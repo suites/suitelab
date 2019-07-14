@@ -1,0 +1,59 @@
+{
+  "name": "CatKnows",
+  "private": true,
+  "description": "A personal blog by @catnose99",
+  "version": "0.1.0",
+  "author": "CatNose <catnose99@gmail.com>",
+  "bugs": {
+    "url": "https://github.com/catnose99/CatKnows/issues"
+  },
+  "dependencies": {
+    "babel-plugin-styled-components": "^1.10.0",
+    "gatsby": "^2.0.118",
+    "gatsby-image": "^2.0.29",
+    "gatsby-plugin-google-analytics": "^2.0.14",
+    "gatsby-plugin-manifest": "^2.0.17",
+    "gatsby-plugin-offline": "^2.0.23",
+    "gatsby-plugin-react-helmet": "^3.0.6",
+    "gatsby-plugin-sharp": "^2.0.20",
+    "gatsby-plugin-sitemap": "^2.0.5",
+    "gatsby-plugin-styled-components": "^3.0.5",
+    "gatsby-plugin-twitter": "^2.0.9",
+    "gatsby-remark-code-titles": "^1.0.2",
+    "gatsby-remark-copy-linked-files": "^2.0.9",
+    "gatsby-remark-custom-blocks": "^2.0.5",
+    "gatsby-remark-embed-youtube": "^0.0.7",
+    "gatsby-remark-images": "^2.0.6",
+    "gatsby-remark-prismjs": "^3.2.4",
+    "gatsby-remark-responsive-iframe": "^2.0.9",
+    "gatsby-remark-smartypants": "^2.0.8",
+    "gatsby-remark-twemoji-shortcut": "^0.10.1",
+    "gatsby-source-filesystem": "^2.0.20",
+    "gatsby-transformer-remark": "^2.2.4",
+    "gatsby-transformer-sharp": "^2.1.13",
+    "netlify-cli": "^2.8.0",
+    "prismjs": "^1.15.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0",
+    "react-helmet": "^5.2.0",
+    "styled-components": "^4.1.3",
+    "twemoji": "^11.3.0"
+  },
+  "homepage": "https://github.com/catnose99/CatKnows",
+  "keywords": [
+    "gatsby"
+  ],
+  "license": "MIT",
+  "main": "n/a",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+  },
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
+  }
+}
