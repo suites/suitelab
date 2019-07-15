@@ -2,10 +2,12 @@ module.exports = {
   siteMetadata: {
     title: `suite lab`,
     author: `yoon.homme`,
-    description: `CatNoseの個人ブログ。デザインやプログラミングの知見、生産性向上テクニックなどをストックしていきます。`,
+    description: `Software Engineer 윤우식 입니다.`,
     siteUrl: `https://suitee.me`,
     social: {
-      twitter: `catnose99`
+      twitter: `catnose99`,
+      instagram: `yoon.homme`,
+      github: `suites`
     },
     categories: [
       {

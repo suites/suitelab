@@ -85,7 +85,7 @@ const Bio = () => {
     <StaticQuery
       query={bioQuery}
       render={data => {
-        const { author, social } = data.site.siteMetadata;
+        const { author, social, description } = data.site.siteMetadata;
         return (
           <BioWrapper>
             <BioHeader>
@@ -96,23 +96,23 @@ const Bio = () => {
             </BioHeader>
             <BioMain>
               <BioText>
-                Backend Engineer 윤우식 입니다.
+                {description}
               </BioText>
               <BioLinks>
-                <BioLink href="https://www.resume.id/catnose99">
+                <BioLink href="http://resume.suitee.me">
                   <img src={svgResume} alt="RESUME" />
                   <div>RESUME</div>
                 </BioLink>
                 <BioLink
                   className="bio-link--email"
-                  href="mailto:catnose99@gmail.com"
+                  href="mailto:woosiks.io@gmail.com"
                 >
                   <img src={svgEmail} alt="" />
                   <div>E-mail</div>
                 </BioLink>
-                <BioLink href="https://twitter.com/catnose99">
-                  <img src={svgTwitter} alt="Twitter" />
-                  <div>Twitter</div>
+                <BioLink href="https://instagram.com/yoon.homme">
+                  <img src={svgTwitter} alt="Instagram" />
+                  <div>Instagram</div>
                 </BioLink>
               </BioLinks>
             </BioMain>
@@ -138,6 +138,7 @@ const bioQuery = graphql`
         social {
           twitter
         }
+        description
       }
     }
   }
