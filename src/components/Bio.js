@@ -2,10 +2,10 @@ import React from "react";
 import { StaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 
-import svgAvatar from "../svg/avatar.svg";
 import svgTwitter from "../svg/socials/twitter.svg";
 import svgResume from "../svg/socials/resume.svg";
 import svgEmail from "../svg/socials/email.svg";
+import image from '../../static/images/image.png';
 
 const BioWrapper = styled.div`
   position: sticky;
@@ -85,13 +85,13 @@ const Bio = () => {
     <StaticQuery
       query={bioQuery}
       render={data => {
-        const { author, social, description } = data.site.siteMetadata;
+        const { author, resumeUrl, email, social, description } = data.site.siteMetadata;
         return (
           <BioWrapper>
             <BioHeader>
-              <AvatarImage src={svgAvatar} alt={author} />
+              <AvatarImage src={image} alt={author} />
               <BioName>
-                <a href={`https://twitter.com/${social.twitter}`}>{author}</a>
+                <a href='#'>{author}</a>
               </BioName>
             </BioHeader>
             <BioMain>
@@ -99,20 +99,24 @@ const Bio = () => {
                 {description}
               </BioText>
               <BioLinks>
-                <BioLink href="http://resume.suitee.me">
+                <BioLink href={resumeUrl}>
                   <img src={svgResume} alt="RESUME" />
                   <div>RESUME</div>
                 </BioLink>
                 <BioLink
                   className="bio-link--email"
-                  href="mailto:woosiks.io@gmail.com"
+                  href={`mailto:${email}`}
                 >
                   <img src={svgEmail} alt="" />
                   <div>E-mail</div>
                 </BioLink>
-                <BioLink href="https://instagram.com/yoon.homme">
+                <BioLink href={`https://instagram.com/${social.instagram}`} >
                   <img src={svgTwitter} alt="Instagram" />
                   <div>Instagram</div>
+                </BioLink>
+                <BioLink href={`https://github.com/${social.github}`} >
+                  <img src={svgTwitter} alt="Github" />
+                  <div>Github</div>
                 </BioLink>
               </BioLinks>
             </BioMain>
@@ -135,8 +139,11 @@ const bioQuery = graphql`
     site {
       siteMetadata {
         author
+        resumeUrl
+        email
         social {
-          twitter
+          instagram
+          github
         }
         description
       }

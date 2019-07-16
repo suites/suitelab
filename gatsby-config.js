@@ -4,8 +4,9 @@ module.exports = {
     author: `yoon.homme`,
     description: `Software Engineer 윤우식 입니다.`,
     siteUrl: `https://suitee.me`,
+    resumeUrl: `http://resume.suitee.me`,
+    email: `woosiks.io@gmail.com`,
     social: {
-      twitter: `catnose99`,
       instagram: `yoon.homme`,
       github: `suites`
     },
