@@ -128,13 +128,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `CatKnows | CatNoseの個人ブログ`,
-        short_name: `CatKnows`,
+        name: `suite.lab | 윤옴므의 기술블로그`,
+        short_name: `suite.lab`,
         start_url: `/`,
         background_color: `rgb(33, 36, 45)`,
         theme_color: `#0c9ee4`,
         display: `minimal-ui`,
-        icon: `content/assets/avatar.png`
+        icon: `content/assets/favicon.png`
       }
     },
     {

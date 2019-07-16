@@ -10,7 +10,7 @@ const SEO = ({ description, lang, meta, title }) => {
       render={data => {
         const metaDescription =
           description || data.site.siteMetadata.description;
-        const defaultTitle = "CatKnows | CatNoseの個人ブログ";
+        const defaultTitle = "suite.lab | 윤옴므의 기술블로그";
         return (
           <Helmet
             htmlAttributes={{
@@ -69,7 +69,7 @@ const SEO = ({ description, lang, meta, title }) => {
 };
 
 SEO.defaultProps = {
-  lang: `ja`,
+  lang: `ko`,
   meta: []
 };
 
