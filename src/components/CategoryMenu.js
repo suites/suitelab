@@ -117,25 +117,25 @@ const CategoryMenu = ({ location }) => {
       <CategoryItemList>
         <CategoryLink catName="New" catIcon={svgNew} catLink="/" path={path} />
         <CategoryLink
-          catName="Design"
+          catName="JavaScript"
           catIcon={svgDesign}
           catLink="/category/design"
           path={path}
         />
         <CategoryLink
-          catName="Dev"
+          catName="CS"
           catIcon={svgDev}
           catLink="/category/dev"
           path={path}
         />
         <CategoryLink
-          catName="Self"
+          catName="DevOps"
           catIcon={svgSelf}
           catLink="/category/self"
           path={path}
         />
         <CategoryLink
-          catName="Collect"
+          catName="Daily"
           catIcon={svgCollection}
           catLink="/category/collect"
           path={path}
