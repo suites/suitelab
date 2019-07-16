@@ -24,12 +24,13 @@ const Footer = () => {
     <FooterContent>
       <ContentWrapper>
         <FooterInner>
+          <div>© {new Date().getFullYear()}, yoon.homme All rights reserved.</div>
           <div>
+            {'Theme by '}
             <a href="https://github.com/catnose99/CatKnows" rel="nofollow">
-              SourceCode
+              CatKnows
             </a>
           </div>
-          <div>© {new Date().getFullYear()}, CatNose All rights reserved.</div>
         </FooterInner>
       </ContentWrapper>
     </FooterContent>
