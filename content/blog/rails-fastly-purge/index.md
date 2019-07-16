@@ -1,9 +1,9 @@
 ---
-title: "Fastly + Railsでキャッシュをパージする方法"
+title: "테스트 게시글"
 date: "2019-04-21T22:12:03.284Z"
 category: "dev"
 description: "Fastly + Railsでページのキャッシュをインスタント・パージ（削除削除）する方法をまとめました。"
-emoji: "🗑"
+emoji: "🐤"
 ---
 
 前回はRailsでFastlyを使う方法を書きました。
