@@ -2,10 +2,10 @@ import React from "react";
 import { StaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
 
-import svgTwitter from "../svg/socials/twitter.svg";
-import svgResume from "../svg/socials/resume.svg";
-import svgEmail from "../svg/socials/email.svg";
 import image from '../../static/images/image.png';
+
+import { FaInstagram, FaGithub } from 'react-icons/fa';
+import { MdMail, MdPerson } from 'react-icons/md';
 
 const BioWrapper = styled.div`
   position: sticky;
@@ -39,12 +39,10 @@ const BioHeader = styled.div`
 `;
 const BioName = styled.div`
   margin-left: 10px;
-  a {
-    font-weight: 700;
-    letter-spacing: 1px;
-    font-size: 1.3em;
-    color: #fff;
-  }
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 1.3em;
+  color: #fff;
 `;
 const BioMain = styled.div`
   margin-top: 1em;
@@ -91,7 +89,7 @@ const Bio = () => {
             <BioHeader>
               <AvatarImage src={image} alt={author} />
               <BioName>
-                <a href='#'>{author}</a>
+                {author}
               </BioName>
             </BioHeader>
             <BioMain>
@@ -100,23 +98,19 @@ const Bio = () => {
               </BioText>
               <BioLinks>
                 <BioLink href={resumeUrl}>
-                  <img src={svgResume} alt="RESUME" />
-                  <div>RESUME</div>
+                  <MdPerson color={'#FFF'} size={32} />
                 </BioLink>
                 <BioLink
                   className="bio-link--email"
                   href={`mailto:${email}`}
                 >
-                  <img src={svgEmail} alt="" />
-                  <div>E-mail</div>
+                  <MdMail color={'#FFF'} size={32} />
                 </BioLink>
                 <BioLink href={`https://instagram.com/${social.instagram}`} >
-                  <img src={svgTwitter} alt="Instagram" />
-                  <div>Instagram</div>
+                  <FaInstagram color={'#FFF'} size={32} />
                 </BioLink>
                 <BioLink href={`https://github.com/${social.github}`} >
-                  <img src={svgTwitter} alt="Github" />
-                  <div>Github</div>
+                  <FaGithub color={'#FFF'} size={32} />
                 </BioLink>
               </BioLinks>
             </BioMain>

@@ -5,6 +5,7 @@ import ContentWrapper from "../components/ContentWrapper";
 import svgLogo from "../svg/logo.svg";
 
 const HeaderTag = styled.header`
+  background: #3B71DA;
   width: 100%;
   padding: 16px 0;
   // border-bottom: solid 1px ${props => props.theme.colors.blackLight};
