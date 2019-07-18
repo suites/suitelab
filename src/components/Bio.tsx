@@ -1,27 +1,27 @@
-import React from "react";
-import { StaticQuery, graphql } from "gatsby";
-import styled from "styled-components";
+import { graphql, StaticQuery } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
 
 import image from '../../static/images/image.png';
 
-import { FaInstagram, FaGithub } from 'react-icons/fa';
+import { FaGithub, FaInstagram } from 'react-icons/fa';
 import { MdMail, MdPerson } from 'react-icons/md';
 
 const BioWrapper = styled.div`
   position: sticky;
   top: 2em;
-  width: ${props => props.theme.sizes.bioWidth};
+  width: ${(props) => props.theme.sizes.bioWidth};
   padding: 1.5em;
   font-size: 15.5px;
-  background: ${props => props.theme.colors.blackLight};
+  background: ${(props) => props.theme.colors.blackLight};
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
-  @media screen and (max-width: ${props => props.theme.responsive.large}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.large}) {
     position: relative;
     margin: 2em 0;
     width: 100%;
   }
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     padding: 1.3em 1em;
   }
 `;
@@ -71,10 +71,10 @@ const BioLink = styled.a`
   font-weight: 700;
   font-size: 0.9em;
   line-height: 30px;
-  color: ${props => props.theme.colors.gray};
+  color: ${(props) => props.theme.colors.gray};
   letter-spacing: 0.5px;
   &:hover {
-    color: ${props => props.theme.colors.highlight};
+    color: ${(props) => props.theme.colors.highlight};
   }
 `;
 
@@ -82,7 +82,7 @@ const Bio = () => {
   return (
     <StaticQuery
       query={bioQuery}
-      render={data => {
+      render={(data) => {
         const { author, resumeUrl, email, social, description } = data.site.siteMetadata;
         return (
           <BioWrapper>
@@ -101,7 +101,7 @@ const Bio = () => {
                   <MdPerson color={'#FFF'} size={32} />
                 </BioLink>
                 <BioLink
-                  className="bio-link--email"
+                  className='bio-link--email'
                   href={`mailto:${email}`}
                 >
                   <MdMail color={'#FFF'} size={32} />

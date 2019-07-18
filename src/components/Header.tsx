@@ -1,14 +1,14 @@
-import React from "react";
-import { Link } from "gatsby";
-import styled from "styled-components";
-import ContentWrapper from "../components/ContentWrapper";
-import svgLogo from "../svg/logo.svg";
+import { Link } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
+import svgLogo from '../svg/logo.svg';
+import ContentWrapper from './ContentWrapper';
 
 const HeaderTag = styled.header`
   background: #3B71DA;
   width: 100%;
   padding: 16px 0;
-  // border-bottom: solid 1px ${props => props.theme.colors.blackLight};
+  // border-bottom: solid 1px ${(props) => props.theme.colors.blackLight};
   box-shadow: 0 2px 4px rgba(0,0,0,.4);
 `;
 
@@ -22,7 +22,7 @@ const HeaderInner = styled.div`
     display: block;
     width: 200px;
     height: 60px;
-    @media screen and (max-width: ${props => props.theme.responsive.small}) {
+    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
       margin: 0 auto;
     }
   }
@@ -42,11 +42,16 @@ const HeaderInner = styled.div`
   }
 `;
 
-const Header = ({ title, location }) => {
-  const rootPath = `${__PATH_PREFIX__}/`;
+interface Props {
+  title: any;
+  location: any;
+}
+
+const Header = ({ title, location }: Props) => {
+  const rootPath = `${process.env.__PATH_PREFIX__}/`;
   const logoLink = (
-    <Link to={`/`} className="logo-link">
-      <img className="logo" src={svgLogo} alt={title} />
+    <Link to={`/`} className='logo-link'>
+      <img className='logo' src={svgLogo} alt={title} />
     </Link>
   );
 

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 const globalStyle = createGlobalStyle`
   /* http://meyerweb.com/eric/tools/css/reset/
@@ -30,8 +30,8 @@ const globalStyle = createGlobalStyle`
     height: 100%;
   }
   body {
-    background: ${props => props.theme.colors.background};
-    color: ${props => props.theme.colors.background};
+    background: ${(props: any) => props.theme.colors.background};
+    color: ${(props: any) => props.theme.colors.background};
     line-height: 1.6;
     font-size: 100%;
     font-weight: 400;
@@ -43,7 +43,7 @@ const globalStyle = createGlobalStyle`
     display: block;
   }
   a {
-    color: ${props => props.theme.colors.highlight};
+    color: ${(props: any) => props.theme.colors.highlight};
     text-decoration: none;
     transition: .2s;
     :focus{

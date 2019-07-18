@@ -1,12 +1,12 @@
-import { css } from "styled-components";
+import { css } from 'styled-components';
 
-const boxPaddingSide = "1.2em";
+const boxPaddingSide = '1.2em';
 
 const SyntaxHighlightStyle = css`
   .gatsby-highlight {
     margin: 1.5em 0;
-    @media screen and (max-width: ${props => props.theme.responsive.small}) {
-      margin: 1.5em -${props => props.theme.sideSpace.contentSmall};
+    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
+      margin: 1.5em -${(props) => props.theme.sideSpace.contentSmall};
     }
   }
   code[class*="language-"],
@@ -22,9 +22,9 @@ const SyntaxHighlightStyle = css`
   }
   pre[class*="language-"],
   :not(pre) > code[class*="language-"] {
-    background: ${props => props.theme.colors.blackLight};
+    background: ${(props) => props.theme.colors.blackLight};
     border-radius: 5px;
-    @media screen and (max-width: ${props => props.theme.responsive.small}) {
+    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
       border-radius: 0;
     }
   }
@@ -153,9 +153,9 @@ const SyntaxHighlightStyle = css`
     border-radius: 0 4px;
     display: table;
     z-index: 2;
-    @media screen and (max-width: ${props => props.theme.responsive.small}) {
+    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
       border-radius: 0;
-      margin-right: -${props => props.theme.sideSpace.contentSmall};
+      margin-right: -${(props) => props.theme.sideSpace.contentSmall};
     }
   }
   .gatsby-code-title + .gatsby-highlight {

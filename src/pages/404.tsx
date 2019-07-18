@@ -1,16 +1,16 @@
-import React from "react";
-import { graphql, Link } from "gatsby";
-import styled from "styled-components";
+import { graphql, Link } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
 
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
+import Layout from '../components/Layout';
+import SEO from '../components/SEO';
 
-import svg404 from "../svg/others/404.svg";
+import svg404 from '../svg/others/404.svg';
 
 const Wrapper = styled.div`
   color: #fff;
   text-align: center;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     margin-top: 2em;
   }
 `;
@@ -34,14 +34,18 @@ const StyledLink = styled(Link)`
   background: #fff;
   font-size: 20px;
   font-weight: 700;
-  color: ${props => props.theme.colors.blackLight};
+  color: ${(props) => props.theme.colors.blackLight};
   border-radius: 4px;
   &:hover {
-    background: ${props => props.theme.colors.highlight};
+    background: ${(props) => props.theme.colors.highlight};
   }
 `;
 
-class NotFoundPage extends React.Component {
+interface Props {
+  data: any;
+  location: any;
+}
+class NotFoundPage extends React.Component<Props> {
   render() {
     const { data } = this.props;
     const siteTitle = data.site.siteMetadata.title;
@@ -49,10 +53,10 @@ class NotFoundPage extends React.Component {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <Wrapper>
-          <SEO title="ページが見つかりません" />
+          <SEO title='ページが見つかりません' />
           <HeroImage src={svg404} />
           <Title>Not Found</Title>
-          <StyledLink to={`/`} className="cat-item__link">
+          <StyledLink to={`/`} className='cat-item__link'>
             HOME
           </StyledLink>
         </Wrapper>

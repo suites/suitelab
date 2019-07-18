@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import svgTwitterWhite from "../svg/socials/twitter-white.svg";
+import React from 'react';
+import styled from 'styled-components';
+import svgTwitterWhite from '../svg/socials/twitter-white.svg';
 
 const Follow = styled.div`
   margin-top: 2em;
@@ -36,9 +36,9 @@ const FollowLink = styled.a`
 const ShareButtons = () => {
   return (
     <Follow>
-      <FollowLink href="https://twitter.com/catnose99" rel="nofollow">
-        <img src={svgTwitterWhite} alt="Twitter" />
-        <div className="follow-link-text">@catnose99をフォロー</div>
+      <FollowLink href='https://twitter.com/catnose99' rel='nofollow'>
+        <img src={svgTwitterWhite} alt='Twitter' />
+        <div className='follow-link-text'>@catnose99をフォロー</div>
       </FollowLink>
     </Follow>
   );

@@ -1,24 +1,24 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "gatsby";
-import svgNew from "../svg/categories/new.svg";
-import svgDesign from "../svg/categories/design.svg";
-import svgDev from "../svg/categories/dev.svg";
-import svgCollection from "../svg/categories/collection.svg";
-import svgSelf from "../svg/categories/self.svg";
+import { Link } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
+import svgCollection from '../svg/categories/collection.svg';
+import svgDesign from '../svg/categories/design.svg';
+import svgDev from '../svg/categories/dev.svg';
+import svgNew from '../svg/categories/new.svg';
+import svgSelf from '../svg/categories/self.svg';
 
 const Nav = styled.nav`
   display: block;
   margin: 0;
   padding: 0 0 2em;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     padding: 1em 0;
   }
 `;
 
 const CategoryItemList = styled.ul`
   display: flex;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     margin: 0 -20px;
     flex-wrap: nowrap;
     overflow-x: auto;
@@ -38,7 +38,7 @@ const CategoryItem = styled.li`
   width: 70px;
   margin: 0 20px 0 0;
   text-align: center;
-  @media screen and (max-width: ${props => props.theme.responsive.small}) {
+  @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     width: 60px;
     flex: 0 0 auto;
     margin: 0 0 0 15px;
@@ -49,12 +49,12 @@ const CategoryItem = styled.li`
 
   .cat-item__image {
     padding: 2px;
-    background: ${props => props.theme.colors.blackLight};
+    background: ${(props) => props.theme.colors.blackLight};
     border-radius: 50%;
     position: relative;
     img {
       position: relative;
-      background: ${props => props.theme.colors.blackLight};
+      background: ${(props) => props.theme.colors.blackLight};
       border-radius: 50%;
       display: block;
       z-index: 2;
@@ -65,8 +65,8 @@ const CategoryItem = styled.li`
     font-size: 13px;
     font-weight: 700;
     letter-spacing: 0.5px;
-    color: ${props => props.theme.colors.gray};
-    @media screen and (max-width: ${props => props.theme.responsive.small}) {
+    color: ${(props) => props.theme.colors.gray};
+    @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
       font-size: 12px;
     }
   }
@@ -80,11 +80,11 @@ const CategoryItem = styled.li`
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      background: ${props => props.theme.colors.gradient};
+      background: ${(props) => props.theme.colors.gradient};
       animation: rotating 2s linear infinite;
     }
     img {
-      border: solid 2px ${props => props.theme.colors.background};
+      border: solid 2px ${(props) => props.theme.colors.background};
     }
   }
   @keyframes rotating {
@@ -97,47 +97,54 @@ const CategoryItem = styled.li`
   }
 `;
 
-const CategoryLink = ({ catName, catIcon, catLink, path }) => {
+interface CategoryLinkProps {
+  catName: any;
+  catIcon: any;
+  catLink: any;
+  path: any;
+}
+
+const CategoryLink = ({ catName, catIcon, catLink, path }: CategoryLinkProps) => {
   return (
-    <CategoryItem className={catLink === path && "active"}>
-      <Link to={catLink} className="cat-item__link">
-        <div className="cat-item__image">
+    <CategoryItem className={catLink === path ? 'active' : undefined}>
+      <Link to={catLink} className='cat-item__link'>
+        <div className='cat-item__image'>
           <img src={catIcon} alt={catName} />
         </div>
-        <div className="cat-item__name">{catName}</div>
+        <div className='cat-item__name'>{catName}</div>
       </Link>
     </CategoryItem>
   );
 };
 
-const CategoryMenu = ({ location }) => {
+const CategoryMenu = ({ location }: { location: any }) => {
   const path = location.pathname;
   return (
     <Nav>
       <CategoryItemList>
-        <CategoryLink catName="New" catIcon={svgNew} catLink="/" path={path} />
+        <CategoryLink catName='New' catIcon={svgNew} catLink='/' path={path} />
         <CategoryLink
-          catName="JavaScript"
+          catName='JavaScript'
           catIcon={svgDesign}
-          catLink="/category/design"
+          catLink='/category/design'
           path={path}
         />
         <CategoryLink
-          catName="CS"
+          catName='CS'
           catIcon={svgDev}
-          catLink="/category/dev"
+          catLink='/category/dev'
           path={path}
         />
         <CategoryLink
-          catName="DevOps"
+          catName='DevOps'
           catIcon={svgSelf}
-          catLink="/category/self"
+          catLink='/category/self'
           path={path}
         />
         <CategoryLink
-          catName="Daily"
+          catName='Daily'
           catIcon={svgCollection}
-          catLink="/category/collect"
+          catLink='/category/collect'
           path={path}
         />
       </CategoryItemList>

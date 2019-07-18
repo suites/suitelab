@@ -1,5 +1,5 @@
-import { css } from "styled-components";
-import svgHeadingIcon from "../svg/others/heading-icon.svg";
+import { css } from 'styled-components';
+import svgHeadingIcon from '../svg/others/heading-icon.svg';
 
 const postContentStyle = css`
   margin: 1.5em 0 1em;
@@ -99,7 +99,7 @@ const postContentStyle = css`
         line-height: 25px;
         content: counter(number);
         counter-increment: number;
-        background: ${props => props.theme.colors.highlight};
+        background: ${(props) => props.theme.colors.highlight};
       }
     }
   }
@@ -128,7 +128,7 @@ const postContentStyle = css`
     font-size: .9em;
     line-height: 1.4;
     th {
-      background-color: ${props => props.theme.colors.highlight};
+      background-color: ${(props) => props.theme.colors.highlight};
       color: #FFF;
       padding: 10px 12px;
       text-align: center;
@@ -141,8 +141,8 @@ const postContentStyle = css`
       }
     }
     td {
-      background-color:  ${props => props.theme.colors.whitesmoke};
-      color: ${props => props.theme.colors.blackLight};
+      background-color:  ${(props) => props.theme.colors.whitesmoke};
+      color: ${(props) => props.theme.colors.blackLight};
       padding: 10px 12px;
     }
     thead tr {
@@ -165,7 +165,7 @@ const postContentStyle = css`
   blockquote {
     margin: 2.3em 0;
     font-style: italic;
-    background: ${props => props.theme.colors.whitesmoke};
+    background: ${(props) => props.theme.colors.whitesmoke};
     padding: 1em;
     p {
       margin: .3em 0;
