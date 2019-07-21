@@ -1,11 +1,11 @@
-import React from "react";
-import { graphql } from "gatsby";
-import Layout from "../components/Layout";
-import SEO from "../components/SEO";
-import PostCard from "../components/PostCard";
-import CategoryMenu from "../components/CategoryMenu";
-import CategoryJsonLd from "../components/json/CategoryJsonLd";
-import styled from "styled-components";
+import { graphql } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
+import CategoryMenu from '../components/CategoryMenu';
+import CategoryJsonLd from '../components/json/CategoryJsonLd';
+import Layout from '../components/Layout';
+import PostCard from '../components/PostCard';
+import SEO from '../components/SEO';
 
 const Heading = styled.h1`
   margin: 0.5em 0 0.8em;
@@ -16,14 +16,19 @@ const Heading = styled.h1`
   letter-spacing: 1px;
 `;
 
-class CategoryTemplate extends React.Component {
+interface Props {
+  data: any;
+  pageContext: any;
+  location: any;
+}
+class CategoryTemplate extends React.Component<Props> {
   render() {
     const { data, pageContext } = this.props;
     const posts = data.allMarkdownRemark.edges;
     const { location } = this.props;
     // get Category name from category slug
     const categorySlug = pageContext.category;
-    const categoryObject = data.site.siteMetadata.categories.find(cat => {
+    const categoryObject = data.site.siteMetadata.categories.find((cat: any) => {
       return cat.slug === categorySlug;
     });
     // use slug when name doesn't exist
@@ -38,7 +43,7 @@ class CategoryTemplate extends React.Component {
         />
         <CategoryMenu location={location} />
         <Heading>{categoryName}</Heading>
-        {posts.map(({ node }) => {
+        {posts.map(({ node }: { node: any }) => {
           return <PostCard key={node.fields.slug} node={node} />;
         })}
       </Layout>

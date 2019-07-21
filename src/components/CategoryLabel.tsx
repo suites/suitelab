@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 
 interface Props {
   slug: any;
-  isLink: any;
+  isLink?: any;
 }
 
 const categoryLabel = ({ slug, isLink }: Props) => {
