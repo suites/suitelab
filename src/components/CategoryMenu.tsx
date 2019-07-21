@@ -124,7 +124,7 @@ const CategoryMenu = ({ location }: { location: any }) => {
       <CategoryItemList>
         <CategoryLink catName='New' catIcon={svgNew} catLink='/' path={path} />
         <CategoryLink
-          catName='JavaScript'
+          catName='Language'
           catIcon={svgDesign}
           catLink='/category/design'
           path={path}
@@ -136,7 +136,7 @@ const CategoryMenu = ({ location }: { location: any }) => {
           path={path}
         />
         <CategoryLink
-          catName='DevOps'
+          catName='Dev'
           catIcon={svgSelf}
           catLink='/category/self'
           path={path}

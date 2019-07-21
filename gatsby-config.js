@@ -2,13 +2,14 @@ module.exports = {
   siteMetadata: {
     title: `suite lab`,
     author: `yoon.homme`,
-    description: `Software Engineer 윤우식 입니다.`,
+    description: `반갑습니다. Software Engineer 윤우식 입니다.`,
     siteUrl: `https://suitee.me`,
     resumeUrl: `http://resume.suitee.me`,
     email: `woosiks.io@gmail.com`,
     social: {
       instagram: `yoon.homme`,
-      github: `suites`
+      github: `suites`,
+      linkedin: `suitee`,
     },
     categories: [
       {
@@ -73,13 +74,6 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`
             }
           },
-          // 文字化けするため使わない
-          // {
-          //   resolve: `gatsby-remark-twemoji-shortcut`,
-          //   options: {
-          //     classname: "twemoji"
-          //   }
-          // },
           {
             resolve: "gatsby-remark-custom-blocks",
             options: {

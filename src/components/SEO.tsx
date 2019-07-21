@@ -64,7 +64,11 @@ const SEO = ({ description, lang, meta, title }: Props) => {
               },
               {
                 name: `google-site-verification`,
-                content: `tPbbYBIkS-hMJ6JCXihoxuipkMX5q1QnyQ-6R_kvkYs`,
+                content: `88lff6Lu9mvm83qKi5gCz6QvnlyJzZnPjPQo7E7PdOw`,
+              },
+              {
+                name: `naver-site-verification`,
+                content: `0d943f89faeb80f3af0c50cf57e4d269c64e695b`,
               },
             ].concat(meta)}
           />
