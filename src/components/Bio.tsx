@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import image from '../../static/images/image.png';
 
-import { FaGithub, FaInstagram } from 'react-icons/fa';
-import { MdMail, MdPerson } from 'react-icons/md';
+import { FaGithub, FaIdBadge, FaInstagram } from 'react-icons/fa';
+import { MdMail } from 'react-icons/md';
 
 const BioWrapper = styled.div`
   position: sticky;
@@ -98,7 +98,7 @@ const Bio = () => {
               </BioText>
               <BioLinks>
                 <BioLink href={resumeUrl}>
-                  <MdPerson color={'#FFF'} size={32} />
+                  <FaIdBadge color={'#FFF'} size={32} />
                 </BioLink>
                 <BioLink
                   className='bio-link--email'
