@@ -18,6 +18,8 @@ import postSyntaxHighlightStyle from '../styles/postSyntaxHighlight';
 
 import svgPattern from '../svg/others/pattern.svg';
 
+import { Disqus } from 'gatsby-plugin-disqus';
+
 const Content = styled.section`
   position: relative;
   background: #fff;
@@ -111,23 +113,32 @@ interface Props {
 class BlogPostTemplate extends React.Component<Props> {
   render() {
     const post = this.props.data.markdownRemark;
-    const siteTitle = this.props.data.site.siteMetadata.title;
+    const { siteUrl, title: { siteTitle } } = this.props.data.site.siteMetadata;
     const { relatedPosts, slug } = this.props.pageContext;
     const { title, description, date, category, emoji } = post.frontmatter;
+
+    const location = this.props.location;
+    const location_full_url = `${siteUrl + location.pathname}`;
+
+    const disqusConfig = {
+      url: location_full_url,
+      identifier: post.id,
+      title: post.title,
+    };
     return (
-      <Layout location={this.props.location} title={siteTitle}>
+      <Layout location={location} title={siteTitle}>
         <SEO title={title} description={description || post.excerpt} />
         <Helmet>
           <link
             rel='canonical'
-            href={`https://catnose99.com${this.props.location.pathname}`}
+            href={location_full_url}
           />
         </Helmet>
         <PostJsonLd
           title={title}
           description={description || post.excerpt}
           date={date}
-          url={this.props.location.href}
+          url={location.href}
           categorySlug={category}
         />
         <Content>
@@ -148,6 +159,7 @@ class BlogPostTemplate extends React.Component<Props> {
           </ContentMain>
           <aside>
             <ShareButtons slug={slug} title={title} emoji={emoji} />
+            <Disqus config={disqusConfig} />
             <RelatedPosts posts={relatedPosts} />
           </aside>
         </Content>
@@ -164,6 +176,7 @@ export const pageQuery = graphql`
       siteMetadata {
         title
         author
+        siteUrl
       }
     }
     markdownRemark(fields: { slug: { eq: $slug } }) {

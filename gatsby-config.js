@@ -117,8 +117,6 @@ module.exports = {
         ]
       }
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -134,7 +132,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: "UA-134661352-1"
+        trackingId: "UA-91992546-2"
       }
     },
     {
@@ -143,6 +141,14 @@ module.exports = {
         output: `/sitemap.xml`
       }
     },
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `suitelab`
+      }
+    },
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     `gatsby-plugin-twitter`,
     `gatsby-plugin-offline`,
     `gatsby-plugin-react-helmet`,
