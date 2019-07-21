@@ -13,7 +13,7 @@ const IndexContent = styled.div`
   }
 `;
 
-const ContentWrapper = ({ children }) => {
+const ContentWrapper = ({ children }: { children: any }) => {
   return <IndexContent>{children}</IndexContent>;
 };
 

@@ -69,7 +69,7 @@ const ShareButtons = ({ slug, title, emoji }: Props) => {
             style={{
               width: '24px',
               height: '19px',
-              marginTop: '11px'
+              marginTop: '11px',
             }}
           />
         </ShareLink>
