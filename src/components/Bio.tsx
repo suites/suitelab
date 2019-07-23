@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import image from '../../static/images/image.png';
 
-import { FaGithub, FaIdBadge, FaInstagram } from 'react-icons/fa';
+import { FaGithub, FaIdBadge, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
 
 const BioWrapper = styled.div`
@@ -47,7 +47,7 @@ const BioName = styled.div`
 const BioMain = styled.div`
   margin-top: 1em;
 `;
-const BioText = styled.p`
+const BioText = styled.div`
   color: #fff;
   font-size: 0.92em;
 `;
@@ -94,7 +94,9 @@ const Bio = () => {
             </BioHeader>
             <BioMain>
               <BioText>
-                {description}
+                {description.split('\n').map((item: string, i: number) => {
+                  return <p key={i}>{item}</p>;
+                })}
               </BioText>
               <BioLinks>
                 <BioLink href={resumeUrl}>
@@ -111,6 +113,9 @@ const Bio = () => {
                 </BioLink>
                 <BioLink href={`https://github.com/${social.github}`} >
                   <FaGithub color={'#FFF'} size={32} />
+                </BioLink>
+                <BioLink href={`https://linkedin.com/in/${social.linkedin}`} >
+                  <FaLinkedin color={'#FFF'} size={32} />
                 </BioLink>
               </BioLinks>
             </BioMain>
@@ -138,6 +143,7 @@ const bioQuery = graphql`
         social {
           instagram
           github
+          linkedin
         }
         description
       }
