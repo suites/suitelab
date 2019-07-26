@@ -2,6 +2,7 @@
 title: simple resume[이력서 생성기] 개발기
 date: '2018-12-17'
 category: "web"
+emoji: "🌸"
 ---
 
 > Demo 링크 : <http://resume.suitee.me/>  

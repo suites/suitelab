@@ -3,7 +3,7 @@
   "private": true,
   "description": "A personal blog by @yoon.homme",
   "version": "0.1.0",
-  "author": "CatNose <woosiks.io@gmail.com>",
+  "author": "yoon.homme <woosiks.io@gmail.com>",
   "dependencies": {
     "@types/react-helmet": "^5.0.8",
     "@types/styled-components": "^4.1.18",
