@@ -7,7 +7,6 @@ import ContentWrapper from './ContentWrapper';
 const HeaderTag = styled.header`
   background: #3B71DA;
   width: 100%;
-  padding: 16px 0;
   // border-bottom: solid 1px ${(props) => props.theme.colors.blackLight};
   box-shadow: 0 2px 4px rgba(0,0,0,.4);
 `;
