@@ -45,7 +45,7 @@ exports.createPages = ({ graphql, actions }) => {
     categories = new Set(categories);
     categories.forEach(category => {
       createPage({
-        path: `/category/${category}/`,
+        path: `/category/${category.replace(/\s/, '-')}/`,
         component: path.resolve("src/templates/categories.tsx"),
         context: {
           category
