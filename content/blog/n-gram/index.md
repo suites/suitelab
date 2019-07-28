@@ -1,7 +1,7 @@
 ---
 title: 문장의 유사도 분석하기(레벤슈타인 거리, N-gram)
 date: '2018-07-30'
-category: "Deep Learning"
+category: "deep learning"
 ---
 
 ## 문장의 유사도 분석

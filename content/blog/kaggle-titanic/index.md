@@ -1,7 +1,7 @@
 ---
 title: kaggle Titanic 머신러닝 입문기
 date: '2018-03-19'
-category: "Deep Learning"
+category: "deep learning"
 ---
 
 ```python

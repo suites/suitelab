@@ -4,6 +4,13 @@
   "description": "A personal blog by @yoon.homme",
   "version": "0.1.0",
   "author": "yoon.homme <woosiks.io@gmail.com>",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
+  },
   "dependencies": {
     "@types/react-helmet": "^5.0.8",
     "@types/styled-components": "^4.1.18",
@@ -51,12 +58,5 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
-  },
-  "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop",
-    "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   }
 }

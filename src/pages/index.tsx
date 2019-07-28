@@ -15,6 +15,7 @@ interface Props {
 class BlogIndex extends React.Component<Props> {
   render() {
     const { data } = this.props;
+    const categories = data.site.siteMetadata.categories;
     const siteTitle = data.site.siteMetadata.title;
     const posts = data.allMarkdownRemark.edges;
     const { location } = this.props;
@@ -23,10 +24,10 @@ class BlogIndex extends React.Component<Props> {
       <Layout location={this.props.location} title={siteTitle}>
         <SEO title='' />
         <Helmet>
-          <link rel='canonical' href='https://catnose99.com' />
+          <link rel='canonical' href='https://suitee.me' />
         </Helmet>
         <HomeJsonLd />
-        <CategoryMenu location={location} />
+        <CategoryMenu location={location} categories={categories} />
         {posts.map(({ node }: { node: any }) => {
           return <PostCard key={node.fields.slug} node={node} />;
         })}
@@ -42,6 +43,11 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        categories {
+          name
+          icon
+          link
+        }
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {

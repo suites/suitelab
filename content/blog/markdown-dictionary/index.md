@@ -1,7 +1,7 @@
 ---
 title: 마크다운(Markdown)문법 대-백과
 date: '2018-10-31'
-category: "Blog"
+category: "blog"
 ---
 오늘은 사용할 때마다 가물가물한 마크다운 문법에 대해 정리를 해두려고한다.
 

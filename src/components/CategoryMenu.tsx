@@ -1,4 +1,4 @@
-import { Link } from 'gatsby';
+import { graphql, Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import svgCollection from '../svg/categories/collection.svg';
@@ -117,36 +117,30 @@ const CategoryLink = ({ catName, catIcon, catLink, path }: CategoryLinkProps) =>
   );
 };
 
-const CategoryMenu = ({ location }: { location: any }) => {
+interface CategoryMenuProps {
+  location: any;
+  categories: any[];
+}
+
+const CategoryMenu = ({ location, categories }: CategoryMenuProps) => {
   const path = location.pathname;
   return (
     <Nav>
       <CategoryItemList>
-        <CategoryLink catName='New' catIcon={svgNew} catLink='/' path={path} />
-        <CategoryLink
-          catName='Language'
-          catIcon={svgDesign}
-          catLink='/category/design'
-          path={path}
-        />
-        <CategoryLink
-          catName='CS'
-          catIcon={svgDev}
-          catLink='/category/dev'
-          path={path}
-        />
-        <CategoryLink
-          catName='Dev'
-          catIcon={svgSelf}
-          catLink='/category/self'
-          path={path}
-        />
-        <CategoryLink
-          catName='Daily'
-          catIcon={svgCollection}
-          catLink='/category/collect'
-          path={path}
-        />
+        <CategoryLink key='new' catName='new' catIcon={svgNew} catLink='/' path={path} />
+        {
+          categories && categories.map((category) => {
+            return (
+              <CategoryLink
+                key={category.name}
+                catName={category.name}
+                catIcon={svgCollection}
+                catLink={category.link}
+                path={path}
+              />
+            );
+          })
+        }
       </CategoryItemList>
     </Nav>
   );

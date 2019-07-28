@@ -28,7 +28,8 @@ class CategoryTemplate extends React.Component<Props> {
     const { location } = this.props;
     // get Category name from category slug
     const categorySlug = pageContext.category;
-    const categoryObject = data.site.siteMetadata.categories.find((cat: any) => {
+    const categories = data.site.siteMetadata.categories;
+    const categoryObject = categories.find((cat: any) => {
       return cat.slug === categorySlug;
     });
     // use slug when name doesn't exist
@@ -41,7 +42,7 @@ class CategoryTemplate extends React.Component<Props> {
           categorySlug={categorySlug}
           categoryName={categoryName}
         />
-        <CategoryMenu location={location} />
+        <CategoryMenu location={location} categories={categories} />
         <Heading>{categoryName}</Heading>
         {posts.map(({ node }: { node: any }) => {
           return <PostCard key={node.fields.slug} node={node} />;
@@ -61,6 +62,8 @@ export const pageQuery = graphql`
           name
           slug
           color
+          icon
+          link
         }
       }
     }

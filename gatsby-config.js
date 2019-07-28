@@ -17,24 +17,32 @@ Software Engineer 윤우식 입니다.
     },
     categories: [
       {
-        name: "Design",
-        slug: "design",
-        color: "#0c9ee4"
+        name: "web",
+        slug: "web",
+        color: "#0c9ee4",
+        icon: "../svg/categories/design.svg",
+        link: "/category/web"
       },
       {
-        name: "Dev",
-        slug: "dev",
-        color: "#f7615f"
+        name: "algorithm",
+        slug: "algorithm",
+        color: "#f7615f",
+        icon: "../svg/categories/dev.svg",
+        link: "/category/algorithm"
       },
       {
-        name: "Self",
-        slug: "self",
-        color: "#ffa22b"
+        name: "blog",
+        slug: "blog",
+        color: "#ffa22b",
+        icon: "../svg/categories/self.svg",
+        link: "/category/blog"
       },
       {
-        name: "Collect",
-        slug: "collect",
-        color: "#ffa22b"
+        name: "deep learning",
+        slug: "deep learning",
+        color: "#ffa22b",
+        icon: "../svg/categories/self.svg",
+        link: "/category/deep-learning"
       }
     ]
   },
