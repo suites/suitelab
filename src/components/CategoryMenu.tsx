@@ -129,7 +129,7 @@ const CategoryMenu = ({ location, categories }: CategoryMenuProps) => {
       <CategoryItemList>
         <CategoryLink key='new' catName='new' catIcon={svgNew} catLink='/' path={path} />
         {
-          categories && categories.map((category) => {
+          categories.map((category) => {
             return (
               <CategoryLink
                 key={category.name}
