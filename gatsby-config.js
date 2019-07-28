@@ -40,7 +40,7 @@ Software Engineer 윤우식 입니다.
       {
         name: "deep learning",
         slug: "deep learning",
-        color: "#ffa22b",
+        color: "#5ca4a9",
         icon: "../svg/categories/self.svg",
         link: "/category/deep-learning"
       }
