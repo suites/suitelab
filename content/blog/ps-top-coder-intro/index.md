@@ -1,7 +1,7 @@
 ---
 title: 탑코더 알고리즘 정복 시-리즈
 date: '2018-10-30'
-category: "algorithm"
+category: 'algorithm'
 ---
 
 ![빨간책](B9653641350_l.jpg)

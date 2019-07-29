@@ -1,7 +1,7 @@
 ---
 title: 무료로 내 블로그에 SSL[HTTPS] 적용하기
 date: '2019-02-13'
-category: "blog"
+category: 'blog'
 emoji: "👑"
 ---
 

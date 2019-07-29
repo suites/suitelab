@@ -1,7 +1,7 @@
 ---
 title: Dynamic Programming
 date: '2018-11-05'
-category: "algorithm"
+category: 'algorithm'
 ---
 
 ## 문제

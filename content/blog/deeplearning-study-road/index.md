@@ -1,7 +1,9 @@
 ---
 title: 딥러닝 공부 커리큘럼
 date: '2018-03-14'
-category: "deep learning"
+category: 'deep learning'
+description: ''
+emoji: '👨‍🎓'
 ---
 
 스티브 워즈니악 옹은 "All my great stuff, I learned outside of school"이라 했다.

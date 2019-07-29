@@ -1,7 +1,7 @@
 ---
 title: 탑코더 알고리즘 정복 - 1. 키위 주스
 date: '2018-10-30'
-category: "algorithm"
+category: 'algorithm'
 ---
 
 ## 문제

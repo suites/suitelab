@@ -1,7 +1,7 @@
 ---
 title: NLP Basic
 date: '2018-03-19'
-category: "deep learning"
+category: 'deep learning'
 ---
 
 # Natural Language Processing

@@ -1,7 +1,7 @@
 ---
 title: 머신러닝의 네가지 분류
 date: '2018-10-21'
-category: "dev"
+category: 'deep learning'
 ---
 
 ## 지도 학습(supervised learning)
