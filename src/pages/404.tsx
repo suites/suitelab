@@ -53,9 +53,9 @@ class NotFoundPage extends React.Component<Props> {
     return (
       <Layout location={this.props.location} title={siteTitle}>
         <Wrapper>
-          <SEO title='ページが見つかりません' />
+          <SEO title='앗! 길을 잘못 들었나봐요.' />
           <HeroImage src={svg404} />
-          <Title>Not Found</Title>
+          <Title>앗! 길을 잘못 들었나봐요.</Title>
           <StyledLink to={`/`} className='cat-item__link'>
             HOME
           </StyledLink>
