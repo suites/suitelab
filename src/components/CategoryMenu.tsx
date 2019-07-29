@@ -1,11 +1,12 @@
 import { graphql, Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import svgCollection from '../svg/categories/collection.svg';
-import svgDesign from '../svg/categories/design.svg';
-import svgDev from '../svg/categories/dev.svg';
+
+import cactusBlue from '../svg/categories/cactus-blue.svg';
+import cactusGreen from '../svg/categories/cactus-green.svg';
+import cactusRed from '../svg/categories/cactus-red.svg';
+import cactusYellow from '../svg/categories/cactus-yellow.svg';
 import svgNew from '../svg/categories/new.svg';
-import svgSelf from '../svg/categories/self.svg';
 
 const Nav = styled.nav`
   display: block;
@@ -58,6 +59,12 @@ const CategoryItem = styled.li`
       border-radius: 50%;
       display: block;
       z-index: 2;
+      .cactus {
+        fill: #FFF000;
+      }
+    }
+    .cactus {
+      fill: #FFF000;
     }
   }
   .cat-item__name {
@@ -86,6 +93,9 @@ const CategoryItem = styled.li`
     img {
       border: solid 2px ${(props) => props.theme.colors.background};
     }
+    .cactus {
+      fill: #fff;
+    }
   }
   @keyframes rotating {
     from {
@@ -96,6 +106,19 @@ const CategoryItem = styled.li`
     }
   }
 `;
+
+function selectCategoryIcon(name: string) {
+  switch (name) {
+    case 'cactusYellow':
+      return cactusYellow;
+    case 'cactusRed':
+      return cactusRed;
+    case 'cactusGreen':
+      return cactusGreen;
+    case 'cactusBlue':
+      return cactusBlue;
+  }
+}
 
 interface CategoryLinkProps {
   catName: any;
@@ -134,7 +157,7 @@ const CategoryMenu = ({ location, categories }: CategoryMenuProps) => {
               <CategoryLink
                 key={category.name}
                 catName={category.name}
-                catIcon={svgCollection}
+                catIcon={selectCategoryIcon(category.icon)}
                 catLink={category.link}
                 path={path}
               />

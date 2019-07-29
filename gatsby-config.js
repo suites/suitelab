@@ -18,28 +18,28 @@ module.exports = {
         name: "web",
         slug: "web",
         color: "#0c9ee4",
-        icon: "../svg/categories/design.svg",
+        icon: "cactusBlue",
         link: "/category/web"
       },
       {
         name: "algorithm",
         slug: "algorithm",
         color: "#f7615f",
-        icon: "../svg/categories/dev.svg",
+        icon: "cactusRed",
         link: "/category/algorithm"
       },
       {
         name: "blog",
         slug: "blog",
         color: "#ffa22b",
-        icon: "../svg/categories/self.svg",
+        icon: "cactusYellow",
         link: "/category/blog"
       },
       {
         name: "deep learning",
         slug: "deep learning",
-        color: "#5ca4a9",
-        icon: "../svg/categories/self.svg",
+        color: "#C0D545",
+        icon: "cactusGreen",
         link: "/category/deep-learning"
       }
     ]
