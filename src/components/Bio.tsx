@@ -78,12 +78,26 @@ const BioLink = styled.a`
   }
 `;
 
+interface Social {
+  instagram: string;
+  github: string;
+  linkedin: string;
+}
+
+interface SiteMetadata {
+  author: string,
+  resumeUrl: string,
+  email: string,
+  social: Social,
+  description: string,
+}
+
 const Bio = () => {
   return (
     <StaticQuery
       query={bioQuery}
       render={(data) => {
-        const { author, resumeUrl, email, social, description } = data.site.siteMetadata;
+        const { author, resumeUrl, email, social, description }: SiteMetadata = data.site.siteMetadata;
         return (
           <BioWrapper>
             <BioHeader>
