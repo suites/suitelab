@@ -2,6 +2,7 @@
 title: Dynamic Programming
 date: '2018-11-05'
 category: 'algorithm'
+emoji: '💾'
 ---
 
 ## 문제

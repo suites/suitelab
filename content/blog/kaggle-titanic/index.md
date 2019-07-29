@@ -2,6 +2,7 @@
 title: kaggle Titanic 머신러닝 입문기
 date: '2018-03-19'
 category: 'deep learning'
+emoji: '🐧'
 ---
 
 ```python

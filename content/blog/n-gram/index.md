@@ -2,6 +2,7 @@
 title: 문장의 유사도 분석하기(레벤슈타인 거리, N-gram)
 date: '2018-07-30'
 category: 'deep learning'
+emoji: '☀️'
 ---
 
 ## 문장의 유사도 분석

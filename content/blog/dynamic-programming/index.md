@@ -2,7 +2,7 @@
 title: Dynamic Programming
 date: '2017-09-14'
 category: 'algorithm'
-emoji: ''
+emoji: '🐸'
 ---
 
 > 참고 : [백준 - 다이나믹 프로그래밍 시작하기][1]  

@@ -2,6 +2,7 @@
 title: 로스트아크 대기열 카카오톡 알림봇 개발기
 date: '2018-11-18'
 category: 'web'
+emoji: '🐳'
 ---
 
 > 서비스 링크 : <https://pf.kakao.com/_dcPGj>  

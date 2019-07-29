@@ -2,6 +2,7 @@
 title: 탑코더 알고리즘 정복 - 3. 암호
 date: '2018-11-05'
 category: 'algorithm'
+emoji: '⏰'
 ---
 
 ## 문제

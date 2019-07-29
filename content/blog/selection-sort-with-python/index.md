@@ -2,6 +2,7 @@
 title: 선택정렬 알고리즘(selection sort) 
 date: '2018-08-28'
 category: 'algorithm'
+emoji: '🛴'
 ---
 
 ## 선택 정렬(Selection sort)

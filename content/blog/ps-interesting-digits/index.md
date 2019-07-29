@@ -2,6 +2,7 @@
 title: 탑코더 알고리즘 정복 - 4. 재미있는 수학
 date: '2018-11-06'
 category: 'algorithm'
+emoji: '🎥'
 ---
 
 ## 문제

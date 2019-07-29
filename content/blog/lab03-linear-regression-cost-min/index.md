@@ -2,6 +2,7 @@
 title: 딥러닝 강의 lec 03
 date: '2017-10-19'
 category: 'deep learning'
+emoji: '🐛'
 ---
 
 # ML lab 03 - Linear Regression의 cost 최소화의 TensorFlow 구현 (new)
