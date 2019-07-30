@@ -1,3 +1,13 @@
+<h1 align="center">🌵 suite.lab</h1>
+
+<p align="center">
+  	<a href="https://github.com/suitelab/simple-resume/LICENSE">
+    	<img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Simple-resume is released under the MIT license." />
+  	</a>
+	<a href="https://github.com/suitelab/simple-resume"><img src="https://img.shields.io/badge/release-v0.0.1-brightgreen.svg"></a>
+  	<a href="https://app.netlify.com/sites/suitee/deploys"><img src="https://api.netlify.com/api/v1/badges/720440e3-bd73-49f8-8625-145e62975597/deploy-status"></a>
+</p>
+
 <p>
   Made with
   <a href="https://github.com/gatsbyjs/gatsby">
@@ -5,78 +15,13 @@
   </a>
 </p>
 
-## Markdown
+## Blog
+<https://suitee.me>
 
-There are some custom blocks for Markdown(will be automatically converted to styled blocks).
+## Authors
 
-### Set meta data
+[yoon.homme](https://github.com/suitee)
 
-You have to set post meta data in frontmatter(At the top of each markdown file).
+## License
 
-```
-title: Example title
-date: "2019-01-28T22:40:32.169Z"
-description: "This text will be used as meta/og description"
-category: "design"
-emoji: "😁"
-```
-
-_cagegory: must be just 1 category_
-_emoji: converted to Twemoji and used as HeroImage_
-
-### Custom Blocks
-
-#### Gray colored block
-
-```
-[[simple | title here]]
-| content here
-```
-
-#### Info block
-
-```
-[[info | title here]]
-| content here
-```
-
-#### Alert block
-
-```
-[[alert | title here]]
-| content here
-```
-
-#### Notice block
-
-```
-[[notice | title here]]
-| content here
-```
-
-#### Advance
-
-You can use lists like this
-
-```
-[[alert | Danger! ]]
-| - Don't smoke.
-| - Don't each to much.
-| - Don't stay home.
-```
-
-### Ads
-
-When to add ads(e.g. Google Adsense) on your site,
-make sure the ads are shown only on production.
-
-```
-if(process.env.NODE_ENV === "production") {
-  // Ads here
-}
-```
-
-### Licence
-MIT (except for images/icons/blog contents)
-
-You are not allowed to use or distribute images/icons/blogContents included in this project.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details 
