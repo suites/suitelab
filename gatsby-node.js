@@ -7,8 +7,8 @@ const oldPaths = [
   '/2017/10/18/lab03-Linear-Regression-Cost-Min/',
   '/2018/03/13/DeepLearning-Study-Road/',
   '/2018/03/18/kaggle-titanic/',
-  '/2018/07/29/n-gram/',
   '/2018/03/18/nlp-basic/',
+  '/2018/07/29/n-gram/',
   '/2018/08/27/selection-sort-with-python/',
   '/2018/10/20/classification-ml/',
   '/2018/10/29/ps-kiwi-juice-easy/',
@@ -22,7 +22,8 @@ const oldPaths = [
   '/2018/12/04/file-is-a-commonjs-module/',
   '/2018/12/17/simple-resume/',
   '/2019/02/13/how-to-setup-free-ssl/',
-  '/2019/02/14/how-to-setup-free-ssl-2/']
+  '/2019/02/14/how-to-setup-free-ssl-2/',
+]
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage, createRedirect } = actions;
