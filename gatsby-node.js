@@ -2,7 +2,7 @@ const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
 
 exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
 
   return graphql(
     `
@@ -34,6 +34,7 @@ exports.createPages = ({ graphql, actions }) => {
 
     const posts = result.data.allMarkdownRemark.edges;
 
+    createRedirect({ fromPath: '/asdf', toPath: '/how-to-setup-free-ssl-2' });
     // Create category posts pages
     // ref: https://www.gatsbyjs.org/docs/adding-tags-and-categories-to-blog-posts/
     let categories = [];
