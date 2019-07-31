@@ -2,6 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import twemoji from 'twemoji';
+import { MarkdownRemark, RelatedPost } from '../models/';
 
 const Wrapper = styled.div`
   background: ${(props) => props.theme.colors.whitesmoke};
@@ -67,7 +68,11 @@ const PostCardContent = styled.div`
   }
 `;
 
-const RelatedPostCard = ({ node }: { node: any }) => {
+interface Props {
+  node: MarkdownRemark;
+}
+
+const RelatedPostCard = ({ node }: Props) => {
   const title = node.frontmatter.title || node.fields.slug;
   const emoji = twemoji.parse(node.frontmatter.emoji || '🐱', {
     folder: 'svg',
@@ -87,11 +92,11 @@ const RelatedPostCard = ({ node }: { node: any }) => {
   );
 };
 
-const RelatedPosts = ({ posts }: { posts: any }) => {
+const RelatedPosts = ({ posts }: { posts: RelatedPost[] }) => {
   if (!posts.length) { return null; }
-  const content: any[] = [];
+  const content: JSX.Element[] = [];
 
-  posts.forEach((post: any) => {
+  posts.forEach((post) => {
     content.push(
       <RelatedPostCard key={post.node.fields.slug} node={post.node} />,
     );

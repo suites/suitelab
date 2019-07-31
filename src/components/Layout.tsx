@@ -31,7 +31,7 @@ const MainWrapper = styled.div`
 
 interface Props {
   location: any;
-  title: any;
+  title: string;
   children: any;
 }
 

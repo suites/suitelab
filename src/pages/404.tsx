@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 
+import { QueryResult } from '../models';
 import svg404 from '../svg/others/404.svg';
 
 const Wrapper = styled.div`
@@ -42,7 +43,7 @@ const StyledLink = styled(Link)`
 `;
 
 interface Props {
-  data: any;
+  data: QueryResult;
   location: any;
 }
 class NotFoundPage extends React.Component<Props> {

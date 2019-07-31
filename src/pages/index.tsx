@@ -7,9 +7,10 @@ import HomeJsonLd from '../components/json/HomeJsonLd';
 import Layout from '../components/Layout';
 import PostCard from '../components/PostCard';
 import SEO from '../components/SEO';
+import { QueryResult } from '../models';
 
 interface Props {
-  data: any;
+  data: QueryResult;
   location: any;
 }
 class BlogIndex extends React.Component<Props> {
@@ -28,7 +29,7 @@ class BlogIndex extends React.Component<Props> {
         </Helmet>
         <HomeJsonLd />
         <CategoryMenu location={location} categories={categories} />
-        {posts.map(({ node }: { node: any }) => {
+        {posts.map(({ node }) => {
           return <PostCard key={node.fields.slug} node={node} />;
         })}
       </Layout>

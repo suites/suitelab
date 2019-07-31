@@ -2,6 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import twemoji from 'twemoji';
+import { MarkdownRemark } from '../models/QueryResult';
 import CategoryLabel from './CategoryLabel';
 
 const PostCardWrapper = styled.div`
@@ -69,7 +70,11 @@ const PostCardContent = styled.div`
   }
 `;
 
-const PostCard = ({ node }: { node: any }) => {
+interface Props {
+  node: MarkdownRemark;
+}
+
+const PostCard = ({ node }: Props) => {
   const title = node.frontmatter.title || node.fields.slug;
   const emoji = twemoji.parse(node.frontmatter.emoji || '🐱', {
     folder: 'svg',

@@ -2,18 +2,19 @@ import { graphql, StaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Helmet from 'react-helmet';
+import { QueryResult } from '../models';
 
 interface Props {
-  description?: any;
+  description?: string;
   lang?: any;
   meta?: any;
-  title?: any;
+  title: string;
 }
 const SEO = ({ description, lang, meta, title }: Props) => {
   return (
     <StaticQuery
       query={detailsQuery}
-      render={(data) => {
+      render={(data: QueryResult) => {
         const metaDescription =
           description || data.site.siteMetadata.description;
         const defaultTitle = 'suite.lab | 윤옴므의 기술블로그';

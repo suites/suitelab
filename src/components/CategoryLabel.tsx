@@ -1,6 +1,7 @@
 import { graphql, Link, StaticQuery } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
+import { QueryResult } from '../models';
 
 const Wrapper = styled.div`
   .category-text {
@@ -21,18 +22,17 @@ const Wrapper = styled.div`
 `;
 
 interface Props {
-  slug: any;
-  isLink?: any;
+  slug: string;
+  isLink?: boolean;
 }
 
-const categoryLabel = ({ slug, isLink }: Props) => {
-  if (!slug) { return null; }
+const CategoryLabel = ({ slug, isLink }: Props) => {
   return (
     <StaticQuery
       query={categoryQuery}
-      render={(data) => {
+      render={(data: QueryResult) => {
         const { categories } = data.site.siteMetadata;
-        const categoryObject = categories.find((cat: any) => {
+        const categoryObject = categories.find((cat) => {
           return cat.slug === slug;
         });
         const categoryName = categoryObject ? categoryObject.name : slug;
@@ -77,4 +77,4 @@ const categoryQuery = graphql`
   }
 `;
 
-export default categoryLabel;
+export default CategoryLabel;

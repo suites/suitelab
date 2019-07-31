@@ -1,12 +1,13 @@
 import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
+import QueryResult from '../../models/QueryResult';
 
 const JsonLD = () => {
   return (
     <StaticQuery
       query={jsonLdHomeQuery}
-      render={(data) => {
+      render={(data: QueryResult) => {
         const { title, siteUrl, description, author } = data.site.siteMetadata;
 
         const publisher = {

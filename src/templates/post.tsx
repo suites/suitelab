@@ -19,6 +19,8 @@ import postSyntaxHighlightStyle from '../styles/postSyntaxHighlight';
 import svgPattern from '../svg/others/pattern.svg';
 
 import { Disqus } from 'gatsby-plugin-disqus';
+import { QueryResult } from '../models';
+import { PostPageContext } from '../models/PageContext';
 
 const Content = styled.section`
   position: relative;
@@ -105,15 +107,15 @@ const PostContent = styled.div`
 `;
 
 interface Props {
-  data: any;
-  pageContext: any;
+  data: QueryResult;
+  pageContext: PostPageContext;
   location: any;
 }
 
 class BlogPostTemplate extends React.Component<Props> {
   render() {
     const post = this.props.data.markdownRemark;
-    const { siteUrl, title: { siteTitle } } = this.props.data.site.siteMetadata;
+    const { siteUrl, title: siteTitle } = this.props.data.site.siteMetadata;
     const { relatedPosts, slug } = this.props.pageContext;
     const { title, description, date, category, emoji } = post.frontmatter;
 
@@ -123,7 +125,7 @@ class BlogPostTemplate extends React.Component<Props> {
     const disqusConfig = {
       url: location_full_url,
       identifier: post.id,
-      title: post.title,
+      title,
     };
     return (
       <Layout location={location} title={siteTitle}>
@@ -153,7 +155,7 @@ class BlogPostTemplate extends React.Component<Props> {
           <ContentMain>
             <PostDate>{date}</PostDate>
             <PostTitle>{title}</PostTitle>
-            <CategoryLabel slug={category} isLink='true' />
+            <CategoryLabel slug={category} isLink={true} />
             <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
             <FollowBudge />
           </ContentMain>

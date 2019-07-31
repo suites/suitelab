@@ -1,19 +1,20 @@
 import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
+import { QueryResult } from '../../models';
 
 interface Props {
-  title: any;
-  description: any;
-  date: any;
-  categorySlug: any;
-  url: any;
+  title: string;
+  description: string;
+  date: string;
+  categorySlug: string;
+  url: string;
 }
 const PostJsonLD = ({ title, description, date, categorySlug, url }: Props) => {
   return (
     <StaticQuery
       query={jsonLdPostQuery}
-      render={(data) => {
+      render={(data: QueryResult) => {
         const { siteUrl, author, categories } = data.site.siteMetadata;
         const dateFormatted = date.replace(/\./g, '-');
         const publisher = {
@@ -48,7 +49,7 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }: Props) => {
 
         // bread crumbs
         // get category name from slug
-        const categoryObject = categories.find((cat: any) => {
+        const categoryObject = categories.find((cat) => {
           return cat.slug === categorySlug;
         });
         const categoryName = categoryObject

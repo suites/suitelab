@@ -2,6 +2,7 @@ import { graphql, Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
+import { Category } from '../models/QueryResult';
 import cactusBlue from '../svg/categories/cactus-blue.svg';
 import cactusGreen from '../svg/categories/cactus-green.svg';
 import cactusRed from '../svg/categories/cactus-red.svg';
@@ -121,20 +122,20 @@ function selectCategoryIcon(name: string) {
 }
 
 interface CategoryLinkProps {
-  catName: any;
-  catIcon: any;
-  catLink: any;
-  path: any;
+  categoryName: string;
+  categoryIcon: string;
+  categoryLink: string;
+  path: string;
 }
 
-const CategoryLink = ({ catName, catIcon, catLink, path }: CategoryLinkProps) => {
+const CategoryLink = ({ categoryName, categoryIcon, categoryLink, path }: CategoryLinkProps) => {
   return (
-    <CategoryItem className={catLink === path ? 'active' : undefined}>
-      <Link to={catLink} className='cat-item__link'>
+    <CategoryItem className={categoryLink === path ? 'active' : undefined}>
+      <Link to={categoryLink} className='cat-item__link'>
         <div className='cat-item__image'>
-          <img src={catIcon} alt={catName} />
+          <img src={categoryIcon} alt={categoryName} />
         </div>
-        <div className='cat-item__name'>{catName}</div>
+        <div className='cat-item__name'>{categoryName}</div>
       </Link>
     </CategoryItem>
   );
@@ -142,7 +143,7 @@ const CategoryLink = ({ catName, catIcon, catLink, path }: CategoryLinkProps) =>
 
 interface CategoryMenuProps {
   location: any;
-  categories: any[];
+  categories: Category[];
 }
 
 const CategoryMenu = ({ location, categories }: CategoryMenuProps) => {
@@ -150,15 +151,15 @@ const CategoryMenu = ({ location, categories }: CategoryMenuProps) => {
   return (
     <Nav>
       <CategoryItemList>
-        <CategoryLink key='new' catName='new' catIcon={svgNew} catLink='/' path={path} />
+        <CategoryLink key='new' categoryName='new' categoryIcon={svgNew} categoryLink='/' path={path} />
         {
           categories.map((category) => {
             return (
               <CategoryLink
                 key={category.name}
-                catName={category.name}
-                catIcon={selectCategoryIcon(category.icon)}
-                catLink={category.link}
+                categoryName={category.name}
+                categoryIcon={selectCategoryIcon(category.icon)}
+                categoryLink={category.link}
                 path={path}
               />
             );

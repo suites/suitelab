@@ -6,6 +6,7 @@ import image from '../../static/images/image.png';
 
 import { FaGithub, FaIdBadge, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
+import QueryResult from '../models/QueryResult';
 
 const BioWrapper = styled.div`
   position: sticky;
@@ -78,26 +79,12 @@ const BioLink = styled.a`
   }
 `;
 
-interface Social {
-  instagram: string;
-  github: string;
-  linkedin: string;
-}
-
-interface SiteMetadata {
-  author: string,
-  resumeUrl: string,
-  email: string,
-  social: Social,
-  description: string,
-}
-
 const Bio = () => {
   return (
     <StaticQuery
       query={bioQuery}
-      render={(data) => {
-        const { author, resumeUrl, email, social, description }: SiteMetadata = data.site.siteMetadata;
+      render={(data: QueryResult) => {
+        const { author, resumeUrl, email, social, description } = data.site.siteMetadata;
         return (
           <BioWrapper>
             <BioHeader>

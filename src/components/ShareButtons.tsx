@@ -45,9 +45,9 @@ const GitHubLink = styled.a`
 `;
 
 interface Props {
-  slug: any;
-  title: any;
-  emoji: any;
+  slug: string;
+  title: string;
+  emoji: string;
 }
 
 const ShareButtons = ({ slug, title, emoji }: Props) => {

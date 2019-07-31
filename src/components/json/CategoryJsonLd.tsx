@@ -1,17 +1,18 @@
 import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
+import { QueryResult } from '../../models';
 
 interface Props {
-  categorySlug: any;
-  categoryName: any;
+  categorySlug: string;
+  categoryName: string;
 }
 
 const CategoryJsonLD = ({ categorySlug, categoryName }: Props) => {
   return (
     <StaticQuery
       query={jsonLdCategoryQuery}
-      render={(data) => {
+      render={(data: QueryResult) => {
         const { siteUrl } = data.site.siteMetadata;
         // bread crumbs
         const jsonBreadCrumbs = {

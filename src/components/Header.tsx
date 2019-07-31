@@ -42,7 +42,7 @@ const HeaderInner = styled.div`
 `;
 
 interface Props {
-  title: any;
+  title: string;
   location: any;
 }
 

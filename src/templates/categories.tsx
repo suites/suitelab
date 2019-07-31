@@ -6,6 +6,8 @@ import CategoryJsonLd from '../components/json/CategoryJsonLd';
 import Layout from '../components/Layout';
 import PostCard from '../components/PostCard';
 import SEO from '../components/SEO';
+import { QueryResult } from '../models';
+import { CategoryPageContext } from '../models/PageContext';
 
 const Heading = styled.h1`
   margin: 0.5em 0 0.8em;
@@ -17,8 +19,8 @@ const Heading = styled.h1`
 `;
 
 interface Props {
-  data: any;
-  pageContext: any;
+  data: QueryResult;
+  pageContext: CategoryPageContext;
   location: any;
 }
 class CategoryTemplate extends React.Component<Props> {
@@ -29,7 +31,7 @@ class CategoryTemplate extends React.Component<Props> {
     // get Category name from category slug
     const categorySlug = pageContext.category;
     const categories = data.site.siteMetadata.categories;
-    const categoryObject = categories.find((cat: any) => {
+    const categoryObject = categories.find((cat) => {
       return cat.slug === categorySlug;
     });
     // use slug when name doesn't exist
@@ -44,7 +46,7 @@ class CategoryTemplate extends React.Component<Props> {
         />
         <CategoryMenu location={location} categories={categories} />
         <Heading>{categoryName}</Heading>
-        {posts.map(({ node }: { node: any }) => {
+        {posts.map(({ node }) => {
           return <PostCard key={node.fields.slug} node={node} />;
         })}
       </Layout>
