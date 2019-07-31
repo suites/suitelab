@@ -54,13 +54,13 @@ const ShareButtons = ({ slug, title, emoji }: Props) => {
   const encodedTitle = encodeURIComponent(
     `${emoji || '🐱'}${title} | CatKnows`,
   );
-  const pageUrl = `https://catnose99.com${slug}`;
+  const pageUrl = `https://suitee.me${slug}`;
   return (
     <Wrapper>
       <ShareTitle>SHARE</ShareTitle>
       <ShareLinks>
         <ShareLink
-          href={`https://twitter.com/share?url=${pageUrl}&text=${encodedTitle}&via=catnose99`}
+          href={`https://twitter.com/share?url=${pageUrl}&text=${encodedTitle}&via=yoon.homme`}
           rel='nofllow'
         >
           <img
@@ -80,20 +80,7 @@ const ShareButtons = ({ slug, title, emoji }: Props) => {
         >
           f
         </ShareLink>
-        <ShareLink
-          href={`http://b.hatena.ne.jp/add?mode=confirm&url=${pageUrl}`}
-          style={{ fontSize: '19px' }}
-          rel='nofllow'
-        >
-          B!
-        </ShareLink>
       </ShareLinks>
-      <GitHubLink
-        href={`https://github.com/catnose99/CatKnows/edit/master/content/blog${slug}index.md`}
-        rel='nofllow'
-      >
-        Edit on GitHub
-      </GitHubLink>
     </Wrapper>
   );
 };

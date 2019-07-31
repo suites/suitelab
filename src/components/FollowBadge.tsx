@@ -1,7 +1,6 @@
 import React from 'react';
+import { FaGithub } from 'react-icons/fa';
 import styled from 'styled-components';
-import svgTwitterWhite from '../svg/socials/twitter-white.svg';
-import { FaGithub, FaIdBadge, FaInstagram } from 'react-icons/fa';
 
 const Follow = styled.div`
   margin-top: 2em;
@@ -11,7 +10,7 @@ const Follow = styled.div`
 const FollowLink = styled.a`
   display: inline-flex;
   align-items: center;
-  background: #20a8ea;
+  background: #000;
   color: #fff;
   padding: 0;
   border-radius: 4px;
@@ -31,8 +30,7 @@ const FollowLink = styled.a`
 const ShareButtons = () => {
   return (
     <Follow>
-      <FollowLink href='https://twitter.com/catnose99' rel='nofollow'>
-        {/* <img src={svgTwitterWhite} alt='Twitter' /> */}
+      <FollowLink href='https://github.com/suites'>
         <FaGithub size={32} />
         <div className='follow-link-text'>Follow to @yoon.homme</div>
       </FollowLink>

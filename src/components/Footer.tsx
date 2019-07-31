@@ -25,12 +25,6 @@ const Footer = () => {
       <ContentWrapper>
         <FooterInner>
           <div>© {new Date().getFullYear()}, yoon.homme All rights reserved.</div>
-          <div>
-            {'Theme by '}
-            <a href='https://github.com/catnose99/CatKnows' rel='nofollow'>
-              CatKnows
-            </a>
-          </div>
         </FooterInner>
       </ContentWrapper>
     </FooterContent>

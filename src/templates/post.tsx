@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import twemoji from 'twemoji';
 
 import CategoryLabel from '../components/CategoryLabel';
-import FollowBudge from '../components/FollowBudge';
+import FollowBudge from '../components/FollowBadge';
 import PostJsonLd from '../components/json/PostJsonLd';
 import Layout from '../components/Layout';
 import RelatedPosts from '../components/RelatedPosts';
