@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `suite lab`,
+    title: `suite.lab`,
     author: `yoon.homme`,
     description: `기술과 커뮤니케이션의 힘이 세상을 바꾼다고 믿습니다.
 편리한 세상으로 나아가기 위해 고민하고 개발합니다.
