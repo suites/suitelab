@@ -7,7 +7,7 @@ import Layout from '../components/Layout';
 import PostCard from '../components/PostCard';
 import SEO from '../components/SEO';
 import { QueryResult } from '../models';
-import { CategoryPageContext } from '../models/PageContext';
+import { CategoryPageContext } from '../models';
 
 const Heading = styled.h1`
   margin: 0.5em 0 0.8em;

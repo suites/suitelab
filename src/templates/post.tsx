@@ -20,7 +20,7 @@ import svgPattern from '../svg/others/pattern.svg';
 
 import { Disqus } from 'gatsby-plugin-disqus';
 import { QueryResult } from '../models';
-import { PostPageContext } from '../models/PageContext';
+import { PostPageContext } from '../models';
 
 const Content = styled.section`
   position: relative;

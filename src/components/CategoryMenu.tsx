@@ -2,7 +2,7 @@ import { graphql, Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
-import { Category } from '../models/QueryResult';
+import { Category } from '../models';
 import cactusBlue from '../svg/categories/cactus-blue.svg';
 import cactusGreen from '../svg/categories/cactus-green.svg';
 import cactusRed from '../svg/categories/cactus-red.svg';

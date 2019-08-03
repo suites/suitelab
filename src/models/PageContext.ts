@@ -1,4 +1,4 @@
-import { MarkdownRemark } from './QueryResult';
+import { MarkdownRemark } from './MarkdownRemark';
 
 export interface RelatedPost {
   node: MarkdownRemark;

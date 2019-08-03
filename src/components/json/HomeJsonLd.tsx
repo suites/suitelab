@@ -1,7 +1,7 @@
 import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
-import QueryResult from '../../models/QueryResult';
+import { QueryResult } from '../../models';
 
 const JsonLD = () => {
   return (

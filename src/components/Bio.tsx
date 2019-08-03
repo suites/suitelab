@@ -6,7 +6,7 @@ import image from '../../static/images/image.png';
 
 import { FaGithub, FaIdBadge, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
-import QueryResult from '../models/QueryResult';
+import { QueryResult } from '../models';
 
 const BioWrapper = styled.div`
   position: sticky;
