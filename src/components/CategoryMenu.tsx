@@ -45,11 +45,11 @@ const CategoryItem = styled.li`
     flex: 0 0 auto;
     margin: 0 0 0 15px;
   }
-  .cat-item__link {
+  .category-item__link {
     color: #fff;
   }
 
-  .cat-item__image {
+  .category-item__image {
     padding: 2px;
     background: ${(props) => props.theme.colors.blackLight};
     border-radius: 50%;
@@ -68,7 +68,7 @@ const CategoryItem = styled.li`
       fill: #FFF000;
     }
   }
-  .cat-item__name {
+  .category-item__name {
     margin-top: 5px;
     font-size: 13px;
     font-weight: 700;
@@ -79,7 +79,7 @@ const CategoryItem = styled.li`
     }
   }
   &.active {
-    .cat-item__image:after {
+    .category-item__image:after {
       content: "";
       position: absolute;
       display: block;
@@ -131,11 +131,11 @@ interface CategoryLinkProps {
 const CategoryLink = ({ categoryName, categoryIcon, categoryLink, path }: CategoryLinkProps) => {
   return (
     <CategoryItem className={categoryLink === path ? 'active' : undefined}>
-      <Link to={categoryLink} className='cat-item__link'>
-        <div className='cat-item__image'>
+      <Link to={categoryLink} className='category-item__link'>
+        <div className='category-item__image'>
           <img src={categoryIcon} alt={categoryName} />
         </div>
-        <div className='cat-item__name'>{categoryName}</div>
+        <div className='category-item__name'>{categoryName}</div>
       </Link>
     </CategoryItem>
   );
