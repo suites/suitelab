@@ -52,7 +52,7 @@ interface Props {
 
 const ShareButtons = ({ slug, title, emoji }: Props) => {
   const encodedTitle = encodeURIComponent(
-    `${emoji || '🐱'}${title} | CatKnows`,
+    `${emoji || '🐱'}${title} | suite.lab`,
   );
   const pageUrl = `https://suitee.me${slug}`;
   return (
