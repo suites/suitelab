@@ -14,7 +14,6 @@
   "dependencies": {
     "@types/react-helmet": "^5.0.8",
     "@types/styled-components": "^4.1.18",
-    "babel-plugin-styled-components": "^1.10.0",
     "gatsby": "^2.0.118",
     "gatsby-image": "^2.0.29",
     "gatsby-plugin-disqus": "^1.1.2",
