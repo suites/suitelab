@@ -2,7 +2,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import twemoji from 'twemoji';
-import { MarkdownRemark } from '../models/QueryResult';
+import { MarkdownRemark } from '../models';
 import CategoryLabel from './CategoryLabel';
 
 const PostCardWrapper = styled.div`
