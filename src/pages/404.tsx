@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 
+import svg404 from '../../static/images/svg/others/404.svg';
 import { QueryResult } from '../models';
-import svg404 from '../svg/others/404.svg';
 
 const Wrapper = styled.div`
   color: #fff;

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import svgTwitterWhite from '../svg/socials/twitter-white.svg';
+import svgTwitterWhite from '../../static/images/svg/socials/twitter-white.svg';
 
 const Wrapper = styled.div`
   margin: 0 0 2.5em;

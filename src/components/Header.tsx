@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import svgLogo from '../svg/logo.svg';
+import svgLogo from '../../static/images/svg/logo.svg';
 import ContentWrapper from './ContentWrapper';
 
 const HeaderTag = styled.header`

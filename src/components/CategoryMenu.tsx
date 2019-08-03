@@ -2,12 +2,13 @@ import { graphql, Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
+import cactusBlue from '../../static/images/svg/categories/cactus-blue.svg';
+import cactusGreen from '../../static/images/svg/categories/cactus-green.svg';
+import cactusRed from '../../static/images/svg/categories/cactus-red.svg';
+import cactusYellow from '../../static/images/svg/categories/cactus-yellow.svg';
+import svgNew from '../../static/images/svg/categories/new.svg';
+
 import { Category } from '../models';
-import cactusBlue from '../svg/categories/cactus-blue.svg';
-import cactusGreen from '../svg/categories/cactus-green.svg';
-import cactusRed from '../svg/categories/cactus-red.svg';
-import cactusYellow from '../svg/categories/cactus-yellow.svg';
-import svgNew from '../svg/categories/new.svg';
 
 const Nav = styled.nav`
   display: block;
