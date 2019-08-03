@@ -2,7 +2,7 @@ import { graphql, StaticQuery } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 
-import image from '../../static/images/image.png';
+import avatar from '../../static/images/avatar.png';
 
 import { FaGithub, FaIdBadge, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { MdMail } from 'react-icons/md';
@@ -88,7 +88,7 @@ const Bio = () => {
         return (
           <BioWrapper>
             <BioHeader>
-              <AvatarImage src={image} alt={author} />
+              <AvatarImage src={avatar} alt={author} />
               <BioName>
                 {author}
               </BioName>

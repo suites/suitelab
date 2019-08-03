@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import Layout from '../components/Layout';
 import SEO from '../components/SEO';
 
+import svg404 from '../../static/images/svg/others/404.svg';
 import { QueryResult } from '../models';
-import svg404 from '../svg/others/404.svg';
 
 const Wrapper = styled.div`
   color: #fff;
@@ -57,7 +57,7 @@ class NotFoundPage extends React.Component<Props> {
           <SEO title='앗! 길을 잘못 들었나봐요.' />
           <HeroImage src={svg404} />
           <Title>앗! 길을 잘못 들었나봐요.</Title>
-          <StyledLink to={`/`} className='cat-item__link'>
+          <StyledLink to={`/`} className='category-item__link'>
             HOME
           </StyledLink>
         </Wrapper>

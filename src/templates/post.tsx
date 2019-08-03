@@ -16,7 +16,7 @@ import postContentStyle from '../styles/postContent';
 import postCustomBlockStyle from '../styles/postCustomBlock';
 import postSyntaxHighlightStyle from '../styles/postSyntaxHighlight';
 
-import svgPattern from '../svg/others/pattern.svg';
+import svgPattern from '../../static/images/svg/others/pattern.svg';
 
 import { Disqus } from 'gatsby-plugin-disqus';
 import { QueryResult } from '../models';

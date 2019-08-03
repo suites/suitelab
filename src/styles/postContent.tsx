@@ -1,5 +1,5 @@
 import { css } from 'styled-components';
-import svgHeadingIcon from '../svg/others/heading-icon.svg';
+import svgHeadingIcon from '../../static/images/svg/others/heading-icon.svg';
 
 const postContentStyle = css`
   margin: 1.5em 0 1em;
