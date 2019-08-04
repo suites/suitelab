@@ -65,6 +65,10 @@ exports.createPages = ({ graphql, actions }) => {
         const endPointOldPath = v.split('/')[v.split('/').length - 2];
         return _.isEqual(newPath.replace(/\//gi, '').toLowerCase(), endPointOldPath.toLowerCase());
       });
+
+      if (!oldPath) {
+        return;
+      }
       createRedirect({ fromPath: oldPath, toPath: newPath });
     });
 
