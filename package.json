@@ -37,7 +37,7 @@
     "gatsby-remark-smartypants": "^2.0.8",
     "gatsby-remark-twemoji-shortcut": "^0.10.1",
     "gatsby-source-filesystem": "^2.0.20",
-    "gatsby-transformer-remark": "^2.2.4",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^2.1.13",
     "netlify-cli": "^2.8.0",
     "prismjs": "^1.15.0",
