@@ -4,7 +4,7 @@ import { MarkdownRemark } from './MarkdownRemark';
 export interface QueryResult {
   site: Site;
   markdownRemark: MarkdownRemark;
-  allMarkdownRemark: AllMarkdownRemark;
+  // allMarkdownRemark: AllMarkdownRemark;
 }
 
 interface Site {

@@ -26,7 +26,7 @@ interface Props {
 class CategoryTemplate extends React.Component<Props> {
   render() {
     const { data, pageContext } = this.props;
-    const posts = data.allMarkdownRemark.edges;
+    // const posts = data.allMarkdownRemark.edges;
     const { location } = this.props;
     // get Category name from category slug
     const categorySlug = pageContext.category;
@@ -46,9 +46,9 @@ class CategoryTemplate extends React.Component<Props> {
         />
         <CategoryMenu location={location} categories={categories} />
         <Heading>{categoryName}</Heading>
-        {posts.map(({ node }) => {
+        {/* {posts.map(({ node }) => {
           return <PostCard key={node.fields.slug} node={node} />;
-        })}
+        })} */}
       </Layout>
     );
   }
@@ -56,37 +56,37 @@ class CategoryTemplate extends React.Component<Props> {
 
 export default CategoryTemplate;
 
-export const pageQuery = graphql`
-  query BlogPostByCategory($category: String) {
-    site {
-      siteMetadata {
-        categories {
-          name
-          slug
-          color
-          icon
-          link
-        }
-      }
-    }
-    allMarkdownRemark(
-      limit: 1000
-      sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { category: { eq: $category } } }
-    ) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "YYYY.MM.DD")
-            title
-            emoji
-            category
-          }
-        }
-      }
-    }
-  }
-`;
+// export const pageQuery = graphql`
+//   query BlogPostByCategory($category: String) {
+//     site {
+//       siteMetadata {
+//         categories {
+//           name
+//           slug
+//           color
+//           icon
+//           link
+//         }
+//       }
+//     }
+//     allMarkdownRemark(
+//       limit: 1000
+//       sort: { frontmatter: { date: DESC } }
+//       filter: { frontmatter: { category: { eq: $category } } }
+//     ) {
+//       edges {
+//         node {
+//           fields {
+//             slug
+//           }
+//           frontmatter {
+//             date(formatString: "YYYY.MM.DD")
+//             title
+//             emoji
+//             category
+//           }
+//         }
+//       }
+//     }
+//   }
+// `;

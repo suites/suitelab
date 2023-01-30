@@ -18,7 +18,7 @@ class BlogIndex extends React.Component<Props> {
     const { data } = this.props;
     const categories = data.site.siteMetadata.categories;
     const siteTitle = data.site.siteMetadata.title;
-    const posts = data.allMarkdownRemark.edges;
+    // const posts = data.allMarkdownRemark.edges;
     const { location } = this.props;
 
     return (
@@ -29,9 +29,9 @@ class BlogIndex extends React.Component<Props> {
         </Helmet>
         <HomeJsonLd />
         <CategoryMenu location={location} categories={categories} />
-        {posts.map(({ node }) => {
+        {/* {posts.map(({ node }) => {
           return <PostCard key={node.fields.slug} node={node} />;
-        })}
+        })} */}
       </Layout>
     );
   }
@@ -51,20 +51,20 @@ export const pageQuery = graphql`
         }
       }
     }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "YYYY.MM.DD")
-            title
-            emoji
-            category
-          }
-        }
-      }
-    }
+    # allMarkdownRemark(sort: { frontmatter: { date: DESC } }) {
+    #   edges {
+    #     node {
+    #       fields {
+    #         slug
+    #       }
+    #       frontmatter {
+    #         date(formatString: "YYYY.MM.DD")
+    #         title
+    #         emoji
+    #         category
+    #       }
+    #     }
+    #   }
+    # }
   }
 `;
