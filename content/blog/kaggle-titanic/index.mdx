@@ -3,13 +3,14 @@ title: kaggle Titanic 머신러닝 입문기
 date: '2018-03-19'
 category: 'deep learning'
 emoji: '🐧'
+slug: 'kaggle-titanic'
 ---
 
 ```python
 import pandas as pd
 ```
 
-## Load Dataset
+{/* ## Load Dataset
 
 
 ```python
@@ -18,8 +19,8 @@ train = pd.read_csv("data/train.csv", index_col="PassengerId")
 print(train.shape)
 train.head()
 ```
-    (891, 11)
-<div>
+    (891, 11) */}
+{/* <div>
 <style>
     .dataframe thead tr:only-child th {
         text-align: right;
@@ -301,9 +302,9 @@ sns.lmplot(data=low_fare, x="Age", y="Fare", hue="Survived", fit_reg=False)
 
 
 
-
+```
     <seaborn.axisgrid.FacetGrid at 0x23ddeba74e0>
-
+```
 
 
 
@@ -318,9 +319,9 @@ train = pd.read_csv("data/train.csv", index_col="PassengerId")
 print(train.shape)
 train.head()
 ```
-
+```
     (891, 11)
-
+```
 
 
 
@@ -1480,4 +1481,4 @@ submission.to_csv("data/decision-tree.csv")
 
 ![png](score_1.png)
 
-결과는 0.78947로 나름 만족스럽게 나왔다.
+결과는 0.78947로 나름 만족스럽게 나왔다. */}
