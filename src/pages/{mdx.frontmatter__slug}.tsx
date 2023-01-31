@@ -104,69 +104,59 @@ const PostContent = styled.div`
   ${postContentStyle}
   ${postCustomBlockStyle}
 `;
-interface Props {
-  data: Queries.BlogPostByIdQuery;
-  pageContext: PostPageContext;
-  children: any;
-  location: any;
-}
 
-class BlogPostTemplate extends React.Component<PageProps<Queries.BlogPostByIdQuery, PostPageContext>> {
-  render() {
-    const {site, mdx} = this.props.data;
-    const { siteUrl, title: siteTitle } = site?.siteMetadata!!;
-    const { title, description, date, category, emoji } = mdx?.frontmatter!!;
-    const { relatedPosts, slug } = this.props.pageContext;
+const BlogPostTemplate = ({data, pageContext, location, children}: PageProps<Queries.BlogPostByIdQuery, PostPageContext>) => {
+  const {site, mdx} = data;
+  const { siteUrl, title: siteTitle } = site?.siteMetadata!!;
+  const { title, description, date, category, emoji } = mdx?.frontmatter!!;
+  const { relatedPosts, slug } = pageContext;
+  const location_full_url = `${siteUrl + location.pathname}`;
 
-    const location = this.props.location;
-    const location_full_url = `${siteUrl + location.pathname}`;
-
-    const disqusConfig = {
-      url: location_full_url,
-      identifier: mdx?.id,
-      title,
-    };
-    return (
-      <Layout location={location} title={siteTitle!!}>
-        <SEO title={title!!} description={description!! || mdx!!.excerpt!!} />
-        <Helmet>
-          <link
-            rel='canonical'
-            href={location_full_url}
-          />
-        </Helmet>
-        <PostJsonLd
-          title={title!!}
-          description={description!! || mdx!!.excerpt!!}
-          date={date!!}
-          url={location.href}
-          categorySlug={category!!}
+  const disqusConfig = {
+    url: location_full_url,
+    identifier: mdx?.id,
+    title,
+  };
+  return (
+    <Layout location={location} title={siteTitle!!}>
+      <SEO title={title!!} description={description!! || mdx!!.excerpt!!} />
+      <Helmet>
+        <link
+          rel='canonical'
+          href={location_full_url}
         />
-        <Content>
-          <HeroImage
-            dangerouslySetInnerHTML={{
-              __html: twemoji.parse(emoji || '😺', {
-                folder: 'svg',
-                ext: '.svg',
-              }),
-            }}
-          />
-          <ContentMain>
-            <PostDate>{date}</PostDate>
-            <PostTitle>{title}</PostTitle>
-            <CategoryLabel slug={category!!} isLink={true} />
-            <PostContent >{this.props.children}</PostContent>
-            <FollowBudge />
-          </ContentMain>
-          <aside>
-            <ShareButtons slug={slug} title={title!!} emoji={emoji!!} />
-            <Disqus config={disqusConfig} />
-            {/* <RelatedPosts posts={relatedPosts} /> */}
-          </aside>
-        </Content>
-      </Layout>
-    );
-  }
+      </Helmet>
+      <PostJsonLd
+        title={title!!}
+        description={description!! || mdx!!.excerpt!!}
+        date={date!!}
+        url={location.href}
+        categorySlug={category!!}
+      />
+      <Content>
+        <HeroImage
+          dangerouslySetInnerHTML={{
+            __html: twemoji.parse(emoji || '😺', {
+              folder: 'svg',
+              ext: '.svg',
+            }),
+          }}
+        />
+        <ContentMain>
+          <PostDate>{date}</PostDate>
+          <PostTitle>{title}</PostTitle>
+          <CategoryLabel slug={category!!} isLink={true} />
+          <PostContent >{children}</PostContent>
+          <FollowBudge />
+        </ContentMain>
+        <aside>
+          <ShareButtons slug={slug} title={title!!} emoji={emoji!!} />
+          <Disqus config={disqusConfig} />
+          <RelatedPosts posts={relatedPosts} />
+        </aside>
+      </Content>
+    </Layout>
+  );
 }
 
 export default BlogPostTemplate;
