@@ -68,6 +68,7 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.md`, `.mdx`],
+        remarkPlugins: [require('remark-math'), require('remark-html-katex')],
         gatsbyRemarkPlugins: [
           `gatsby-remark-code-titles`,
           {
@@ -90,35 +91,6 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`
             }
           },
-          // {
-          //   resolve: "gatsby-remark-custom-blocks",
-          //   options: {
-          //     blocks: {
-          //       simple: {
-          //         classes: "simple",
-          //         title: "optional"
-          //       },
-          //       info: {
-          //         classes: "info",
-          //         title: "optional"
-          //       },
-          //       alert: {
-          //         classes: "alert",
-          //         title: "optional"
-          //       },
-          //       notice: {
-          //         classes: "notice",
-          //         title: "optional"
-          //       },
-          //       imageSmall: {
-          //         classes: "image-small"
-          //       },
-          //       imageMedium: {
-          //         classes: "image-medium"
-          //       }
-          //     }
-          //   }
-          // },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {

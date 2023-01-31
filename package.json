@@ -47,6 +47,8 @@
     "react-dom": "^18.0.0",
     "react-helmet": "^6.1.0",
     "react-icons": "^4.7.1",
+    "remark-html-katex": "^3.0.0",
+    "remark-math": "^3.0.1",
     "styled-components": "^5.3.6",
     "twemoji": "^14.0.2",
     "typescript": "^4.9.4"
