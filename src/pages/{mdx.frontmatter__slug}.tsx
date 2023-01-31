@@ -21,6 +21,8 @@ import svgPattern from '../../static/images/svg/others/pattern.svg';
 import { Disqus } from 'gatsby-plugin-disqus';
 import { PostPageContext } from '../models';
 
+import "katex/dist/katex.min.css";
+
 const Content = styled.section`
   position: relative;
   background: #fff;
@@ -167,7 +169,7 @@ const BlogPostTemplate = ({data, pageContext, location, children}: PageProps<Que
           <FollowBudge />
         </ContentMain>
         <aside>
-          <ShareButtons slug={slug} title={title!!} emoji={emoji!!} />
+          <ShareButtons slug={slug!!} title={title!!} emoji={emoji!!} />
           <Disqus config={disqusConfig} />
           <RelatedPosts posts={relatedPosts()} />
         </aside>

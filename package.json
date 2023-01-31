@@ -34,6 +34,7 @@
     "gatsby-remark-custom-blocks": "^5.5.0",
     "gatsby-remark-embed-youtube": "^0.0.7",
     "gatsby-remark-images": "^7.5.0",
+    "gatsby-remark-katex": "^7.5.0",
     "gatsby-remark-prismjs": "^7.5.0",
     "gatsby-remark-responsive-iframe": "^6.5.0",
     "gatsby-remark-smartypants": "^6.5.0",
