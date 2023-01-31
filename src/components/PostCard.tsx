@@ -82,7 +82,7 @@ const PostCard = ({ frontmatter }: Props) => {
 
   return (
     <PostCardWrapper>
-      <Link to={frontmatter.slug!!} className='post-card-link'>
+      <Link to={`/${frontmatter.slug!!}`} className='post-card-link'>
         <PostCardEmoji dangerouslySetInnerHTML={{ __html: emoji }} />
         <PostCardContent>
           <h3>{title}</h3>
