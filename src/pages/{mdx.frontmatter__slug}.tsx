@@ -106,10 +106,9 @@ const PostContent = styled.div`
 `;
 
 const BlogPostTemplate = ({data, pageContext, location, children}: PageProps<Queries.BlogPostByIdQuery, PostPageContext>) => {
-  const {site, mdx} = data;
+  const {site, mdx, allMdx} = data;
   const { siteUrl, title: siteTitle } = site?.siteMetadata!!;
-  const { title, description, date, category, emoji } = mdx?.frontmatter!!;
-  const { relatedPosts, slug } = pageContext;
+  const { title, description, date, category, emoji, slug } = mdx?.frontmatter!!;
   const location_full_url = `${siteUrl + location.pathname}`;
 
   const disqusConfig = {
@@ -117,6 +116,24 @@ const BlogPostTemplate = ({data, pageContext, location, children}: PageProps<Que
     identifier: mdx?.id,
     title,
   };
+
+  const relatedPosts = () => {
+    return allMdx.nodes
+    .filter((node) => node.frontmatter!!.slug !== slug)
+    .filter((node) => node.frontmatter!!.category === category)
+    .slice(0, 5)
+    .map((node) => {
+      return {
+        category: node.frontmatter!!.category,
+        date: node.frontmatter!!.category,
+        description: "",
+        emoji: node.frontmatter!!.emoji,
+        slug: node.frontmatter!!.slug,
+        title: node.frontmatter!!.title,
+      }
+    })
+  }
+
   return (
     <Layout location={location} title={siteTitle!!}>
       <SEO title={title!!} description={description!! || mdx!!.excerpt!!} />
@@ -152,7 +169,7 @@ const BlogPostTemplate = ({data, pageContext, location, children}: PageProps<Que
         <aside>
           <ShareButtons slug={slug} title={title!!} emoji={emoji!!} />
           <Disqus config={disqusConfig} />
-          <RelatedPosts posts={relatedPosts} />
+          <RelatedPosts posts={relatedPosts()} />
         </aside>
       </Content>
     </Layout>
@@ -180,6 +197,25 @@ export const pageQuery = graphql`
         date(formatString: "YYYY.MM.DD")
         emoji
         category
+        slug
+      }
+    }
+    allMdx(
+      sort: { frontmatter: { date: DESC } }
+      limit: 1000
+    ) {
+      nodes {
+        id
+        frontmatter {
+          title
+          date(formatString: "YYYY.MM.DD")
+          emoji
+          category
+          slug
+        }
+        internal {
+          contentFilePath
+        }
       }
     }
   }
