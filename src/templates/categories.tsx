@@ -6,7 +6,6 @@ import CategoryJsonLd from '../components/json/CategoryJsonLd';
 import Layout from '../components/Layout';
 import PostCard from '../components/PostCard';
 import SEO from '../components/SEO';
-import { QueryResult } from '../models';
 import { CategoryPageContext } from '../models';
 
 const Heading = styled.h1`
@@ -18,41 +17,48 @@ const Heading = styled.h1`
   letter-spacing: 1px;
 `;
 
-interface Props {
-  data: QueryResult;
-  pageContext: CategoryPageContext;
-  location: any;
-}
-class CategoryTemplate extends React.Component<PageProps<Queries.BlogPostByIdQuery, CategoryPageContext>> {
-  render() {
-    return <></>
-    // const { data, pageContext } = this.props;
-    // // const posts = data.allMarkdownRemark.edges;
-    // const { location } = this.props;
-    // // get Category name from category slug
-    // const categorySlug = pageContext.category;
-    // const categories = data.site!!.siteMetadata!!.;
-    // const categoryObject = categories.find((cat) => {
-    //   return cat.slug === categorySlug;
-    // });
-    // // use slug when name doesn't exist
-    // const categoryName = categoryObject ? categoryObject.name : categorySlug;
 
-    // return (
-    //   <Layout location={this.props.location} title={categoryName}>
-    //     <SEO title={categoryName} />
-    //     <CategoryJsonLd
-    //       categorySlug={categorySlug}
-    //       categoryName={categoryName}
-    //     />
-    //     <CategoryMenu location={location} categories={categories} />
-    //     <Heading>{categoryName}</Heading>
-    //     {/* {posts.map(({ node }) => {
-    //       return <PostCard key={node.fields.slug} node={node} />;
-    //     })} */}
-    //   </Layout>
-    // );
-  }
+const CategoryTemplate = ({data, pageContext, location}: PageProps<Queries.BlogPostByCategoryQuery, CategoryPageContext>) => {
+  const posts = data.allMdx.nodes;
+  // get Category name from category slug
+  const categorySlug = pageContext.category;
+  const categories = data.site!!.siteMetadata!!.categories;
+  const categoryObject = categories!!.find((cat) => {
+    return cat!!.slug === categorySlug;
+  });
+  // use slug when name doesn't exist
+  const categoryName = categoryObject ? categoryObject.name : categorySlug;
+
+  return (
+    <Layout location={location} title={categoryName!!}>
+      <SEO title={categoryName!!} />
+      <CategoryJsonLd
+        categorySlug={categorySlug}
+        categoryName={categoryName!!}
+      />
+      <CategoryMenu location={location} categories={categories!!.map((category) => {
+        return {
+          color: category!!.color!!,
+          icon: category!!.icon!!,
+          link: category!!.link!!,
+          name: category!!.name!!,
+          slug: category!!.slug!!
+        }
+      }
+      )} />
+      <Heading>{categoryName}</Heading>
+      {posts.map(({ frontmatter }) => {
+        return <PostCard key={frontmatter!!.slug!!} frontmatter={{
+          category: frontmatter!!.category!!,
+          date: frontmatter!!.date!!,
+          description: "",
+          emoji: frontmatter!!.emoji!!,
+          slug: frontmatter!!.slug!!,
+          title: frontmatter!!.title!!,
+        }} />;
+      })}
+    </Layout>
+  );
 }
 
 export default CategoryTemplate;
