@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby';
+import { graphql, PageProps, Link } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
@@ -19,8 +19,9 @@ import postSyntaxHighlightStyle from '../styles/postSyntaxHighlight';
 import svgPattern from '../../static/images/svg/others/pattern.svg';
 
 import { Disqus } from 'gatsby-plugin-disqus';
-import { QueryResult } from '../models';
 import { PostPageContext } from '../models';
+
+import "katex/dist/katex.min.css";
 
 const Content = styled.section`
   position: relative;
@@ -106,74 +107,81 @@ const PostContent = styled.div`
   ${postCustomBlockStyle}
 `;
 
-interface Props {
-  data: QueryResult;
-  pageContext: PostPageContext;
-  location: any;
-}
+const BlogPostTemplate = ({data, pageContext, location, children}: PageProps<Queries.BlogPostByIdQuery, PostPageContext>) => {
+  const {site, mdx, allMdx} = data;
+  const { siteUrl, title: siteTitle } = site?.siteMetadata!!;
+  const { title, description, date, category, emoji, slug } = mdx?.frontmatter!!;
+  const location_full_url = `${siteUrl + location.pathname}`;
 
-class BlogPostTemplate extends React.Component<Props> {
-  render() {
-    const post = this.props.data.markdownRemark;
-    const { siteUrl, title: siteTitle } = this.props.data.site.siteMetadata;
-    const { relatedPosts, slug } = this.props.pageContext;
-    const { title, description, date, category, emoji } = post.frontmatter;
+  const disqusConfig = {
+    url: location_full_url,
+    identifier: mdx?.id,
+    title,
+  };
 
-    const location = this.props.location;
-    const location_full_url = `${siteUrl + location.pathname}`;
-
-    const disqusConfig = {
-      url: location_full_url,
-      identifier: post.id,
-      title,
-    };
-    return (
-      <Layout location={location} title={siteTitle}>
-        <SEO title={title} description={description || post.excerpt} />
-        <Helmet>
-          <link
-            rel='canonical'
-            href={location_full_url}
-          />
-        </Helmet>
-        <PostJsonLd
-          title={title}
-          description={description || post.excerpt}
-          date={date}
-          url={location.href}
-          categorySlug={category}
-        />
-        <Content>
-          <HeroImage
-            dangerouslySetInnerHTML={{
-              __html: twemoji.parse(emoji || '😺', {
-                folder: 'svg',
-                ext: '.svg',
-              }),
-            }}
-          />
-          <ContentMain>
-            <PostDate>{date}</PostDate>
-            <PostTitle>{title}</PostTitle>
-            <CategoryLabel slug={category} isLink={true} />
-            <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
-            <FollowBudge />
-          </ContentMain>
-          <aside>
-            <ShareButtons slug={slug} title={title} emoji={emoji} />
-            <Disqus config={disqusConfig} />
-            <RelatedPosts posts={relatedPosts} />
-          </aside>
-        </Content>
-      </Layout>
-    );
+  const relatedPosts = () => {
+    return allMdx.nodes
+    .filter((node) => node.frontmatter!!.slug !== slug)
+    .filter((node) => node.frontmatter!!.category === category)
+    .slice(0, 5)
+    .map((node) => {
+      return {
+        category: node.frontmatter!!.category,
+        date: node.frontmatter!!.category,
+        description: "",
+        emoji: node.frontmatter!!.emoji,
+        slug: node.frontmatter!!.slug,
+        title: node.frontmatter!!.title,
+      }
+    })
   }
+
+  return (
+    <Layout location={location} title={siteTitle!!}>
+      <SEO title={title!!} description={description!! || mdx!!.excerpt!!} />
+      <Helmet>
+        <link
+          rel='canonical'
+          href={location_full_url}
+        />
+      </Helmet>
+      <PostJsonLd
+        title={title!!}
+        description={description!! || mdx!!.excerpt!!}
+        date={date!!}
+        url={location.href}
+        categorySlug={category!!}
+      />
+      <Content>
+        <HeroImage
+          dangerouslySetInnerHTML={{
+            __html: twemoji.parse(emoji || '😺', {
+              folder: 'svg',
+              ext: '.svg',
+            }),
+          }}
+        />
+        <ContentMain>
+          <PostDate>{date}</PostDate>
+          <PostTitle>{title}</PostTitle>
+          <CategoryLabel slug={category!!} isLink={true} />
+          <PostContent >{children}</PostContent>
+          <FollowBudge />
+        </ContentMain>
+        <aside>
+          <ShareButtons slug={slug!!} title={title!!} emoji={emoji!!} />
+          <Disqus config={disqusConfig} />
+          <RelatedPosts posts={relatedPosts()} />
+        </aside>
+      </Content>
+    </Layout>
+  );
 }
 
 export default BlogPostTemplate;
 
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query BlogPostById($id: String) {
     site {
       siteMetadata {
         title
@@ -181,16 +189,35 @@ export const pageQuery = graphql`
         siteUrl
       }
     }
-    markdownRemark(fields: { slug: { eq: $slug } }) {
+    mdx(id: {eq: $id}) {
       id
       excerpt(pruneLength: 160)
-      html
+      body
       frontmatter {
         title
         description
         date(formatString: "YYYY.MM.DD")
         emoji
         category
+        slug
+      }
+    }
+    allMdx(
+      sort: { frontmatter: { date: DESC } }
+      limit: 1000
+    ) {
+      nodes {
+        id
+        frontmatter {
+          title
+          date(formatString: "YYYY.MM.DD")
+          emoji
+          category
+          slug
+        }
+        internal {
+          contentFilePath
+        }
       }
     }
   }

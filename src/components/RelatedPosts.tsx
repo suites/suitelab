@@ -2,7 +2,6 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import twemoji from 'twemoji';
-import { MarkdownRemark, RelatedPost } from '../models/';
 
 const Wrapper = styled.div`
   background: ${(props) => props.theme.colors.whitesmoke};
@@ -69,36 +68,37 @@ const PostCardContent = styled.div`
 `;
 
 interface Props {
-  node: MarkdownRemark;
+  frontmatter: Queries.MdxFrontmatter;
 }
 
-const RelatedPostCard = ({ node }: Props) => {
-  const title = node.frontmatter.title || node.fields.slug;
-  const emoji = twemoji.parse(node.frontmatter.emoji || '🐱', {
+const RelatedPostCard = ({ frontmatter }: Props) => {
+  const { title: titleName, slug, emoji: emojiName, date } = frontmatter;
+  const title = titleName!! || slug!!;
+  const emoji = twemoji.parse(emojiName!! || '🐱', {
     folder: 'svg',
     ext: '.svg',
   });
 
   return (
     <PostCardWrapper>
-      <Link to={node.fields.slug} className='post-card-link'>
+      <Link to={`/${slug!!}`} className='post-card-link'>
         <PostCardEmoji dangerouslySetInnerHTML={{ __html: emoji }} />
         <PostCardContent>
           <h5>{title}</h5>
-          <time>{node.frontmatter.date}</time>
+          <time>{date}</time>
         </PostCardContent>
       </Link>
     </PostCardWrapper>
   );
 };
 
-const RelatedPosts = ({ posts }: { posts: RelatedPost[] }) => {
+const RelatedPosts = ({ posts }: { posts: Queries.MdxFrontmatter[] }) => {
   if (!posts.length) { return null; }
   const content: JSX.Element[] = [];
 
   posts.forEach((post) => {
     content.push(
-      <RelatedPostCard key={post.node.fields.slug} node={post.node} />,
+      <RelatedPostCard key={post.slug} frontmatter={post} />,
     );
   });
   return <Wrapper>{content}</Wrapper>;

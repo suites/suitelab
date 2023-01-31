@@ -1,0 +1,328 @@
+---
+title: 마크다운(Markdown)문법 대-백과
+date: '2018-10-31'
+category: 'blog'
+emoji: '🐞'
+slug: 'markdown-dictionary'
+---
+오늘은 사용할 때마다 가물가물한 마크다운 문법에 대해 정리를 해두려고한다.
+
+---
+### 제목 Headers
+`#`와 숫자를 사용하여 제목을 작성할 수 있다.
+
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td># H1</td>
+      <td><h1>H1</h1></td>
+    </tr>
+    <tr>
+      <td>## H2</td>
+      <td><h2>H2</h2></td>
+    </tr>
+    <tr>
+      <td>### H3</td>
+      <td><h3>H3</h3></td>
+    </tr>
+    <tr>
+      <td>#### H4</td>
+      <td><h4>H1</h4></td>
+    </tr>
+    <tr>
+      <td>##### H5</td>
+      <td><h5>H5</h5></td>
+    </tr>
+    <tr>
+      <td>###### H6</td>
+      <td><h6>H6</h6></td>
+    </tr>
+    </tbody>
+  </table>
+}
+
+---
+### 인용 Blockquotes
+`>`을 사용하여 인용 문구를 작성할 수 있다.
+
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>&gt; 인용문</td>
+      <td><blockquote> 인용문 </blockquote></td>
+    </tr>
+    <tr>
+      <td>&gt;&gt; 인용문안의 인용문</td>
+      <td><blockquote> 인용문1 <blockquote> 인용문2 </blockquote></blockquote></td>
+    </tr>
+    </tbody>
+  </table>
+}
+
+---
+### 코드 블럭 Code Blocks
+<code>\`\`\`</code> 혹은 <code>\~\~\~</code> 코드 첫 줄과 마지막 줄에 Back quote ( \` ) 또는 물결( ~ ) 3개 삽입
+
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td> ```<br/>이것은<br/>코드 블럭<br/>입니다<br/>```</td>
+      <td>
+        <figure className="highlight bash">
+          <table>
+            <tr>
+              <td className="gutter">
+                <pre><span className="line">1</span><br/><span className="line">2</span><br/><span className="line">3</span><br/></pre></td><td className="code"><pre><span className="line">이것은</span><br/><span className="line">코드 블럭</span><br/><span className="line">입니다</span><br/></pre>
+              </td>
+            </tr>
+          </table>
+        </figure>
+      </td>
+    </tr>
+    <tr>
+      <td> ~~~<br/>이것은<br/>코드 블럭<br/>입니다<br/>~~~</td>
+      <td>
+        <figure className="highlight bash"><table><tr><td className="gutter"><pre><span className="line">1</span><br/><span className="line">2</span><br/><span className="line">3</span><br/></pre></td><td className="code"><pre><span className="line">이것은</span><br/><span className="line">코드 블럭</span><br/><span className="line">입니다</span><br/></pre></td></tr></table></figure>
+      </td>
+    </tr>
+    <tr>
+      <td> ```c<br/>void f() &#123;<br/><pre>    printf(%s,“이것은 c 코드 입니다”);</pre>&#125;<br/>```</td>
+      <td>
+        <figure className="highlight c"><table><tr><td className="gutter"><pre><span className="line">1</span><br/><span className="line">2</span><br/><span className="line">3</span><br/></pre></td><td className="code"><pre><span className="line"><span className="function"><span className="keyword">void</span> <span className="title">f</span><span className="params">()</span></span> &#123;</span><br/><span className="line">	<span className="built_in">   printf</span>(%s,<span className="string">"이것은 c 코드 입니다"</span>);</span><br/><span className="line">&#125;</span><br/></pre></td></tr></table></figure>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+}
+
+---
+### 인라인 코드 Inline Code Blocks
+<code>`(Back quote)</code>로 감싸진 텍스트
+
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>`인라인 코드 블럭`</td>
+      <td><code>인라인 코드 블럭</code></td>
+    </tr>
+
+    </tbody>
+  </table>
+}
+
+---
+### 강조 Emphasis
+기울여 쓰기(italic) : `*` 또는 `_`로 감싼 텍스트
+굴게쓰기(bold) : `**` 또는 `__`로 감싼 텍스트
+
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>*기울여쓰기(italic)*<br/>_기울여쓰기(italic)_<br/><br/>**굵게쓰기(bold)**<br/>__굵게쓰기(bold)__</td>
+      <td><em>기울여쓰기(italic)</em><br/><em>기울여쓰기(italic)</em><br/><br/><strong>굵게쓰기(bold)</strong><br/><strong>굵게쓰기(bold)</strong></td>
+    </tr>
+    </tbody>
+  </table>
+}
+
+---
+### 수평선 Horizontal Rules
+`-` 또는 `*` 또는 `_` 을 3개 이상 작성
+(단, `-`을 사용할 경우 header로 인식할 수 있으니 이 전 라인은 비워두어야한다.)
+
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>---</td>
+      <td><hr/></td>
+    </tr>
+    <tr>
+      <td>***</td>
+      <td><hr/></td>
+    </tr>
+    <tr>
+      <td>___</td>
+      <td><hr/></td>
+    </tr>
+    </tbody>
+  </table>
+}
+
+---
+### 링크 Links
+#### 외부 링크 External Links
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><strong>인라인 링크</strong> <pre>[Google](http://www.google.co.kr "구글")</pre></td>
+      <td><a href="http://google.com">Google</a></td>
+    </tr>
+    <tr>
+      <td><strong>참조 링크</strong> <br/>[Google][1]<br/>[Naver][2]<br/>[1]: http://google.com "구글"<br/>[2]: http://naver.com "네이버"</td>
+      <td><br/><a href="http://google.com">Google</a><br/><a href="http://naver.com">Naver</a></td>
+    </tr>
+    <tr>
+      <td><strong>URl 링크</strong><br/>&#40;http://google.com<span>&#41;</span><br/>(example@gmail.com)</td>
+      <td>(http://google.com)<br/>(example@gmail.com)</td>
+    </tr>
+    </tbody>
+  </table>
+}
+
+
+#### 내부 링크 Internal (Anchored) Links
+`[링크](#id)` 내부 링크
+
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>[목차](#index)</td>
+      <td><a href="#index">목차</a></td>
+    </tr>
+    </tbody>
+  </table>
+}
+
+---
+### 리스트 Lists
+#### 순서 있는 리스트 Ordered Lists
+`No. ` 숫자 다음 .을 찍는다. (적힌 숫자랑 상관없이 순서대로 번호가 매겨진다.)
+
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        1. list item 1<br/>
+        2. list item 2<br/>
+        3. list item 3<br/>
+        4. list item 4<br/>
+        5. list item 5<br/>
+        </td>
+      <td>
+        <ol>
+          <li>list item 1</li>
+          <li>list item 2</li>
+          <li>list item 3</li>
+          <li>list item 4</li>
+          <li>list item 5</li>
+        </ol>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+}
+
+#### 순서 없는 리스트 Unordered Lists
+`*`, `+`, `-` 으로 시작
+
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>* list item 1<pre>    * list item 1-1</pre><pre>    * list item 1-2</pre></td>
+      <td><ul><li>list item 1</li><ul><li>list item 1-1</li><li>list item 1-2</li></ul></ul></td>
+    </tr>
+    <tr>
+      <td>+ list item 1<pre>    + list item 1-1</pre><pre>    + list item 1-2</pre></td>
+      <td><ul><li>list item 1</li><ul><li>list item 1-1</li><li>list item 1-2</li></ul></ul></td>
+    </tr>
+    <tr>
+      <td>- list item 1<pre>    - list item 1-1</pre><pre>    - list item 1-2</pre></td>
+      <td><ul><li>list item 1</li><ul><li>list item 1-1</li><li>list item 1-2</li></ul></ul></td>
+    </tr>
+    </tbody>
+  </table>
+}
+
+---
+### 이미지 Adding Images
+
+{
+  <table>
+    <thead>
+    <tr>
+      <th>마크다운</th>
+      <th>실행결과</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>**인라인 이미지**<pre>!&#91;alt text&#93;&#40;/test.png &#41;</pre></td>
+      <td><img src="https://suitee.me/static/21ce8a948d7d3c19e261e01baa39dc37/41689/B9653641350_l.jpg"/></td>
+    </tr>
+    <tr>
+      <td>**링크 이미지**<pre>!&#91;alt text&#93;&#40;image_URL&#41;</pre></td>
+      <td><img src="https://suitee.me/static/21ce8a948d7d3c19e261e01baa39dc37/41689/B9653641350_l.jpg"/></td>
+    </tr>
+    </tbody>
+  </table>
+}

@@ -3,17 +3,18 @@ title: 로스트아크 대기열 카카오톡 알림봇 개발기
 date: '2018-11-18'
 category: 'web'
 emoji: '🐳'
+slug: 'lostark-wait-notifier'
 ---
 
-> 서비스 링크 : <https://pf.kakao.com/_dcPGj>  
-> Github 링크 : <https://github.com/suitelab/lostark-wait-notifier>
+> 서비스 링크 : (https://pf.kakao.com/_dcPGj)  
+> Github 링크 : (https://github.com/suitelab/lostark-wait-notifier)
 
 ## 들어가기 전에
-<http://loaq.kr/>는 데이터 재배포를 금지하고 있습니다!  
+(http://loaq.kr/)는 데이터 재배포를 금지하고 있습니다!  
 이 게시물은 기존에 만들었던 서비스로써 현재의 운영방법이 아닙니다. 후기로만 봐주세요!
 
 현재 운영중인 서비스의 개발 후기는  
-<http://suitee.me/2018/11/18/lostark-wait-notifier-2/>에 올려두었습니다.
+(http://suitee.me/2018/11/18/lostark-wait-notifier-2/)에 올려두었습니다.
 
 ![이미지](loa1.png)
 
@@ -43,26 +44,26 @@ loaq.kr의 대기열 데이터의 원천을 알고싶었지만 결국 알아내�
 우선 loaq.kr의 구조를 파악했다.
 
 ```html
-<div class="server-list">
-  <div class="row">
-    <div class="cell col-center">
+(divclassName="server-list")
+  (divclassName="row")
+    (divclassName="cell col-center")
         루페온
-    </div>
-    <div class="cell col-center">
-      <div>
-        <span class="red">2348</span>
+    (/div)
+    (divclassName="cell col-center")
+      (div)
+        (spanclassName="red")2348(/span)
         &nbsp;
-      </div>
-      <div>
-        <span class="small-text bottom-text blue">
+      (/div)
+      (div)
+        (spanclassName="small-text bottom-text blue")
           &nbsp;(▼1183)
-        </span>
-      </div>
-    </div>
-    <div class="cell col-center">
-        <a href="/server/1">상세보기</a>  
-    </div>
-  </div>
+        (/span)
+      (/div)
+    (/div)
+    (divclassName="cell col-center")
+        (a href="/server/1")상세보기(/a)  
+    (/div)
+  (/div)
 ...
 ```
 서버 한개의 row구조는 저렇게 이루어져 있었고 서버명과 대기자 데이터를 끌어오려면 적합한 selector가 div.server-list라고 생각되어서 그렇게 정했다.
@@ -176,12 +177,12 @@ def Message():
 
 ![이미지](loa2.png)
 
-<http://www.inven.co.kr/board/lostark/4821/5381>  
+(http://www.inven.co.kr/board/lostark/4821/5381)  
 로스트아크 인벤에서도 많은 분들이 이용해주시고 계신다.
 
 ![이미지](plus_2.png)
 
-<https://pf.kakao.com/_dcPGj>
+(https://pf.kakao.com/_dcPGj)
 
 현재 기준으로 3000명을 돌파했다! ❤️❤️❤️  
 이번 서비스 개발은 귀찮음을 벗어나려고 시작한 몸부림에 비해 꽤나 보람찬 개발이었다는 생각이 든다.

@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby';
+import { graphql, PageProps, useStaticQuery } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
 
@@ -10,61 +10,73 @@ import SEO from '../components/SEO';
 import { QueryResult } from '../models';
 
 interface Props {
-  data: QueryResult;
+  data: Queries.AllBlogPostQuery;
   location: any;
 }
-class BlogIndex extends React.Component<Props> {
-  render() {
-    const { data } = this.props;
-    const categories = data.site.siteMetadata.categories;
-    const siteTitle = data.site.siteMetadata.title;
-    const posts = data.allMarkdownRemark.edges;
-    const { location } = this.props;
 
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
-        <SEO title='' />
-        <Helmet>
-          <link rel='canonical' href='https://suitee.me' />
-        </Helmet>
-        <HomeJsonLd />
-        <CategoryMenu location={location} categories={categories} />
-        {posts.map(({ node }) => {
-          return <PostCard key={node.fields.slug} node={node} />;
-        })}
-      </Layout>
-    );
-  }
+const BlogIndex = (props: Props) => {
+  const { allMdx, site } = props.data;
+  const categories = site!!.siteMetadata!!.categories;
+  const siteTitle = site!!.siteMetadata!!.title;
+  const posts = allMdx.nodes;
+  return (
+    <Layout location={props.location} title={siteTitle!!}>
+      <SEO title='' />
+      <Helmet>
+        <link rel='canonical' href='https://suitee.me' />
+      </Helmet>
+      <HomeJsonLd />
+      <CategoryMenu location={props.location} categories={categories!!.map((it) => {
+        return {
+          color: it!!.color!!,
+          icon: it!!.icon!!,
+          link: it!!.link!!,
+          name: it!!.name!!,
+          slug: it!!.slug!!
+        }
+      })} />
+      {posts.map(({ frontmatter }) => {
+        return <PostCard key={frontmatter!!.slug} frontmatter={{
+          category: frontmatter!!.category,
+          date: frontmatter!!.date,
+          description: frontmatter!!.description,
+          emoji: frontmatter!!.emoji,
+          slug: frontmatter!!.slug,
+          title: frontmatter!!.title
+        }} />;
+      })}
+    </Layout>
+  );
 }
 
 export default BlogIndex;
 
 export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-        categories {
-          name
-          icon
-          link
-        }
-      }
-    }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      edges {
-        node {
-          fields {
+  query AllBlogPost {
+      site {
+        siteMetadata {
+          title
+          categories {
+            name
+            icon
+            link
+            color
             slug
           }
-          frontmatter {
-            date(formatString: "YYYY.MM.DD")
-            title
-            emoji
-            category
-          }
         }
       }
-    }
+      allMdx(sort: { frontmatter: { date: DESC } }) {
+        nodes {
+            frontmatter {
+              slug
+              date(formatString: "YYYY.MM.DD")
+              title
+              emoji
+              category
+              description
+            }
+            id
+        }
+      }
   }
 `;
