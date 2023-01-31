@@ -1,7 +1,7 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import svgLogo from '../../static/images/svg/logo.svg';
+import Logo from '../../static/images/logo.png';
 import ContentWrapper from './ContentWrapper';
 
 const HeaderTag = styled.header`
@@ -19,15 +19,17 @@ const HeaderInner = styled.div`
   }
   .logo {
     display: block;
-    width: 200px;
-    height: 60px;
+    width: 170px;
+    height: 36px;
     @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
       margin: 0 auto;
     }
   }
 
   .logo-link {
-    display: block;
+    display:flex;
+    align-items:center;
+    height: 60px;
   }
   .message-link {
     position: absolute;
@@ -50,7 +52,7 @@ const Header = ({ title, location }: Props) => {
   const rootPath = `${process.env.__PATH_PREFIX__}/`;
   const logoLink = (
     <Link to={`/`} className='logo-link'>
-      <img className='logo' src={svgLogo} alt={title} />
+      <img className='logo' src={Logo} alt={title} />
     </Link>
   );
 
