@@ -10,7 +10,7 @@ slug: 'kaggle-titanic'
 import pandas as pd
 ```
 
-{/* ## Load Dataset
+## Load Dataset
 
 
 ```python
@@ -19,24 +19,12 @@ train = pd.read_csv("data/train.csv", index_col="PassengerId")
 print(train.shape)
 train.head()
 ```
-    (891, 11) */}
-{/* <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
-
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
+(891, 11)
+{
+<div>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Survived</th>
       <th>Pclass</th>
@@ -139,7 +127,7 @@ train.head()
   </tbody>
 </table>
 </div>
-
+}
 
 
 ## Explore
@@ -158,7 +146,7 @@ sns.countplot(data=train, x="Embarked", hue="Survived")
 
 
 
-    <matplotlib.axes._subplots.AxesSubplot at 0x23ddebd21d0>
+`<matplotlib.axes._subplots.AxesSubplot at 0x23ddebd21d0>`
 
 
 
@@ -172,24 +160,12 @@ low_fare.head()
 
 
 
-
+{
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Survived</th>
       <th>Pclass</th>
@@ -292,7 +268,7 @@ low_fare.head()
   </tbody>
 </table>
 </div>
-
+}
 
 
 
@@ -325,24 +301,12 @@ train.head()
 
 
 
-
+{
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Survived</th>
       <th>Pclass</th>
@@ -445,7 +409,7 @@ train.head()
   </tbody>
 </table>
 </div>
-
+}
 
 
 
@@ -461,24 +425,12 @@ test.head()
 
 
 
-
+{
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Pclass</th>
       <th>Name</th>
@@ -574,7 +526,7 @@ test.head()
   </tbody>
 </table>
 </div>
-
+}
 
 
 ## Preprocessing
@@ -595,24 +547,12 @@ train.head()
 
 
 
-
+{
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Survived</th>
       <th>Pclass</th>
@@ -715,8 +655,7 @@ train.head()
   </tbody>
 </table>
 </div>
-
-
+}
 
 
 ```python
@@ -734,22 +673,10 @@ test.head()
 
 
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Pclass</th>
       <th>Name</th>
@@ -862,22 +789,10 @@ test[test["Fare"].isnull()]
 
 
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Pclass</th>
       <th>Name</th>
@@ -927,22 +842,10 @@ train[["Embarked", "Embarked_C", "Embarked_S", "Embarked_Q"]].head()
 
 
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Embarked</th>
       <th>Embarked_C</th>
@@ -1012,22 +915,10 @@ test[["Embarked", "Embarked_C", "Embarked_S", "Embarked_Q"]].head()
 
 
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Embarked</th>
       <th>Embarked_C</th>
@@ -1116,22 +1007,10 @@ X_train.head()
 
 
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Pclass</th>
       <th>Sex</th>
@@ -1300,22 +1179,10 @@ X_test.head()
 
 
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Pclass</th>
       <th>Sex</th>
@@ -1423,22 +1290,10 @@ submission.head()
 
 
 <div>
-<style>
-    .dataframe thead tr:only-child th {
-        text-align: right;
-    }
 
-    .dataframe thead th {
-        text-align: left;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-</style>
 <table border="1"className="dataframe">
   <thead>
-    <tr style="text-align: right;">
+    <tr style={{ textAlign: "right" }}>
       <th></th>
       <th>Survived</th>
     </tr>
@@ -1481,4 +1336,4 @@ submission.to_csv("data/decision-tree.csv")
 
 ![png](score_1.png)
 
-결과는 0.78947로 나름 만족스럽게 나왔다. */}
+결과는 0.78947로 나름 만족스럽게 나왔다.
