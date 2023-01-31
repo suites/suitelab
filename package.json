@@ -13,6 +13,7 @@
     "lint": "eslint . --ext md,mdx"
   },
   "dependencies": {
+    "@mdx-js/react": "^2.2.1",
     "@types/react-helmet": "^6.1.6",
     "@types/styled-components": "^5.1.26",
     "eslint-plugin-mdx": "^2.0.5",

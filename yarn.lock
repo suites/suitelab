@@ -2068,7 +2068,7 @@
     "unist-util-visit" "^4.0.0"
     "vfile" "^5.0.0"
 
-"@mdx-js/react@^2.0.0":
+"@mdx-js/react@^2.0.0", "@mdx-js/react@^2.2.1":
   "integrity" "sha512-YdXcMcEnqZhzql98RNrqYo9cEhTTesBiCclEtoiQUbJwx87q9453GTapYU6kJ8ZZ2ek1Vp25SiAXEFy5O/eAPw=="
   "resolved" "https://registry.npmjs.org/@mdx-js/react/-/react-2.2.1.tgz"
   "version" "2.2.1"
