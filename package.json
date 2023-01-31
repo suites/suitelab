@@ -9,11 +9,13 @@
     "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
+    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\"",
+    "lint": "eslint . --ext md,mdx"
   },
   "dependencies": {
     "@types/react-helmet": "^6.1.6",
     "@types/styled-components": "^5.1.26",
+    "eslint-plugin-mdx": "^2.0.5",
     "gatsby": "^5.0.0",
     "gatsby-plugin-disqus": "^1.2.4",
     "gatsby-plugin-google-analytics": "^5.5.0",
@@ -37,7 +39,6 @@
     "gatsby-remark-smartypants": "^6.5.0",
     "gatsby-remark-twemoji-shortcut": "^0.10.1",
     "gatsby-source-filesystem": "^5.5.0",
-    "gatsby-transformer-remark": "^1.7.44",
     "gatsby-transformer-sharp": "^5.5.0",
     "netlify-cli": "^12.10.0",
     "prismjs": "^1.29.0",

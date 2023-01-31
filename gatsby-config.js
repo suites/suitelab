@@ -53,9 +53,22 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-manifest`,
       options: {
-        plugins: [
+        name: `suite.lab | 윤옴므의 기술블로그`,
+        short_name: `suite.lab`,
+        start_url: `/`,
+        background_color: `rgb(33, 36, 45)`,
+        theme_color: `#0c9ee4`,
+        display: `minimal-ui`,
+        icon: `static/images/favicon.png`
+      }
+    },
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        extensions: [`.md`, `.mdx`],
+        gatsbyRemarkPlugins: [
           `gatsby-remark-code-titles`,
           {
             resolve: "gatsby-remark-embed-youtube",
@@ -77,35 +90,35 @@ module.exports = {
               wrapperStyle: `margin-bottom: 1.0725rem`
             }
           },
-          {
-            resolve: "gatsby-remark-custom-blocks",
-            options: {
-              blocks: {
-                simple: {
-                  classes: "simple",
-                  title: "optional"
-                },
-                info: {
-                  classes: "info",
-                  title: "optional"
-                },
-                alert: {
-                  classes: "alert",
-                  title: "optional"
-                },
-                notice: {
-                  classes: "notice",
-                  title: "optional"
-                },
-                imageSmall: {
-                  classes: "image-small"
-                },
-                imageMedium: {
-                  classes: "image-medium"
-                }
-              }
-            }
-          },
+          // {
+          //   resolve: "gatsby-remark-custom-blocks",
+          //   options: {
+          //     blocks: {
+          //       simple: {
+          //         classes: "simple",
+          //         title: "optional"
+          //       },
+          //       info: {
+          //         classes: "info",
+          //         title: "optional"
+          //       },
+          //       alert: {
+          //         classes: "alert",
+          //         title: "optional"
+          //       },
+          //       notice: {
+          //         classes: "notice",
+          //         title: "optional"
+          //       },
+          //       imageSmall: {
+          //         classes: "image-small"
+          //       },
+          //       imageMedium: {
+          //         classes: "image-medium"
+          //       }
+          //     }
+          //   }
+          // },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {
@@ -121,22 +134,10 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `suite.lab | 윤옴므의 기술블로그`,
-        short_name: `suite.lab`,
-        start_url: `/`,
-        background_color: `rgb(33, 36, 45)`,
-        theme_color: `#0c9ee4`,
-        display: `minimal-ui`,
-        icon: `static/images/favicon.png`
-      }
-    },
-    {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: "UA-91992546-2"
-      }
+      },
     },
     {
       resolve: `gatsby-plugin-sitemap`,

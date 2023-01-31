@@ -1,4 +1,4 @@
-import { graphql } from 'gatsby';
+import { graphql, PageProps, Link } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
@@ -19,7 +19,6 @@ import postSyntaxHighlightStyle from '../styles/postSyntaxHighlight';
 import svgPattern from '../../static/images/svg/others/pattern.svg';
 
 import { Disqus } from 'gatsby-plugin-disqus';
-import { QueryResult } from '../models';
 import { PostPageContext } from '../models';
 
 const Content = styled.section`
@@ -105,31 +104,31 @@ const PostContent = styled.div`
   ${postContentStyle}
   ${postCustomBlockStyle}
 `;
-
 interface Props {
-  data: QueryResult;
+  data: Queries.BlogPostByIdQuery;
   pageContext: PostPageContext;
+  children: any;
   location: any;
 }
 
-class BlogPostTemplate extends React.Component<Props> {
+class BlogPostTemplate extends React.Component<PageProps<Queries.BlogPostByIdQuery, PostPageContext>> {
   render() {
-    const post = this.props.data.markdownRemark;
-    const { siteUrl, title: siteTitle } = this.props.data.site.siteMetadata;
+    const {site, mdx} = this.props.data;
+    const { siteUrl, title: siteTitle } = site?.siteMetadata!!;
+    const { title, description, date, category, emoji } = mdx?.frontmatter!!;
     const { relatedPosts, slug } = this.props.pageContext;
-    const { title, description, date, category, emoji } = post.frontmatter;
 
     const location = this.props.location;
     const location_full_url = `${siteUrl + location.pathname}`;
 
     const disqusConfig = {
       url: location_full_url,
-      identifier: post.id,
+      identifier: mdx?.id,
       title,
     };
     return (
-      <Layout location={location} title={siteTitle}>
-        <SEO title={title} description={description || post.excerpt} />
+      <Layout location={location} title={siteTitle!!}>
+        <SEO title={title!!} description={description!! || mdx!!.excerpt!!} />
         <Helmet>
           <link
             rel='canonical'
@@ -137,11 +136,11 @@ class BlogPostTemplate extends React.Component<Props> {
           />
         </Helmet>
         <PostJsonLd
-          title={title}
-          description={description || post.excerpt}
-          date={date}
+          title={title!!}
+          description={description!! || mdx!!.excerpt!!}
+          date={date!!}
           url={location.href}
-          categorySlug={category}
+          categorySlug={category!!}
         />
         <Content>
           <HeroImage
@@ -155,14 +154,14 @@ class BlogPostTemplate extends React.Component<Props> {
           <ContentMain>
             <PostDate>{date}</PostDate>
             <PostTitle>{title}</PostTitle>
-            <CategoryLabel slug={category} isLink={true} />
-            <PostContent dangerouslySetInnerHTML={{ __html: post.html }} />
+            <CategoryLabel slug={category!!} isLink={true} />
+            <PostContent >{this.props.children}</PostContent>
             <FollowBudge />
           </ContentMain>
           <aside>
-            <ShareButtons slug={slug} title={title} emoji={emoji} />
+            <ShareButtons slug={slug} title={title!!} emoji={emoji!!} />
             <Disqus config={disqusConfig} />
-            <RelatedPosts posts={relatedPosts} />
+            {/* <RelatedPosts posts={relatedPosts} /> */}
           </aside>
         </Content>
       </Layout>
@@ -172,26 +171,26 @@ class BlogPostTemplate extends React.Component<Props> {
 
 export default BlogPostTemplate;
 
-// export const pageQuery = graphql`
-//   query BlogPostBySlug($slug: String!) {
-//     site {
-//       siteMetadata {
-//         title
-//         author
-//         siteUrl
-//       }
-//     }
-//     markdownRemark(fields: { slug: { eq: $slug } }) {
-//       id
-//       excerpt(pruneLength: 160)
-//       html
-//       frontmatter {
-//         title
-//         description
-//         date(formatString: "YYYY.MM.DD")
-//         emoji
-//         category
-//       }
-//     }
-//   }
-// `;
+export const pageQuery = graphql`
+  query BlogPostById($id: String) {
+    site {
+      siteMetadata {
+        title
+        author
+        siteUrl
+      }
+    }
+    mdx(id: {eq: $id}) {
+      id
+      excerpt(pruneLength: 160)
+      body
+      frontmatter {
+        title
+        description
+        date(formatString: "YYYY.MM.DD")
+        emoji
+        category
+      }
+    }
+  }
+`;

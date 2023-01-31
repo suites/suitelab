@@ -2,7 +2,6 @@ import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
 import twemoji from 'twemoji';
-import { MarkdownRemark } from '../models';
 import CategoryLabel from './CategoryLabel';
 
 const PostCardWrapper = styled.div`
@@ -71,24 +70,24 @@ const PostCardContent = styled.div`
 `;
 
 interface Props {
-  node: MarkdownRemark;
+  frontmatter: Queries.MdxFrontmatter;
 }
 
-const PostCard = ({ node }: Props) => {
-  const title = node.frontmatter.title || node.fields.slug;
-  const emoji = twemoji.parse(node.frontmatter.emoji || '🐱', {
+const PostCard = ({ frontmatter }: Props) => {
+  const title = frontmatter.title || frontmatter.slug;
+  const emoji = twemoji.parse(frontmatter.emoji || '🐱', {
     folder: 'svg',
     ext: '.svg',
   });
 
   return (
     <PostCardWrapper>
-      <Link to={node.fields.slug} className='post-card-link'>
+      <Link to={frontmatter.slug!!} className='post-card-link'>
         <PostCardEmoji dangerouslySetInnerHTML={{ __html: emoji }} />
         <PostCardContent>
           <h3>{title}</h3>
-          <time>{node.frontmatter.date}</time>
-          <CategoryLabel slug={node.frontmatter.category} />
+          <time>{frontmatter.date}</time>
+          <CategoryLabel slug={frontmatter.category!!} />
         </PostCardContent>
       </Link>
     </PostCardWrapper>
