@@ -25,7 +25,7 @@
     "gatsby-plugin-mdx": "^5.5.0",
     "gatsby-plugin-netlify": "^5.1.0",
     "gatsby-plugin-offline": "^6.5.0",
-    "gatsby-plugin-sharp": "^5.5.0",
+    "gatsby-plugin-sharp": "^5.8.1",
     "gatsby-plugin-sitemap": "^6.5.0",
     "gatsby-plugin-styled-components": "^6.5.0",
     "gatsby-plugin-twitter": "^5.5.0",
