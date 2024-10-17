@@ -2,7 +2,6 @@ import { graphql, PageProps, Link } from 'gatsby';
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import twemoji from 'twemoji';
 
 import CategoryLabel from '../components/CategoryLabel';
 import FollowBudge from '../components/FollowBadge';
@@ -21,7 +20,8 @@ import svgPattern from '../../static/images/svg/others/pattern.svg';
 import { Disqus } from 'gatsby-plugin-disqus';
 import { PostPageContext } from '../models';
 
-import "katex/dist/katex.min.css";
+import 'katex/dist/katex.min.css';
+import { twemojiParse } from '../utils/twemoji.util';
 
 const Content = styled.section`
   position: relative;
@@ -30,7 +30,7 @@ const Content = styled.section`
   font-size: 16px;
   &:before,
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     width: 0;
     height: 0;
@@ -61,7 +61,7 @@ const HeroImage = styled.p`
   position: relative;
   background: ${(props) => props.theme.colors.blackLight};
   text-align: center;
-  background-image: url("${svgPattern}");
+  background-image: url('${svgPattern}');
   background-repeat: repeat;
   background-size: 400px;
   min-height: 230px;
@@ -107,10 +107,16 @@ const PostContent = styled.div`
   ${postCustomBlockStyle}
 `;
 
-const BlogPostTemplate = ({data, pageContext, location, children}: PageProps<Queries.BlogPostByIdQuery, PostPageContext>) => {
-  const {site, mdx, allMdx} = data;
+const BlogPostTemplate = ({
+  data,
+  pageContext,
+  location,
+  children,
+}: PageProps<Queries.BlogPostByIdQuery, PostPageContext>) => {
+  const { site, mdx, allMdx } = data;
   const { siteUrl, title: siteTitle } = site?.siteMetadata!!;
-  const { title, description, date, category, emoji, slug } = mdx?.frontmatter!!;
+  const { title, description, date, category, emoji, slug } =
+    mdx?.frontmatter!!;
   const location_full_url = `${siteUrl + location.pathname}`;
 
   const disqusConfig = {
@@ -121,29 +127,26 @@ const BlogPostTemplate = ({data, pageContext, location, children}: PageProps<Que
 
   const relatedPosts = () => {
     return allMdx.nodes
-    .filter((node) => node.frontmatter!!.slug !== slug)
-    .filter((node) => node.frontmatter!!.category === category)
-    .slice(0, 5)
-    .map((node) => {
-      return {
-        category: node.frontmatter!!.category,
-        date: node.frontmatter!!.category,
-        description: "",
-        emoji: node.frontmatter!!.emoji,
-        slug: node.frontmatter!!.slug,
-        title: node.frontmatter!!.title,
-      }
-    })
-  }
+      .filter((node) => node.frontmatter!!.slug !== slug)
+      .filter((node) => node.frontmatter!!.category === category)
+      .slice(0, 5)
+      .map((node) => {
+        return {
+          category: node.frontmatter!!.category,
+          date: node.frontmatter!!.category,
+          description: '',
+          emoji: node.frontmatter!!.emoji,
+          slug: node.frontmatter!!.slug,
+          title: node.frontmatter!!.title,
+        };
+      });
+  };
 
   return (
     <Layout location={location} title={siteTitle!!}>
       <SEO title={title!!} description={description!! || mdx!!.excerpt!!} />
       <Helmet>
-        <link
-          rel='canonical'
-          href={location_full_url}
-        />
+        <link rel="canonical" href={location_full_url} />
       </Helmet>
       <PostJsonLd
         title={title!!}
@@ -155,17 +158,14 @@ const BlogPostTemplate = ({data, pageContext, location, children}: PageProps<Que
       <Content>
         <HeroImage
           dangerouslySetInnerHTML={{
-            __html: twemoji.parse(emoji || '😺', {
-              folder: 'svg',
-              ext: '.svg',
-            }),
+            __html: twemojiParse(emoji || '😺'),
           }}
         />
         <ContentMain>
           <PostDate>{date}</PostDate>
           <PostTitle>{title}</PostTitle>
           <CategoryLabel slug={category!!} isLink={true} />
-          <PostContent >{children}</PostContent>
+          <PostContent>{children}</PostContent>
           <FollowBudge />
         </ContentMain>
         <aside>
@@ -176,7 +176,7 @@ const BlogPostTemplate = ({data, pageContext, location, children}: PageProps<Que
       </Content>
     </Layout>
   );
-}
+};
 
 export default BlogPostTemplate;
 
@@ -189,7 +189,7 @@ export const pageQuery = graphql`
         siteUrl
       }
     }
-    mdx(id: {eq: $id}) {
+    mdx(id: { eq: $id }) {
       id
       excerpt(pruneLength: 160)
       body
@@ -202,10 +202,7 @@ export const pageQuery = graphql`
         slug
       }
     }
-    allMdx(
-      sort: { frontmatter: { date: DESC } }
-      limit: 1000
-    ) {
+    allMdx(sort: { frontmatter: { date: DESC } }, limit: 1000) {
       nodes {
         id
         frontmatter {

@@ -1,8 +1,8 @@
 import { Link } from 'gatsby';
 import React from 'react';
 import styled from 'styled-components';
-import twemoji from 'twemoji';
 import CategoryLabel from './CategoryLabel';
+import { twemojiParse } from '../utils/twemoji.util';
 
 const PostCardWrapper = styled.div`
   .post-card-link {
@@ -75,14 +75,11 @@ interface Props {
 
 const PostCard = ({ frontmatter }: Props) => {
   const title = frontmatter.title || frontmatter.slug;
-  const emoji = twemoji.parse(frontmatter.emoji || '🐱', {
-    folder: 'svg',
-    ext: '.svg',
-  });
+  const emoji = twemojiParse(frontmatter.emoji || '😺');
 
   return (
     <PostCardWrapper>
-      <Link to={`/${frontmatter.slug!!}`} className='post-card-link'>
+      <Link to={`/${frontmatter.slug!!}`} className="post-card-link">
         <PostCardEmoji dangerouslySetInnerHTML={{ __html: emoji }} />
         <PostCardContent>
           <h3>{title}</h3>
