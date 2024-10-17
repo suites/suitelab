@@ -22,6 +22,13 @@ module.exports = {
         link: '/category/web',
       },
       {
+        name: 'computer science',
+        slug: 'cs',
+        color: '#C0D545',
+        icon: 'cactusGreen',
+        link: '/category/cs',
+      },
+      {
         name: 'algorithm',
         slug: 'algorithm',
         color: '#f7615f',
@@ -39,7 +46,7 @@ module.exports = {
         name: 'deep learning',
         slug: 'deep learning',
         color: '#C0D545',
-        icon: 'cactusGreen',
+        icon: 'cactusBlue',
         link: '/category/deep-learning',
       },
     ],
