@@ -1,0 +1,101 @@
+---
+title: 마법같은 map, filter 함수들은 어떻게 작동하는가 - Method chaining
+date: '2024-10-17'
+category: 'cs'
+emoji: '⛓️'
+slug: 'method-chaining'
+---
+
+## Method chaining이란
+
+Method chaining은 OOP에서 여러 메서드를 호출하는데 일반적으로 사용되는 구문입니다.
+
+Array의 .map이나 .filter 같은 함수들에서 널리 사용됩니다.
+
+각 메서드는 객체를 반환하므로 중간에 변수에 저장할 필요 없이 호출을 계속 연결할 수 있습니다.
+
+## 살펴보기
+
+Method chaning의 장점으로는 메서드 호출의 결과를 담을 불필요한 변수를 생성해야하는 부담을 줄여줍니다.
+
+메서드의 실행 결과는 그 객체이기 때문에 객체에 연달아서 메서드를 호출할 수 있어서 가독성에 도움이 됩니다.
+
+비슷한 구문으로써는 Method cascading이 있습니다.
+
+현대의 프로그래밍 패러다임에선 Method cascading보다 Method chaining이 일반적으로 사용됩니다.
+
+`a.b()` 라는 구문이 있을 때 Method cascading은 이 표현식을 a객체로 평가하는 반면 Method chaning은 `b()` 에 대한 객체로 평가합니다.
+
+```ts
+// Method chaining
+a.b().c();
+// 위 코드는 아래의 코드와 같습니다.
+b = a.b();
+b.c();
+```
+
+```ts
+// Method cascade
+a..b()
+ ..c();
+// 위 코드는 아래의 코드와 같습니다.
+a.b();
+a.c();
+```
+
+Method cascading, Method chaining 모두 Smalltalk 언어에서 유래되었습니다.
+
+## 예시
+
+우선 간단한 Cat 클래스를 작성해줍니다.
+
+Method Chaining을 적용할 메서드는 객체를 리턴하게 합니다.
+
+```ts
+class Cat {
+  private name = '';
+  private age = 0;
+  private weight = 0;
+
+  setName = (name: string) => {
+    this.name = name;
+    return this;
+  };
+
+  setAge = (age: number) => {
+    this.age = age;
+    return this;
+  };
+
+  setWeight = (weight: number) => {
+    this.weight = weight;
+    return this;
+  };
+
+  getInfo = () => {
+    return {
+      name: this.name,
+      age: this.age,
+      weight: this.weight,
+    };
+  };
+}
+```
+
+아래와 같이 Chaining하게 사용할 수 있습니다.
+
+```ts
+const cat = new Cat();
+cat.setName('스탠리').setAge(3).setWeight(20);
+
+console.log(cat.getInfo());
+
+// result
+/*
+{
+  'name': '스탠리',
+  'age': '3',
+  'weight': '20',
+}
+*/
+```
