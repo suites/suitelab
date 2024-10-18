@@ -1,13 +1,12 @@
 ---
 title: 딥러닝 강의 lec 03
 date: '2017-10-19'
-category: 'deep learning'
+category: 'deep-learning'
 emoji: '🐛'
 slug: 'lab03-linear-regression-cost-min'
 ---
 
 ## ML lab 03 - Linear Regression의 cost 최소화의 TensorFlow 구현 (new)
-
 
 ```python
 import tensorflow as tf
@@ -15,7 +14,6 @@ import matplotlib.pyplot as plt
 ```
 
 ## Variables Initialize
-
 
 ```python
 X = [1, 2, 3]
@@ -26,12 +24,10 @@ W = tf.placeholder(tf.float32)
 
 ## Hypothesis
 
-
 ```python
 #hypothesis = Wx
 hypothesis = X * W
 ```
-
 
 ```python
 # cost = avg(sum(H - y)2)
@@ -40,12 +36,10 @@ cost = tf.reduce_mean(tf.square(hypothesis - Y))
 
 ## Session start
 
-
 ```python
 sess = tf.Session()
 sess.run(tf.global_variables_initializer())
 ```
-
 
 ```python
 W_val = []
@@ -59,40 +53,44 @@ for i in range(-30, 50):
 
 ## Visualize
 
-
 ```python
 plt.plot(W_val, cost_val)
 plt.show()
 ```
 
-
 ![png](output_11_0.png)
 
 ## Gradient descent
+
 우리의 cost 같이 밥그릇 모양의 그래프일 때 사용하는 알고리즘
 가장 안쪽의 (1,0)의 점을 찾는 것이 목표
 
 미분 : 한 점의 기울기를 나타냄  
 ↗ 모양의 경우 +  
-↘ 모양의 경우 -  
+↘ 모양의 경우 -
 
 #### 위와 같은 그래프에서 (4, 50)의 경우
+
 > ↗ 모양이므로 +
-W가 1이 되기 위해선 -로 움직여야함
+> W가 1이 되기 위해선 -로 움직여야함
 
 #### 위와 같은 그래프에서 (-2, 40)의 경우
+
 > ↘ 모양이므로 -
-W가 1이 되기 위해선 +로 움직여야함
+> W가 1이 되기 위해선 +로 움직여야함
 
 #### 수식으로 구현 시
+
 $$
 cost(W) = \frac{1}{m}\sum_{i=1}^{m}(Wx^{(i)} - y^{(i)})^{2}
 $$
 
 #### 미분한 결과
+
 $$
 W := W - a\frac{1}{m}\sum_{i=1}^{m}(Wx^{(i)} - y^{(i)})x^{(i)}
 $$
+
 ```python
 learning_rate = 0.1
 gradient = tf.reduce_mean((W * X - Y) *X)
@@ -102,13 +100,11 @@ update = W.assign(descent)
 
 ## Gradient descent 적용
 
-
 ```python
 import tensorflow as tf
 x_data = [1, 2, 3]
 y_data = [1, 2, 3]
 ```
-
 
 ```python
 W = tf.Variable(tf.random_normal([1]), name = 'weight')
@@ -116,16 +112,13 @@ X = tf.placeholder(tf.float32)
 Y = tf.placeholder(tf.float32)
 ```
 
-
 ```python
 hypothesis = X *  W
 ```
 
-
 ```python
 cost = tf.reduce_sum(tf.square(hypothesis - Y))
 ```
-
 
 ```python
 learning_rate = 0.1
@@ -133,7 +126,6 @@ gradient = tf.reduce_mean((W * X - Y) * X)
 descent = W - learning_rate * gradient
 update = W.assign(descent)
 ```
-
 
 ```python
 sess = tf.Session()
@@ -175,35 +167,29 @@ optimizer = tf.train.GradientDescentOptimizer(learning_rate = 0.1)
 train = optimizer.minimize(cost)
 ```
 
-
 ```python
 import tensorflow as tf
 X = [1, 2, 3]
 Y = [1, 2, 3]
 ```
 
-
 ```python
 #W = tf.Variable(5.0)
 W = tf.Variable(-45.0)
 ```
 
-
 ```python
 hypothesis = X *  W
 ```
-
 
 ```python
 cost = tf.reduce_mean(tf.square(hypothesis - Y))
 ```
 
-
 ```python
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1)
 train = optimizer.minimize(cost)
 ```
-
 
 ```python
 sess = tf.Session()
@@ -231,40 +217,33 @@ for step in range(10):
 
 GradientDescentOptimizer를 새로운 식으로 커스텀마이징 하고싶을 때 방법
 
-
 ```python
 import tensorflow as tf
 X = [1, 2, 3]
 Y = [1, 2, 3]
 ```
 
-
 ```python
 W = tf.Variable(5.0)
 ```
-
 
 ```python
 hypothesis = X *  W
 ```
 
-
 ```python
 gradient = tf.reduce_mean((W * X - Y) * X) * 2
 ```
-
 
 ```python
 cost = tf.reduce_mean(tf.square(hypothesis - Y))
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.1)
 ```
 
-
 ```python
 gvs = optimizer.compute_gradients(cost)
 apply_gradients = optimizer.apply_gradients(gvs)
 ```
-
 
 ```python
 sess = tf.Session()

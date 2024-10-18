@@ -36,15 +36,8 @@ module.exports = {
         link: '/category/algorithm',
       },
       {
-        name: 'blog',
-        slug: 'blog',
-        color: '#ffa22b',
-        icon: 'cactusYellow',
-        link: '/category/blog',
-      },
-      {
         name: 'deep learning',
-        slug: 'deep learning',
+        slug: 'deep-learning',
         color: '#C0D545',
         icon: 'cactusBlue',
         link: '/category/deep-learning',
