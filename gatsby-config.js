@@ -29,6 +29,13 @@ module.exports = {
         link: '/category/cs',
       },
       {
+        name: 'infra',
+        slug: 'infra',
+        color: '#ffa22b',
+        icon: 'cactusYellow',
+        link: '/category/infra',
+      },
+      {
         name: 'algorithm',
         slug: 'algorithm',
         color: '#f7615f',
@@ -38,7 +45,7 @@ module.exports = {
       {
         name: 'deep learning',
         slug: 'deep-learning',
-        color: '#C0D545',
+        color: '#0c9ee4',
         icon: 'cactusBlue',
         link: '/category/deep-learning',
       },
