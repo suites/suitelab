@@ -133,9 +133,6 @@ module.exports = {
     },
     {
       resolve: "gatsby-plugin-sitemap",
-      options: {
-        output: "/sitemap.xml",
-      },
     },
     {
       resolve: "gatsby-plugin-disqus",
