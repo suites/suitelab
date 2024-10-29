@@ -1,5 +1,5 @@
 ---
-title: 가볍고 빠른 Message queue를 원한다면 - Redis Publisher, Subscriber
+title: 가볍고 빠른 Messaging service를 원한다면 - Redis Publisher, Subscriber
 date: '2024-10-18'
 category: 'infra'
 emoji: '💌'
@@ -8,17 +8,15 @@ slug: 'redis-pub-sub'
 
 ## 개요
 
-Redis의 pub/sub은 MSA에서 모듈간의 데이터 교환을 위해 사용되는 Message Queue의 용도로 redis를 활용하는 방법이다.
+Redis의 pub/sub은 MSA에서 모듈간의 데이터 교환을 위해 사용되는 Messaging service의 용도로 redis를 활용하는 방법이다.
 
 채팅, 구독, 푸시 알림, 결제 시스템 등에 사용된다.
 
-## Message Queue란
+## Messaging Service란
 
 MSA같은 분산 시스템에서 모듈간 메시지를 교환하기 위한 통신 방법이다. 시스템간 Coupling을 낮추고 확장성을 높인다.
 
 시스템간 Coupling을 낮추고 독립적으로 운영되게 할 수 있는 이유는 데이터 교환을 비동기적으로 처리할 수 있기 때문이다.
-
-메시지 큐는 메시지를 임시 저장하여 수신자가 처리할 준비가 될 때까지 보관할 수 있다. 발신자와 수신자의 메시지 전달 속도를 조절하여 시스템의 부하를 분산하고 안정성을 높이는데 도움이 된다.
 
 ## Redis pub/sub의 구성요소
 
