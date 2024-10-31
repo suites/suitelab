@@ -17,10 +17,11 @@ const BlogIndex = (props: Props) => {
   const { allMdx, site } = props.data;
   const categories = site!!.siteMetadata!!.categories;
   const siteTitle = site!!.siteMetadata!!.title;
+  const siteDescription = site!!.siteMetadata!!.description;
   const posts = allMdx.nodes;
   return (
     <Layout location={props.location} title={siteTitle!!}>
-      <SEO title="" />
+      <SEO title={siteTitle!!} description={siteDescription!!} />
       <Helmet>
         <link rel="canonical" href="https://suitee.me" />
       </Helmet>
@@ -64,6 +65,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        description
         categories {
           name
           icon
