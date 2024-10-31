@@ -2,7 +2,8 @@ import { graphql, StaticQuery } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Helmet from 'react-helmet';
-import { QueryResult } from '../models';
+import { useLocation } from "@reach/router";
+import { QueryResult } from "../models";
 
 interface Props {
   description?: string;
@@ -11,13 +12,14 @@ interface Props {
   title: string;
 }
 const SEO = ({ description, lang, meta, title }: Props) => {
+  const { pathname } = useLocation();
   return (
     <StaticQuery
       query={detailsQuery}
       render={(data: QueryResult) => {
         const metaDescription =
           description || data.site.siteMetadata.description;
-        const defaultTitle = 'suite.lab | 윤옴므의 기술블로그';
+        const defaultTitle = "suite.lab | 윤옴므의 기술블로그";
         return (
           <Helmet
             htmlAttributes={{
@@ -27,6 +29,10 @@ const SEO = ({ description, lang, meta, title }: Props) => {
             title={title}
             titleTemplate={`%s | ${data.site.siteMetadata.title}`}
             meta={[
+              {
+                property: `og:url`,
+                content: `${data.site.siteMetadata.siteUrl}${pathname}`,
+              },
               {
                 name: `description`,
                 content: metaDescription,
@@ -68,8 +74,8 @@ const SEO = ({ description, lang, meta, title }: Props) => {
                 content: `88lff6Lu9mvm83qKi5gCz6QvnlyJzZnPjPQo7E7PdOw`,
               },
               {
-                name: `naver-site-verification`,
-                content: `d3fcbfc3dcab8dd1c1cba11b1addc1dcd95c10e2`,
+                name: `facebook-domain-verification`,
+                content: `gekvdoha59vae2xpx4it05kl6w4fx4`,
               },
             ].concat(meta)}
           />
