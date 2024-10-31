@@ -13,14 +13,6 @@ interface Props {
   location: any;
 }
 
-export const Head = () => (
-  <script
-    async
-    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8149191585003652"
-    crossOrigin="anonymous"
-  ></script>
-);
-
 const BlogIndex = (props: Props) => {
   const { allMdx, site } = props.data;
   const categories = site!!.siteMetadata!!.categories;

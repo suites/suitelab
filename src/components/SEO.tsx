@@ -69,7 +69,7 @@ const SEO = ({ description, lang, meta, title }: Props) => {
               },
               {
                 name: `naver-site-verification`,
-                content: `0d943f89faeb80f3af0c50cf57e4d269c64e695b`,
+                content: `d3fcbfc3dcab8dd1c1cba11b1addc1dcd95c10e2`,
               },
             ].concat(meta)}
           />
