@@ -1,8 +1,8 @@
 {
   "name": "suitelab",
   "private": true,
-  "description": "A personal blog by @yoon.homme",
-  "version": "0.1.0",
+  "description": "A Tech blog by @yoon.homme",
+  "version": "1.0.0",
   "author": "yoon.homme <woosiks.io@gmail.com>",
   "scripts": {
     "build": "gatsby build",
@@ -27,7 +27,6 @@
     "gatsby-plugin-mdx": "^5.13.1",
     "gatsby-plugin-netlify": "^5.1.0",
     "gatsby-plugin-offline": "^6.5.0",
-    "gatsby-plugin-react-helmet": "^6.13.1",
     "gatsby-plugin-sharp": "^5.5.0",
     "gatsby-plugin-sitemap": "^6.5.0",
     "gatsby-plugin-styled-components": "^6.5.0",
@@ -49,7 +48,6 @@
     "prismjs": "^1.29.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
-    "react-helmet": "^6.1.0",
     "react-icons": "^4.7.1",
     "remark-html-katex": "^3.0.0",
     "remark-math": "^3.0.1",
@@ -57,14 +55,13 @@
     "twemoji": "^14.0.2",
     "typescript": "^4.9.4"
   },
-  "homepage": "https://github.com/suites/suitee",
+  "homepage": "https://suitee.me",
   "keywords": [
     "gatsby"
   ],
   "license": "MIT",
-  "main": "n/a",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
+    "url": "git+https://github.com/suites/suitelab.git"
   }
 }
