@@ -1,12 +1,12 @@
-import { graphql, PageProps } from 'gatsby';
-import React from 'react';
-import styled from 'styled-components';
-import CategoryMenu from '../components/CategoryMenu';
-import CategoryJsonLd from '../components/json/CategoryJsonLd';
-import Layout from '../components/Layout';
-import PostCard from '../components/PostCard';
-import SEO from '../components/SEO';
-import { CategoryPageContext } from '../models';
+import { graphql, HeadProps, PageProps } from "gatsby";
+import React from "react";
+import styled from "styled-components";
+import CategoryMenu from "../components/CategoryMenu";
+import Layout from "../components/Layout";
+import PostCard from "../components/PostCard";
+import { CategoryPageContext } from "../models";
+import SEO from "../components/SEO";
+import CategoryJsonLD from "../components/json/CategoryJsonLd";
 
 const Heading = styled.h1`
   margin: 0.5em 0 0.8em;
@@ -17,8 +17,11 @@ const Heading = styled.h1`
   letter-spacing: 1px;
 `;
 
-
-const CategoryTemplate = ({data, pageContext, location}: PageProps<Queries.BlogPostByCategoryQuery, CategoryPageContext>) => {
+const CategoryTemplate = ({
+  data,
+  pageContext,
+  location,
+}: PageProps<Queries.BlogPostByCategoryQuery, CategoryPageContext>) => {
   const posts = data.allMdx.nodes;
   // get Category name from category slug
   const categorySlug = pageContext.category;
@@ -31,35 +34,41 @@ const CategoryTemplate = ({data, pageContext, location}: PageProps<Queries.BlogP
 
   return (
     <Layout location={location} title={categoryName!!}>
-      <SEO title={categoryName!!} />
-      <CategoryJsonLd
+      {/* <CategoryJsonLd
         categorySlug={categorySlug}
         categoryName={categoryName!!}
+      /> */}
+      <CategoryMenu
+        location={location}
+        categories={categories!!.map((category) => {
+          return {
+            color: category!!.color!!,
+            icon: category!!.icon!!,
+            link: category!!.link!!,
+            name: category!!.name!!,
+            slug: category!!.slug!!,
+          };
+        })}
       />
-      <CategoryMenu location={location} categories={categories!!.map((category) => {
-        return {
-          color: category!!.color!!,
-          icon: category!!.icon!!,
-          link: category!!.link!!,
-          name: category!!.name!!,
-          slug: category!!.slug!!
-        }
-      }
-      )} />
       <Heading>{categoryName}</Heading>
       {posts.map(({ frontmatter }) => {
-        return <PostCard key={frontmatter!!.slug!!} frontmatter={{
-          category: frontmatter!!.category!!,
-          date: frontmatter!!.date!!,
-          description: "",
-          emoji: frontmatter!!.emoji!!,
-          slug: frontmatter!!.slug!!,
-          title: frontmatter!!.title!!,
-        }} />;
+        return (
+          <PostCard
+            key={frontmatter!!.slug!!}
+            frontmatter={{
+              category: frontmatter!!.category!!,
+              date: frontmatter!!.date!!,
+              description: "",
+              emoji: frontmatter!!.emoji!!,
+              slug: frontmatter!!.slug!!,
+              title: frontmatter!!.title!!,
+            }}
+          />
+        );
       })}
     </Layout>
   );
-}
+};
 
 export default CategoryTemplate;
 
@@ -81,15 +90,35 @@ export const pageQuery = graphql`
       sort: { frontmatter: { date: DESC } }
       filter: { frontmatter: { category: { eq: $category } } }
     ) {
-        nodes {
-          frontmatter {
-            date(formatString: "YYYY.MM.DD")
-            title
-            emoji
-            category
-            slug
-          }
+      nodes {
+        frontmatter {
+          date(formatString: "YYYY.MM.DD")
+          title
+          emoji
+          category
+          slug
         }
+      }
     }
   }
 `;
+
+export const Head = ({
+  data: { site },
+  pageContext,
+}: HeadProps<Queries.BlogPostByCategoryQuery, CategoryPageContext>) => {
+  const categories = site!!.siteMetadata!!.categories;
+  const categorySlug = pageContext.category;
+  const categoryObject = categories!!.find((cat) => {
+    return cat!!.slug === categorySlug;
+  });
+  const categoryName = categoryObject ? categoryObject.name : categorySlug;
+  return (
+    <SEO title={categoryName!!}>
+      <CategoryJsonLD
+        categorySlug={categorySlug}
+        categoryName={categoryName!!}
+      />
+    </SEO>
+  );
+};

@@ -1,27 +1,26 @@
-import { graphql, PageProps, Link } from 'gatsby';
-import React from 'react';
-import Helmet from 'react-helmet';
-import styled from 'styled-components';
+import { graphql, PageProps, HeadProps } from "gatsby";
+import React from "react";
+import styled from "styled-components";
 
-import CategoryLabel from '../components/CategoryLabel';
-import FollowBudge from '../components/FollowBadge';
-import PostJsonLd from '../components/json/PostJsonLd';
-import Layout from '../components/Layout';
-import RelatedPosts from '../components/RelatedPosts';
-import SEO from '../components/SEO';
-import ShareButtons from '../components/ShareButtons';
+import CategoryLabel from "../components/CategoryLabel";
+import FollowBudge from "../components/FollowBadge";
+import PostJsonLd from "../components/json/PostJsonLd";
+import Layout from "../components/Layout";
+import RelatedPosts from "../components/RelatedPosts";
+import ShareButtons from "../components/ShareButtons";
 
-import postContentStyle from '../styles/postContent';
-import postCustomBlockStyle from '../styles/postCustomBlock';
-import postSyntaxHighlightStyle from '../styles/postSyntaxHighlight';
+import postContentStyle from "../styles/postContent";
+import postCustomBlockStyle from "../styles/postCustomBlock";
+import postSyntaxHighlightStyle from "../styles/postSyntaxHighlight";
 
-import svgPattern from '../../static/images/svg/others/pattern.svg';
+import svgPattern from "../../static/images/svg/others/pattern.svg";
 
-import { Disqus } from 'gatsby-plugin-disqus';
-import { PostPageContext } from '../models';
+import { Disqus } from "gatsby-plugin-disqus";
+import { PostPageContext } from "../models";
 
-import 'katex/dist/katex.min.css';
-import { twemojiParse } from '../utils/twemoji.util';
+import "katex/dist/katex.min.css";
+import { twemojiParse } from "../utils/twemoji.util";
+import SEO from "../components/SEO";
 
 const Content = styled.section`
   position: relative;
@@ -30,7 +29,7 @@ const Content = styled.section`
   font-size: 16px;
   &:before,
   &:after {
-    content: '';
+    content: "";
     position: absolute;
     width: 0;
     height: 0;
@@ -61,7 +60,7 @@ const HeroImage = styled.p`
   position: relative;
   background: ${(props) => props.theme.colors.blackLight};
   text-align: center;
-  background-image: url('${svgPattern}');
+  background-image: url("${svgPattern}");
   background-repeat: repeat;
   background-size: 400px;
   min-height: 230px;
@@ -109,18 +108,16 @@ const PostContent = styled.div`
 
 const BlogPostTemplate = ({
   data,
-  pageContext,
   location,
   children,
 }: PageProps<Queries.BlogPostByIdQuery, PostPageContext>) => {
   const { site, mdx, allMdx } = data;
   const { siteUrl, title: siteTitle } = site?.siteMetadata!!;
-  const { title, description, date, category, emoji, slug } =
-    mdx?.frontmatter!!;
-  const location_full_url = `${siteUrl + location.pathname}`;
+  const { title, date, category, emoji, slug } = mdx?.frontmatter!!;
+  const locationFullUrl = `${siteUrl + location.pathname}`;
 
   const disqusConfig = {
-    url: location_full_url,
+    url: locationFullUrl,
     identifier: mdx?.id,
     title,
   };
@@ -134,7 +131,7 @@ const BlogPostTemplate = ({
         return {
           category: node.frontmatter!!.category,
           date: node.frontmatter!!.category,
-          description: '',
+          description: "",
           emoji: node.frontmatter!!.emoji,
           slug: node.frontmatter!!.slug,
           title: node.frontmatter!!.title,
@@ -144,21 +141,10 @@ const BlogPostTemplate = ({
 
   return (
     <Layout location={location} title={siteTitle!!}>
-      <SEO title={title!!} description={description!! || mdx!!.excerpt!!} />
-      <Helmet>
-        <link rel="canonical" href={location_full_url} />
-      </Helmet>
-      <PostJsonLd
-        title={title!!}
-        description={description!! || mdx!!.excerpt!!}
-        date={date!!}
-        url={location.href}
-        categorySlug={category!!}
-      />
       <Content>
         <HeroImage
           dangerouslySetInnerHTML={{
-            __html: twemojiParse(emoji || '😺'),
+            __html: twemojiParse(emoji || "😺"),
           }}
         />
         <ContentMain>
@@ -219,3 +205,24 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export const Head = ({
+  data: { site, mdx },
+}: HeadProps<Queries.BlogPostByIdQuery, PostPageContext>) => {
+  const { siteUrl } = site?.siteMetadata!!;
+  const { title, description, date, category } = mdx?.frontmatter!!;
+  const locationFullUrl = `${siteUrl + location.pathname}`;
+
+  return (
+    <SEO title={title!!} description={description!! || mdx!!.excerpt!!}>
+      <link rel="canonical" href={locationFullUrl} />
+      <PostJsonLd
+        title={title!!}
+        description={description!! || mdx!!.excerpt!!}
+        date={date!!}
+        url={location.href}
+        categorySlug={category!!}
+      />
+    </SEO>
+  );
+};

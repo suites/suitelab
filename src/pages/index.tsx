@@ -1,33 +1,23 @@
-import { graphql, PageProps, useStaticQuery } from 'gatsby';
-import React from 'react';
-import Helmet from 'react-helmet';
+import { graphql, HeadProps, PageProps } from "gatsby";
+import React from "react";
 
-import CategoryMenu from '../components/CategoryMenu';
-import HomeJsonLd from '../components/json/HomeJsonLd';
-import Layout from '../components/Layout';
-import PostCard from '../components/PostCard';
-import SEO from '../components/SEO';
+import CategoryMenu from "../components/CategoryMenu";
+import HomeJsonLd from "../components/json/HomeJsonLd";
+import Layout from "../components/Layout";
+import PostCard from "../components/PostCard";
+import SEO from "../components/SEO";
 
-interface Props {
-  data: Queries.AllBlogPostQuery;
-  location: any;
-}
-
-const BlogIndex = (props: Props) => {
-  const { allMdx, site } = props.data;
+const BlogIndex = ({
+  data: { allMdx, site },
+}: PageProps<Queries.AllBlogPostQuery>) => {
   const categories = site!!.siteMetadata!!.categories;
   const siteTitle = site!!.siteMetadata!!.title;
   const siteDescription = site!!.siteMetadata!!.description;
   const posts = allMdx.nodes;
   return (
-    <Layout location={props.location} title={siteTitle!!}>
-      <SEO title={siteTitle!!} description={siteDescription!!} />
-      <Helmet>
-        <link rel="canonical" href="https://suitee.me" />
-      </Helmet>
-      <HomeJsonLd />
+    <Layout location={location} title={siteTitle!!}>
       <CategoryMenu
-        location={props.location}
+        location={location}
         categories={categories!!.map((it) => {
           return {
             color: it!!.color!!,
@@ -39,7 +29,6 @@ const BlogIndex = (props: Props) => {
         })}
       />
       {posts.map(({ frontmatter }) => {
-        console.log(JSON.stringify(posts, null, 2));
         return (
           <PostCard
             key={frontmatter!!.slug}
@@ -90,3 +79,16 @@ export const pageQuery = graphql`
     }
   }
 `;
+
+export const Head = ({
+  data: { site },
+}: HeadProps<Queries.AllBlogPostQuery>) => {
+  const description = site!!.siteMetadata!!.description!!;
+  const title = site!!.siteMetadata!!.title!!;
+
+  return (
+    <SEO title={title} description={description}>
+      <HomeJsonLd />
+    </SEO>
+  );
+};

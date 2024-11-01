@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@mdx-js/react": "^2.2.1",
-    "@types/react-helmet": "^6.1.6",
+    "@opentelemetry/api": "^1.9.0",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^8.9.0",
     "eslint-plugin-mdx": "^2.0.5",
