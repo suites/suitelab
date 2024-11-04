@@ -19,7 +19,6 @@ const SEO = ({ description, title, children }: Props) => {
 
   return (
     <>
-      {/* <html lang={lang} /> */}
       <title>{title || defaultTitle}</title>
       <meta name="description" content={metaDescription} />
       <meta property="og:url" content={`${siteMetadata.siteUrl}${pathname}`} />

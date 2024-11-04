@@ -34,10 +34,6 @@ const CategoryTemplate = ({
 
   return (
     <Layout location={location} title={categoryName!!}>
-      {/* <CategoryJsonLd
-        categorySlug={categorySlug}
-        categoryName={categoryName!!}
-      /> */}
       <CategoryMenu
         location={location}
         categories={categories!!.map((category) => {
