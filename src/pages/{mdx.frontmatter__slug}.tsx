@@ -21,6 +21,7 @@ import { PostPageContext } from "../models";
 import "katex/dist/katex.min.css";
 import { twemojiParse } from "../utils/twemoji.util";
 import SEO from "../components/SEO";
+import { useLocation } from "@reach/router";
 
 const Content = styled.section`
   position: relative;
@@ -108,12 +109,12 @@ const PostContent = styled.div`
 
 const BlogPostTemplate = ({
   data,
-  location,
   children,
 }: PageProps<Queries.BlogPostByIdQuery, PostPageContext>) => {
   const { site, mdx, allMdx } = data;
   const { siteUrl, title: siteTitle } = site?.siteMetadata!!;
   const { title, date, category, emoji, slug } = mdx?.frontmatter!!;
+  const location = useLocation();
   const locationFullUrl = `${siteUrl + location.pathname}`;
 
   const disqusConfig = {
@@ -211,6 +212,7 @@ export const Head = ({
 }: HeadProps<Queries.BlogPostByIdQuery, PostPageContext>) => {
   const { siteUrl } = site?.siteMetadata!!;
   const { title, description, date, category } = mdx?.frontmatter!!;
+  const location = useLocation();
   const locationFullUrl = `${siteUrl + location.pathname}`;
 
   return (
