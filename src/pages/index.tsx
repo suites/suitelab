@@ -6,6 +6,7 @@ import HomeJsonLd from "../components/json/HomeJsonLd";
 import Layout from "../components/Layout";
 import PostCard from "../components/PostCard";
 import SEO from "../components/SEO";
+import { useLocation } from "@reach/router";
 
 const BlogIndex = ({
   data: { allMdx, site },
@@ -14,6 +15,8 @@ const BlogIndex = ({
   const siteTitle = site!!.siteMetadata!!.title;
   const siteDescription = site!!.siteMetadata!!.description;
   const posts = allMdx.nodes;
+  const location = useLocation();
+
   return (
     <Layout location={location} title={siteTitle!!}>
       <CategoryMenu

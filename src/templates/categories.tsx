@@ -7,6 +7,7 @@ import PostCard from "../components/PostCard";
 import { CategoryPageContext } from "../models";
 import SEO from "../components/SEO";
 import CategoryJsonLD from "../components/json/CategoryJsonLd";
+import { useLocation } from "@reach/router";
 
 const Heading = styled.h1`
   margin: 0.5em 0 0.8em;
@@ -20,10 +21,9 @@ const Heading = styled.h1`
 const CategoryTemplate = ({
   data,
   pageContext,
-  location,
 }: PageProps<Queries.BlogPostByCategoryQuery, CategoryPageContext>) => {
   const posts = data.allMdx.nodes;
-  // get Category name from category slug
+
   const categorySlug = pageContext.category;
   const categories = data.site!!.siteMetadata!!.categories;
   const categoryObject = categories!!.find((cat) => {
@@ -31,6 +31,7 @@ const CategoryTemplate = ({
   });
   // use slug when name doesn't exist
   const categoryName = categoryObject ? categoryObject.name : categorySlug;
+  const location = useLocation();
 
   return (
     <Layout location={location} title={categoryName!!}>
