@@ -1,4 +1,6 @@
-module.exports = {
+import { GatsbyConfig } from "gatsby";
+
+const config: GatsbyConfig = {
   siteMetadata: {
     title: "suite.lab",
     author: "yoon.homme",
@@ -108,9 +110,7 @@ module.exports = {
             },
             query: `
               {
-                allMdx(
-                  sort: { order: DESC, fields: [frontmatter___date] },
-                ) {
+                allMdx(sort: {frontmatter: {date: DESC}}) {
                   nodes {
                     excerpt
                     fields { slug }
@@ -132,9 +132,6 @@ module.exports = {
       resolve: "gatsby-plugin-mdx",
       options: {
         extensions: [".md", ".mdx"],
-        mdxOptions: {
-          remarkPlugins: [require("remark-math"), require("remark-html-katex")],
-        },
         gatsbyRemarkPlugins: [
           "gatsby-remark-code-titles",
           {
@@ -202,3 +199,5 @@ module.exports = {
   ],
   graphqlTypegen: true,
 };
+
+export default config;

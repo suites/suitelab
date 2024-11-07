@@ -1,14 +1,14 @@
-import { graphql, Link } from 'gatsby';
-import React from 'react';
-import styled from 'styled-components';
+import { Link } from "gatsby";
+import React from "react";
+import styled from "styled-components";
 
-import cactusBlue from '../../static/images/svg/categories/cactus-blue.svg';
-import cactusGreen from '../../static/images/svg/categories/cactus-green.svg';
-import cactusRed from '../../static/images/svg/categories/cactus-red.svg';
-import cactusYellow from '../../static/images/svg/categories/cactus-yellow.svg';
-import svgNew from '../../static/images/svg/categories/new.svg';
+import cactusBlue from "../../static/images/svg/categories/cactus-blue.svg";
+import cactusGreen from "../../static/images/svg/categories/cactus-green.svg";
+import cactusRed from "../../static/images/svg/categories/cactus-red.svg";
+import cactusYellow from "../../static/images/svg/categories/cactus-yellow.svg";
+import svgNew from "../../static/images/svg/categories/new.svg";
 
-import { Category } from '../models';
+import { Category } from "../models";
 
 const Nav = styled.nav`
   display: block;
@@ -62,11 +62,11 @@ const CategoryItem = styled.li`
       display: block;
       z-index: 2;
       .cactus {
-        fill: #FFF000;
+        fill: #fff000;
       }
     }
     .cactus {
-      fill: #FFF000;
+      fill: #fff000;
     }
   }
   .category-item__name {
@@ -111,13 +111,13 @@ const CategoryItem = styled.li`
 
 function selectCategoryIcon(name: string) {
   switch (name) {
-    case 'cactusYellow':
+    case "cactusYellow":
       return cactusYellow;
-    case 'cactusRed':
+    case "cactusRed":
       return cactusRed;
-    case 'cactusGreen':
+    case "cactusGreen":
       return cactusGreen;
-    case 'cactusBlue':
+    case "cactusBlue":
       return cactusBlue;
   }
 }
@@ -129,14 +129,19 @@ interface CategoryLinkProps {
   path: string;
 }
 
-const CategoryLink = ({ categoryName, categoryIcon, categoryLink, path }: CategoryLinkProps) => {
+const CategoryLink = ({
+  categoryName,
+  categoryIcon,
+  categoryLink,
+  path,
+}: CategoryLinkProps) => {
   return (
-    <CategoryItem className={categoryLink === path ? 'active' : undefined}>
-      <Link to={categoryLink} className='category-item__link'>
-        <div className='category-item__image'>
+    <CategoryItem className={categoryLink === path ? "active" : undefined}>
+      <Link to={categoryLink} className="category-item__link">
+        <div className="category-item__image">
           <img src={categoryIcon} alt={categoryName} />
         </div>
-        <div className='category-item__name'>{categoryName}</div>
+        <div className="category-item__name">{categoryName}</div>
       </Link>
     </CategoryItem>
   );
@@ -152,20 +157,24 @@ const CategoryMenu = ({ location, categories }: CategoryMenuProps) => {
   return (
     <Nav>
       <CategoryItemList>
-        <CategoryLink key='new' categoryName='new' categoryIcon={svgNew} categoryLink='/' path={path} />
-        {
-          categories.map((category) => {
-            return (
-              <CategoryLink
-                key={category.name}
-                categoryName={category.name}
-                categoryIcon={selectCategoryIcon(category.icon)}
-                categoryLink={category.link}
-                path={path}
-              />
-            );
-          })
-        }
+        <CategoryLink
+          key="new"
+          categoryName="new"
+          categoryIcon={svgNew}
+          categoryLink="/"
+          path={path}
+        />
+        {categories.map((category) => {
+          return (
+            <CategoryLink
+              key={category.name}
+              categoryName={category.name}
+              categoryIcon={selectCategoryIcon(category.icon)}
+              categoryLink={category.link}
+              path={path}
+            />
+          );
+        })}
       </CategoryItemList>
     </Nav>
   );
