@@ -1,13 +1,13 @@
-import { graphql, HeadProps, PageProps } from "gatsby";
-import React from "react";
-import styled from "styled-components";
-import CategoryMenu from "../components/CategoryMenu";
-import Layout from "../components/Layout";
-import PostCard from "../components/PostCard";
-import { CategoryPageContext } from "../models";
-import SEO from "../components/SEO";
-import CategoryJsonLD from "../components/json/CategoryJsonLd";
-import { useLocation } from "@reach/router";
+import { graphql, HeadProps, PageProps } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
+import CategoryMenu from '../components/CategoryMenu';
+import Layout from '../components/Layout';
+import PostCard from '../components/PostCard';
+import { CategoryPageContext } from '../models';
+import SEO from '../components/SEO';
+import CategoryJsonLD from '../components/json/CategoryJsonLd';
+import { useLocation } from '@reach/router';
 
 const Heading = styled.h1`
   margin: 0.5em 0 0.8em;
@@ -25,25 +25,25 @@ const CategoryTemplate = ({
   const posts = data.allMdx.nodes;
 
   const categorySlug = pageContext.category;
-  const categories = data.site!!.siteMetadata!!.categories;
-  const categoryObject = categories!!.find((cat) => {
-    return cat!!.slug === categorySlug;
+  const categories = data.site!.siteMetadata!.categories;
+  const categoryObject = categories!.find((cat) => {
+    return cat!.slug === categorySlug;
   });
   // use slug when name doesn't exist
   const categoryName = categoryObject ? categoryObject.name : categorySlug;
   const location = useLocation();
 
   return (
-    <Layout location={location} title={categoryName!!}>
+    <Layout location={location} title={categoryName!}>
       <CategoryMenu
         location={location}
-        categories={categories!!.map((category) => {
+        categories={categories!.map((category) => {
           return {
-            color: category!!.color!!,
-            icon: category!!.icon!!,
-            link: category!!.link!!,
-            name: category!!.name!!,
-            slug: category!!.slug!!,
+            color: category!.color!,
+            icon: category!.icon!,
+            link: category!.link!,
+            name: category!.name!,
+            slug: category!.slug!,
           };
         })}
       />
@@ -51,14 +51,14 @@ const CategoryTemplate = ({
       {posts.map(({ frontmatter }) => {
         return (
           <PostCard
-            key={frontmatter!!.slug!!}
+            key={frontmatter!.slug!}
             frontmatter={{
-              category: frontmatter!!.category!!,
-              date: frontmatter!!.date!!,
-              description: "",
-              emoji: frontmatter!!.emoji!!,
-              slug: frontmatter!!.slug!!,
-              title: frontmatter!!.title!!,
+              category: frontmatter!.category!,
+              date: frontmatter!.date!,
+              description: '',
+              emoji: frontmatter!.emoji!,
+              slug: frontmatter!.slug!,
+              title: frontmatter!.title!,
             }}
           />
         );
@@ -104,17 +104,17 @@ export const Head = ({
   data: { site },
   pageContext,
 }: HeadProps<Queries.BlogPostByCategoryQuery, CategoryPageContext>) => {
-  const categories = site!!.siteMetadata!!.categories;
+  const categories = site!.siteMetadata!.categories;
   const categorySlug = pageContext.category;
-  const categoryObject = categories!!.find((cat) => {
-    return cat!!.slug === categorySlug;
+  const categoryObject = categories!.find((cat) => {
+    return cat!.slug === categorySlug;
   });
   const categoryName = categoryObject ? categoryObject.name : categorySlug;
   return (
-    <SEO title={categoryName!!}>
+    <SEO title={categoryName!}>
       <CategoryJsonLD
         categorySlug={categorySlug}
-        categoryName={categoryName!!}
+        categoryName={categoryName!}
       />
     </SEO>
   );

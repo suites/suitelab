@@ -1,1 +1,1 @@
-declare module "twemoji"
+declare module 'twemoji';

@@ -84,14 +84,13 @@ const Bio = () => {
     <StaticQuery
       query={bioQuery}
       render={(data: QueryResult) => {
-        const { author, resumeUrl, email, social, description } = data.site.siteMetadata;
+        const { author, resumeUrl, email, social, description } =
+          data.site.siteMetadata;
         return (
           <BioWrapper>
             <BioHeader>
               <AvatarImage src={avatar} alt={author} />
-              <BioName>
-                {author}
-              </BioName>
+              <BioName>{author}</BioName>
             </BioHeader>
             <BioMain>
               <BioText>
@@ -103,19 +102,16 @@ const Bio = () => {
                 <BioLink href={resumeUrl}>
                   <FaIdBadge color={'#FFF'} size={32} />
                 </BioLink>
-                <BioLink
-                  className='bio-link--email'
-                  href={`mailto:${email}`}
-                >
+                <BioLink className="bio-link--email" href={`mailto:${email}`}>
                   <MdMail color={'#FFF'} size={32} />
                 </BioLink>
-                <BioLink href={`https://instagram.com/${social.instagram}`} >
+                <BioLink href={`https://instagram.com/${social.instagram}`}>
                   <FaInstagram color={'#FFF'} size={32} />
                 </BioLink>
-                <BioLink href={`https://github.com/${social.github}`} >
+                <BioLink href={`https://github.com/${social.github}`}>
                   <FaGithub color={'#FFF'} size={32} />
                 </BioLink>
-                <BioLink href={`https://linkedin.com/in/${social.linkedin}`} >
+                <BioLink href={`https://linkedin.com/in/${social.linkedin}`}>
                   <FaLinkedin color={'#FFF'} size={32} />
                 </BioLink>
               </BioLinks>

@@ -1,6 +1,6 @@
-import { graphql, useStaticQuery } from "gatsby";
-import React from "react";
-import { QueryResult } from "../../models";
+import { graphql, useStaticQuery } from 'gatsby';
+import React from 'react';
+import { QueryResult } from '../../models';
 
 interface Props {
   title: string;
@@ -13,13 +13,13 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }: Props) => {
   const data: QueryResult = useStaticQuery(jsonLdPostQuery);
   const { siteUrl, author, categories } = data.site.siteMetadata;
 
-  const dateFormatted = date.replace(/\./g, "-");
+  const dateFormatted = date.replace(/\./g, '-');
 
   const publisher = {
-    "@type": "Organization",
+    '@type': 'Organization',
     name: author,
     logo: {
-      "@type": "ImageObject",
+      '@type': 'ImageObject',
       url: `${siteUrl}/images/avatar.png`,
       width: 150,
       height: 150,
@@ -27,14 +27,14 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }: Props) => {
   };
 
   const authorData = {
-    "@type": "Person",
+    '@type': 'Person',
     name: author,
     image: `${siteUrl}/images/avatar.png`,
   };
 
   const jsonLd = {
-    "@context": "http://schema.org",
-    "@type": "BlogPosting",
+    '@context': 'http://schema.org',
+    '@type': 'BlogPosting',
     headline: title,
     image: `${siteUrl}/images/ogp.png`,
     editor: author,
@@ -52,30 +52,30 @@ const PostJsonLD = ({ title, description, date, categorySlug, url }: Props) => {
   const categoryName = categoryObject ? categoryObject.name : categorySlug;
 
   const jsonBreadCrumbs = {
-    "@context": "http://schema.org",
-    "@type": "BreadcrumbList",
+    '@context': 'http://schema.org',
+    '@type': 'BreadcrumbList',
     itemListElement: [
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 1,
         item: {
-          "@id": siteUrl,
-          name: "HOME",
+          '@id': siteUrl,
+          name: 'HOME',
         },
       },
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 2,
         item: {
-          "@id": `${siteUrl}/${categorySlug}`,
+          '@id': `${siteUrl}/${categorySlug}`,
           name: categoryName,
         },
       },
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 3,
         item: {
-          "@id": url,
+          '@id': url,
           name: title,
         },
       },

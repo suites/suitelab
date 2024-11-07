@@ -1,6 +1,6 @@
-import { graphql, useStaticQuery } from "gatsby";
-import React from "react";
-import { QueryResult } from "../../models";
+import { graphql, useStaticQuery } from 'gatsby';
+import React from 'react';
+import { QueryResult } from '../../models';
 
 interface Props {
   categorySlug: string;
@@ -11,22 +11,22 @@ const CategoryJsonLD = ({ categorySlug, categoryName }: Props) => {
   const data: QueryResult = useStaticQuery(jsonLdCategoryQuery);
   const { siteUrl } = data.site.siteMetadata;
   const jsonBreadCrumbs = {
-    "@context": "http://schema.org",
-    "@type": "BreadcrumbList",
+    '@context': 'http://schema.org',
+    '@type': 'BreadcrumbList',
     itemListElement: [
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 1,
         item: {
-          "@id": siteUrl,
-          name: "HOME",
+          '@id': siteUrl,
+          name: 'HOME',
         },
       },
       {
-        "@type": "ListItem",
+        '@type': 'ListItem',
         position: 2,
         item: {
-          "@id": `${siteUrl}/${categorySlug}`,
+          '@id': `${siteUrl}/${categorySlug}`,
           name: categoryName,
         },
       },

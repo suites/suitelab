@@ -41,7 +41,7 @@ class Layout extends React.Component<Props> {
 
     return (
       <ThemeProvider theme={theme}>
-        <div className='siteRoot'>
+        <div className="siteRoot">
           <Header title={title} location={location} />
           <ContentWrapper>
             <Content>

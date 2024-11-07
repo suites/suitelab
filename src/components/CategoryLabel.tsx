@@ -40,7 +40,7 @@ const CategoryLabel = ({ slug, isLink }: Props) => {
         const content = isLink ? (
           <Link
             to={`/category/${slug}`}
-            className='category-text'
+            className="category-text"
             style={{
               background: categoryColor,
             }}
@@ -48,15 +48,15 @@ const CategoryLabel = ({ slug, isLink }: Props) => {
             {categoryName}
           </Link>
         ) : (
-            <span
-              className='category-text'
-              style={{
-                background: categoryColor,
-              }}
-            >
-              {categoryName}
-            </span>
-          );
+          <span
+            className="category-text"
+            style={{
+              background: categoryColor,
+            }}
+          >
+            {categoryName}
+          </span>
+        );
         return <Wrapper>{content}</Wrapper>;
       }}
     />
