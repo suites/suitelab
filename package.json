@@ -2,7 +2,7 @@
   "name": "suitelab",
   "private": true,
   "description": "A Tech blog by @yoon.homme",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "yoon.homme <woosiks.io@gmail.com>",
   "scripts": {
     "build": "gatsby build",
