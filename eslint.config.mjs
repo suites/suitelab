@@ -1,4 +1,3 @@
-import globals from 'globals';
 import js from '@eslint/js';
 import ts from 'typescript-eslint';
 import prettier from 'eslint-plugin-prettier/recommended';
