@@ -5,10 +5,10 @@ import Logo from '../../static/images/logo.png';
 import ContentWrapper from './ContentWrapper';
 
 const HeaderTag = styled.header`
-  background: #3B71DA;
+  background: #3b71da;
   width: 100%;
   // border-bottom: solid 1px ${(props) => props.theme.colors.blackLight};
-  box-shadow: 0 2px 4px rgba(0,0,0,.4);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
 `;
 
 const HeaderInner = styled.div`
@@ -27,8 +27,8 @@ const HeaderInner = styled.div`
   }
 
   .logo-link {
-    display:flex;
-    align-items:center;
+    display: flex;
+    align-items: center;
     height: 60px;
   }
   .message-link {
@@ -51,8 +51,8 @@ interface Props {
 const Header = ({ title, location }: Props) => {
   const rootPath = `${process.env.__PATH_PREFIX__}/`;
   const logoLink = (
-    <Link to={`/`} className='logo-link'>
-      <img className='logo' src={Logo} alt={title} />
+    <Link to={`/`} className="logo-link">
+      <img className="logo" src={Logo} alt={title} />
     </Link>
   );
 

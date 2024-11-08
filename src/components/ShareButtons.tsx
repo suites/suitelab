@@ -61,11 +61,11 @@ const ShareButtons = ({ slug, title, emoji }: Props) => {
       <ShareLinks>
         <ShareLink
           href={`https://twitter.com/share?url=${pageUrl}&text=${encodedTitle}&via=yoon.homme`}
-          rel='nofllow'
+          rel="nofllow"
         >
           <img
             src={svgTwitterWhite}
-            alt='Twitter'
+            alt="Twitter"
             style={{
               width: '24px',
               height: '19px',
@@ -76,7 +76,7 @@ const ShareButtons = ({ slug, title, emoji }: Props) => {
         <ShareLink
           href={`https://www.facebook.com/share.php?u=${pageUrl}`}
           style={{ fontSize: '20px' }}
-          rel='nofllow'
+          rel="nofllow"
         >
           f
         </ShareLink>

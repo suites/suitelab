@@ -29,12 +29,18 @@ const postContentStyle = css`
       position: absolute;
       top: 0;
       left: 0;
-      content: "";
+      content: '';
       display: inline-block;
       width: 5px;
       height: 100%;
       border-radius: 5px;
-      background: linear-gradient(0deg,#ffa649 0% ,#ffa649 50%,#f7645b 50%,#f7645b 100%);
+      background: linear-gradient(
+        0deg,
+        #ffa649 0%,
+        #ffa649 50%,
+        #f7645b 50%,
+        #f7645b 100%
+      );
     }
   }
   h3 {
@@ -47,18 +53,19 @@ const postContentStyle = css`
     font-size: 1.1em;
     &:before {
       position: absolute;
-      top: .2em;
+      top: 0.2em;
       left: 0;
-      content: "";
+      content: '';
       display: inline-block;
       width: 14px;
       height: 19px;
-      background-image: url("${svgHeadingIcon}");
+      background-image: url('${svgHeadingIcon}');
       background-size: contain;
       background-repeat: no-repeat;
     }
   }
-  ul, ol {
+  ul,
+  ol {
     margin: 1em 0;
     p {
       margin: 0;
@@ -68,7 +75,7 @@ const postContentStyle = css`
     padding-left: 1.2em;
   }
   ul li {
-    margin: .4em 0;
+    margin: 0.4em 0;
     list-style: disc;
   }
   ul ul {
@@ -125,23 +132,23 @@ const postContentStyle = css`
     overflow: auto;
     -webkit-overflow-scrolling: touch;
     width: auto;
-    font-size: .9em;
+    font-size: 0.9em;
     line-height: 1.4;
     th {
       background-color: ${(props) => props.theme.colors.highlight};
-      color: #FFF;
+      color: #fff;
       padding: 10px 12px;
       text-align: center;
       font-weight: 700;
-      &[align="center"] {
+      &[align='center'] {
         text-align: center;
       }
-      &[align="right"] {
+      &[align='right'] {
         text-align: right;
       }
     }
     td {
-      background-color:  ${(props) => props.theme.colors.whitesmoke};
+      background-color: ${(props) => props.theme.colors.whitesmoke};
       color: ${(props) => props.theme.colors.blackLight};
       padding: 10px 12px;
     }
@@ -168,13 +175,13 @@ const postContentStyle = css`
     background: ${(props) => props.theme.colors.whitesmoke};
     padding: 1em;
     p {
-      margin: .3em 0;
+      margin: 0.3em 0;
     }
   }
   .gatsby-resp-image-wrapper {
     margin: 1em 0;
     border: solid 1px #e5e8ea;
-    box-shadow: 0 2px 5px -1px rgba(0,0,0,.25);
+    box-shadow: 0 2px 5px -1px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
     overflow: hidden;
   }

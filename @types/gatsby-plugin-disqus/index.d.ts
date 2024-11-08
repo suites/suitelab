@@ -1,1 +1,1 @@
-declare module "gatsby-plugin-disqus"
+declare module 'gatsby-plugin-disqus';

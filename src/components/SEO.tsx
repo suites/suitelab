@@ -1,7 +1,7 @@
-import { graphql, useStaticQuery } from "gatsby";
-import React from "react";
-import { useLocation } from "@reach/router";
-import { QueryResult } from "../models";
+import { graphql, useStaticQuery } from 'gatsby';
+import React from 'react';
+import { useLocation } from '@reach/router';
+import { QueryResult } from '../models';
 
 interface Props {
   description?: string;
@@ -15,7 +15,7 @@ const SEO = ({ description, title, children }: Props) => {
     site: { siteMetadata },
   }: QueryResult = useStaticQuery(detailsQuery);
   const metaDescription = description || siteMetadata.description;
-  const defaultTitle = "suite.lab | 윤옴므의 기술블로그";
+  const defaultTitle = 'suite.lab | 윤옴므의 기술블로그';
 
   return (
     <>

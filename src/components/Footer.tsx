@@ -24,7 +24,9 @@ const Footer = () => {
     <FooterContent>
       <ContentWrapper>
         <FooterInner>
-          <div>© {new Date().getFullYear()}, yoon.homme All rights reserved.</div>
+          <div>
+            © {new Date().getFullYear()}, yoon.homme All rights reserved.
+          </div>
         </FooterInner>
       </ContentWrapper>
     </FooterContent>

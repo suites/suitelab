@@ -73,12 +73,12 @@ interface Props {
 
 const RelatedPostCard = ({ frontmatter }: Props) => {
   const { title: titleName, slug, emoji: emojiName, date } = frontmatter;
-  const title = titleName!! || slug!!;
+  const title = titleName! || slug!;
   const emoji = twemojiParse(emojiName || '😺');
 
   return (
     <PostCardWrapper>
-      <Link to={`/${slug!!}`} className="post-card-link">
+      <Link to={`/${slug!}`} className="post-card-link">
         <PostCardEmoji dangerouslySetInnerHTML={{ __html: emoji }} />
         <PostCardContent>
           <h5>{title}</h5>

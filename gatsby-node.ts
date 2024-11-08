@@ -1,33 +1,31 @@
-import path from "path";
-import { GatsbyNode } from "gatsby";
-import { createFilePath } from "gatsby-source-filesystem";
+import path from 'path';
+import { GatsbyNode } from 'gatsby';
+import { createFilePath } from 'gatsby-source-filesystem';
 
-export const createPages: GatsbyNode["createPages"] = async ({
+export const createPages: GatsbyNode['createPages'] = async ({
   graphql,
   actions,
 }) => {
   const { createPage } = actions;
-  const result = await graphql(
-    `
-      query GetPages {
-        allMdx(sort: { frontmatter: { date: DESC } }, limit: 1000) {
-          nodes {
-            id
-            frontmatter {
-              title
-              date(formatString: "YYYY.MM.DD")
-              emoji
-              category
-              slug
-            }
-            internal {
-              contentFilePath
-            }
+  const result = await graphql(`
+    query GetPages {
+      allMdx(sort: { frontmatter: { date: DESC } }, limit: 1000) {
+        nodes {
+          id
+          frontmatter {
+            title
+            date(formatString: "YYYY.MM.DD")
+            emoji
+            category
+            slug
+          }
+          internal {
+            contentFilePath
           }
         }
       }
-    `
-  );
+    }
+  `);
   if (result.errors) {
     throw result.errors;
   }
@@ -43,8 +41,8 @@ export const createPages: GatsbyNode["createPages"] = async ({
   categories = new Set(categories);
   categories.forEach((category) => {
     createPage({
-      path: `/category/${category.replace(/\s/, "-")}/`,
-      component: path.resolve("src/templates/categories.tsx"),
+      path: `/category/${category.replace(/\s/, '-')}/`,
+      component: path.resolve('src/templates/categories.tsx'),
       context: {
         category,
       },
@@ -52,7 +50,7 @@ export const createPages: GatsbyNode["createPages"] = async ({
   });
 };
 
-export const onCreateNode: GatsbyNode["onCreateNode"] = ({
+export const onCreateNode: GatsbyNode['onCreateNode'] = ({
   node,
   actions,
   getNode,

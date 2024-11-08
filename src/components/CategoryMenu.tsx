@@ -1,14 +1,14 @@
-import { Link } from "gatsby";
-import React from "react";
-import styled from "styled-components";
+import { Link } from 'gatsby';
+import React from 'react';
+import styled from 'styled-components';
 
-import cactusBlue from "../../static/images/svg/categories/cactus-blue.svg";
-import cactusGreen from "../../static/images/svg/categories/cactus-green.svg";
-import cactusRed from "../../static/images/svg/categories/cactus-red.svg";
-import cactusYellow from "../../static/images/svg/categories/cactus-yellow.svg";
-import svgNew from "../../static/images/svg/categories/new.svg";
+import cactusBlue from '../../static/images/svg/categories/cactus-blue.svg';
+import cactusGreen from '../../static/images/svg/categories/cactus-green.svg';
+import cactusRed from '../../static/images/svg/categories/cactus-red.svg';
+import cactusYellow from '../../static/images/svg/categories/cactus-yellow.svg';
+import svgNew from '../../static/images/svg/categories/new.svg';
 
-import { Category } from "../models";
+import { Category } from '../models';
 
 const Nav = styled.nav`
   display: block;
@@ -30,7 +30,7 @@ const CategoryItemList = styled.ul`
       display: none;
     }
     &:after {
-      content: "";
+      content: '';
       width: 40px;
       flex: 0 0 auto;
     }
@@ -81,7 +81,7 @@ const CategoryItem = styled.li`
   }
   &.active {
     .category-item__image:after {
-      content: "";
+      content: '';
       position: absolute;
       display: block;
       left: 0;
@@ -111,13 +111,13 @@ const CategoryItem = styled.li`
 
 function selectCategoryIcon(name: string) {
   switch (name) {
-    case "cactusYellow":
+    case 'cactusYellow':
       return cactusYellow;
-    case "cactusRed":
+    case 'cactusRed':
       return cactusRed;
-    case "cactusGreen":
+    case 'cactusGreen':
       return cactusGreen;
-    case "cactusBlue":
+    case 'cactusBlue':
       return cactusBlue;
   }
 }
@@ -136,7 +136,7 @@ const CategoryLink = ({
   path,
 }: CategoryLinkProps) => {
   return (
-    <CategoryItem className={categoryLink === path ? "active" : undefined}>
+    <CategoryItem className={categoryLink === path ? 'active' : undefined}>
       <Link to={categoryLink} className="category-item__link">
         <div className="category-item__image">
           <img src={categoryIcon} alt={categoryName} />

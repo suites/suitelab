@@ -30,9 +30,9 @@ const FollowLink = styled.a`
 const ShareButtons = () => {
   return (
     <Follow>
-      <FollowLink href='https://github.com/suites'>
+      <FollowLink href="https://github.com/suites">
         <FaGithub size={32} />
-        <div className='follow-link-text'>Follow to @yoon.homme</div>
+        <div className="follow-link-text">Follow to @yoon.homme</div>
       </FollowLink>
     </Follow>
   );
