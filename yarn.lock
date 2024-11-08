@@ -4129,7 +4129,7 @@ commander@^7.2.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
   integrity sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==
 
-commander@^8.0.0:
+commander@^8.3.0:
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/commander/-/commander-8.3.0.tgz#4837ea1b2da67b9c616a67afbb0fafee567bca66"
   integrity sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==
@@ -8259,12 +8259,12 @@ katex@^0.12.0:
   dependencies:
     commander "^2.19.0"
 
-katex@^0.13.3:
-  version "0.13.24"
-  resolved "https://registry.yarnpkg.com/katex/-/katex-0.13.24.tgz#fe55455eb455698cb24b911a353d16a3c855d905"
-  integrity sha512-jZxYuKCma3VS5UuxOx/rFV1QyGSl3Uy/i0kTJF3HgQ5xMinCQVF8Zd4bMY/9aI9b9A2pjIBOsjSSm68ykTAr8w==
+katex@^0.16.10:
+  version "0.16.10"
+  resolved "https://registry.yarnpkg.com/katex/-/katex-0.16.10.tgz#6f81b71ac37ff4ec7556861160f53bc5f058b185"
+  integrity sha512-ZiqaC04tp2O5utMsl2TEZTXxa6WSC4yo0fv5ML++D3QZv/vx2Mct0mTlRx3O+uUkjfuAgOkzsCmq5MiUEsDDdA==
   dependencies:
-    commander "^8.0.0"
+    commander "^8.3.0"
 
 kebab-hash@^0.1.2:
   version "0.1.2"
