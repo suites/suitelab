@@ -21,10 +21,10 @@ const Nav = styled.nav`
 
 const CategoryItemList = styled.ul`
   display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
   @media screen and (max-width: ${(props) => props.theme.responsive.small}) {
     margin: 0 -20px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     ::-webkit-scrollbar {
       display: none;
@@ -38,6 +38,7 @@ const CategoryItemList = styled.ul`
 `;
 
 const CategoryItem = styled.li`
+  flex-shrink: 0;
   width: 70px;
   margin: 0 20px 0 0;
   text-align: center;
