@@ -13,7 +13,6 @@ const BlogIndex = ({
 }: PageProps<Queries.AllBlogPostQuery>) => {
   const categories = site!.siteMetadata!.categories;
   const siteTitle = site!.siteMetadata!.title;
-  const siteDescription = site!.siteMetadata!.description;
   const posts = allMdx.nodes;
   const location = useLocation();
 
