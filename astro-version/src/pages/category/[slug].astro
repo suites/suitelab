@@ -1,0 +1,155 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import CategoryMenu from '@/components/CategoryMenu.astro';
+import PostCard from '@/components/PostCard.astro';
+import { getCategoryBySlug, getAllCategorySlugs } from '@/utils/category';
+import { sortByDate } from '@/utils/date';
+import { SITE_DESCRIPTION } from '@/consts';
+
+export async function getStaticPaths() {
+  const categorySlugs = getAllCategorySlugs();
+  const posts = await getCollection('blog');
+  
+  return categorySlugs.map((slug) => {
+    // 해당 카테고리의 포스트만 필터링
+    const categoryPosts = posts.filter((post) => {
+      return (post.data as any).category === slug;
+    });
+    
+    return {
+      params: { slug },
+      props: { 
+        posts: categoryPosts,
+        categorySlug: slug 
+      },
+    };
+  });
+}
+
+interface Props {
+  posts: any[];
+  categorySlug: string;
+}
+
+const { posts, categorySlug } = Astro.props;
+const categoryInfo = getCategoryBySlug(categorySlug);
+const categoryName = categoryInfo?.name || categorySlug;
+
+// 날짜순 정렬
+const sortedPosts = sortByDate(posts);
+
+// 페이지 타이틀과 설명
+const pageTitle = `${categoryName} 카테고리`;
+const pageDescription = `${categoryName} 관련 포스트들을 확인해보세요.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Header />
+  
+  <main class="container main-content">
+    <!-- 카테고리 메뉴 -->
+    <CategoryMenu />
+    
+    <!-- 카테고리 헤더 -->
+    <div class="category-header">
+      <h1 class="category-title">
+        {categoryInfo && (
+          <span class="category-icon" set:text={categoryInfo.icon} />
+        )}
+        {categoryName}
+      </h1>
+      <p class="category-description">
+        총 {sortedPosts.length}개의 포스트
+      </p>
+    </div>
+    
+    <!-- 포스트 목록 -->
+    <div class="posts-list">
+      {sortedPosts.length > 0 ? (
+        sortedPosts.map((post) => (
+          <PostCard post={post} />
+        ))
+      ) : (
+        <p class="no-posts">아직 포스트가 없습니다.</p>
+      )}
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .main-content {
+    min-height: 70vh;
+    padding: 2rem 0;
+  }
+  
+  .category-header {
+    margin: 2rem 0;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .category-title {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 0 0 1rem 0;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.5px;
+  }
+  
+  .category-icon {
+    font-size: 3rem;
+    line-height: 1;
+  }
+  
+  .category-description {
+    margin: 0;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .posts-list {
+    margin-top: 2rem;
+  }
+  
+  .no-posts {
+    padding: 4rem 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .main-content {
+      padding: 1rem 0;
+    }
+    
+    .category-header {
+      margin: 1.5rem 0;
+      padding-bottom: 1.5rem;
+    }
+    
+    .category-title {
+      font-size: 2rem;
+    }
+    
+    .category-icon {
+      font-size: 2.5rem;
+    }
+    
+    .category-description {
+      font-size: 1rem;
+    }
+    
+    .posts-list {
+      margin-top: 1rem;
+    }
+  }
+</style>

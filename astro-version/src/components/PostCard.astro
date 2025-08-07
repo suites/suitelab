@@ -1,0 +1,122 @@
+---
+import type { BlogPost } from '@/types';
+import CategoryLabel from './CategoryLabel.astro';
+import FormattedDate from './FormattedDate.astro';
+import { twemojiParse } from '@/utils/twemoji.util';
+
+export interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const { data, id } = post;
+
+// 데이터 추출 (우리 스타일 + 템플릿 스타일 지원)
+const title = data.title || (data as any).slug || id;
+const date = (data as any).date || data.pubDate;
+const category = (data as any).category;
+const emoji = (data as any).emoji || '📝';
+const slug = (data as any).slug || id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
+
+// 이모지 파싱
+const parsedEmoji = twemojiParse(emoji);
+---
+
+<div class="post-card-wrapper">
+  <a href={`/${slug}`} class="post-card-link">
+    <div class="post-card-emoji" set:html={parsedEmoji}></div>
+    <div class="post-card-content">
+      <h3>{title}</h3>
+      <FormattedDate date={date} />
+      {category && <CategoryLabel category={category} />}
+    </div>
+  </a>
+</div>
+
+<style>
+  .post-card-wrapper {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .post-card-link {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.4em 0;
+    color: white;
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  
+  .post-card-link:hover {
+    background: rgba(49, 55, 70, 0.3);
+    margin: 0 -1rem;
+    padding: 1.4em 1rem;
+  }
+  
+  .post-card-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    background: rgba(49, 55, 70, 0.5);
+    border-radius: 8px;
+    font-size: 50px;
+    flex-shrink: 0;
+  }
+  
+  .post-card-emoji :global(img) {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .post-card-content {
+    width: calc(100% - 90px);
+    padding-left: 20px;
+  }
+  
+  .post-card-content h3 {
+    font-size: 1.5em;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 0.3rem 0;
+    color: white;
+  }
+  
+  .post-card-content :global(time) {
+    display: block;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  @media (max-width: 768px) {
+    .post-card-link {
+      padding: 1em 0;
+    }
+    
+    .post-card-emoji {
+      width: 70px;
+      height: 70px;
+    }
+    
+    .post-card-emoji :global(img) {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .post-card-content {
+      width: calc(100% - 70px);
+      padding-left: 15px;
+    }
+    
+    .post-card-content h3 {
+      font-size: 1.1rem;
+    }
+    
+    .post-card-content :global(time) {
+      font-size: 0.8rem;
+    }
+  }
+</style>

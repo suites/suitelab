@@ -39,7 +39,7 @@ export const CATEGORIES: readonly Category[] = [
   },
   {
     name: 'Network',
-    slug: 'network', 
+    slug: 'network',
     color: '#C0D545',
     icon: '🌿',
     link: '/category/network',
@@ -71,6 +71,13 @@ export const CATEGORIES: readonly Category[] = [
     color: '#f7615f',
     icon: '🏗️',
     link: '/category/infrastructure',
+  },
+  {
+    name: 'Infra',
+    slug: 'infra',
+    color: '#f7615f',
+    icon: '🏗️',
+    link: '/category/infra',
   },
 ] as const;
 

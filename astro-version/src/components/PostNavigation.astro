@@ -12,8 +12,11 @@ const sortedPosts = allPosts.sort((a, b) => {
   return new Date(dateB).getTime() - new Date(dateA).getTime();
 });
 
-// 현재 포스트의 인덱스 찾기
-const currentIndex = sortedPosts.findIndex(post => post.id === currentSlug);
+// 현재 포스트의 인덱스 찾기 (slug 매칭 로직 개선)
+const currentIndex = sortedPosts.findIndex(post => {
+  const postSlug = (post.data as any).slug || post.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
+  return postSlug === currentSlug;
+});
 
 // 이전/다음 포스트 찾기
 const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
@@ -31,7 +34,7 @@ function truncateText(text: string, maxLength: number): string {
     <div class="nav-container">
       <!-- 이전 포스트 -->
       {prevPost && (
-        <a href={`/blog/${prevPost.id}`} class="nav-link prev-post">
+        <a href={`/${(prevPost.data as any).slug || prevPost.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-')}`} class="nav-link prev-post">
           <div class="nav-direction">
             <span class="nav-arrow" aria-hidden="true">←</span>
             <span class="nav-label">이전 포스트</span>
@@ -67,7 +70,7 @@ function truncateText(text: string, maxLength: number): string {
       
       <!-- 다음 포스트 -->
       {nextPost && (
-        <a href={`/blog/${nextPost.id}`} class="nav-link next-post">
+        <a href={`/${(nextPost.data as any).slug || nextPost.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-')}`} class="nav-link next-post">
           <div class="nav-direction">
             <span class="nav-label">다음 포스트</span>
             <span class="nav-arrow" aria-hidden="true">→</span>

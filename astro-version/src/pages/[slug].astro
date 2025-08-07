@@ -1,0 +1,39 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import BlogPost from '@/layouts/BlogPost.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  
+  return posts.map((post) => {
+    // 우리 스타일의 slug 필드를 우선 사용, 없으면 id에서 추출
+    const slug = (post.data as any).slug || post.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
+    
+    // slug가 유효한지 확인
+    if (!slug) {
+      console.warn(`Post ${post.id} has no valid slug`);
+      return null;
+    }
+    
+    return {
+      params: { slug },
+      props: { post },
+    };
+  }).filter(Boolean); // null 제거
+}
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+// 읽기 시간 계산 (간단한 추정)
+const readTime = Math.ceil(post.body.split(/\s+/).length / 200);
+---
+
+<BlogPost {...post.data} headings={headings} readTime={readTime}>
+  <Content />
+</BlogPost>

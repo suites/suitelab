@@ -1,57 +1,64 @@
-import type { DateFormatOptions } from '@/types';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ko';
+import relativeTime from 'dayjs/plugin/relativeTime';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+// dayjs 플러그인 및 로케일 설정
+dayjs.extend(relativeTime);
+dayjs.extend(customParseFormat);
+dayjs.locale('ko');
 
 /**
  * 날짜를 한국어 포맷으로 변환
  */
 export function formatDate(
   date: Date | string,
-  options: DateFormatOptions = {}
+  format: string = 'YYYY.MM.DD',
 ): string {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
-  
-  const defaultOptions: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    ...options,
-  };
-  
-  return dateObj.toLocaleDateString(options.locale || 'ko-KR', defaultOptions);
+  return dayjs(date).format(format);
 }
 
 /**
  * 상대적인 시간 표시 (예: "3일 전")
  */
 export function getRelativeTime(date: Date | string): string {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
-  const now = new Date();
-  const diffInSeconds = Math.floor((now.getTime() - dateObj.getTime()) / 1000);
-  
-  const intervals = [
-    { label: '년', seconds: 31536000 },
-    { label: '개월', seconds: 2592000 },
-    { label: '일', seconds: 86400 },
-    { label: '시간', seconds: 3600 },
-    { label: '분', seconds: 60 },
-  ];
-  
-  for (const interval of intervals) {
-    const count = Math.floor(diffInSeconds / interval.seconds);
-    if (count > 0) {
-      return `${count}${interval.label} 전`;
-    }
-  }
-  
-  return '방금 전';
+  return dayjs(date).fromNow();
 }
 
 /**
  * ISO 문자열을 Date 객체로 안전하게 변환
  */
 export function parseDate(dateString: string): Date {
-  const date = new Date(dateString);
-  if (isNaN(date.getTime())) {
+  const parsed = dayjs(dateString);
+  if (!parsed.isValid()) {
     throw new Error(`Invalid date string: ${dateString}`);
   }
-  return date;
+  return parsed.toDate();
+}
+
+/**
+ * 날짜 비교 유틸리티
+ */
+export function isBefore(date1: Date | string, date2: Date | string): boolean {
+  return dayjs(date1).isBefore(dayjs(date2));
+}
+
+export function isAfter(date1: Date | string, date2: Date | string): boolean {
+  return dayjs(date1).isAfter(dayjs(date2));
+}
+
+/**
+ * 날짜 정렬 헬퍼
+ */
+export function sortByDate<T extends { date?: string | Date; pubDate?: Date }>(
+  items: T[],
+  ascending: boolean = false,
+): T[] {
+  return [...items].sort((a, b) => {
+    const dateA = dayjs(a.date || a.pubDate);
+    const dateB = dayjs(b.date || b.pubDate);
+    return ascending
+      ? dateA.unix() - dateB.unix()
+      : dateB.unix() - dateA.unix();
+  });
 }

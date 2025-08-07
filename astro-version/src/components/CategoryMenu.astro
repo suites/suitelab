@@ -8,21 +8,53 @@ const currentPath = Astro.url.pathname;
 function isActiveCategory(category: Category): boolean {
   return currentPath.startsWith(`/category/${category.slug}`);
 }
+
+// 홈 활성화 확인
+const isHome = currentPath === '/';
+
+// 카테고리별 선인장 SVG 매핑
+const cactusIcons: Record<string, string> = {
+  'web': '/images/svg/categories/cactus-blue.svg',
+  'network': '/images/svg/categories/cactus-green.svg', 
+  'cs': '/images/svg/categories/cactus-yellow.svg',
+  'algorithm': '/images/svg/categories/cactus-blue.svg',
+  'deep-learning': '/images/svg/categories/cactus-green.svg',
+  'infrastructure': '/images/svg/categories/cactus-red.svg',
+  'infra': '/images/svg/categories/cactus-red.svg',
+};
 ---
 
 <nav class="category-menu" aria-label="카테고리 네비게이션">
   <ul class="category-list">
+    <!-- 홈 (New) -->
+    <li class="category-item">
+      <a 
+        href="/"
+        class={`category-link ${isHome ? 'active' : ''}`}
+        aria-current={isHome ? 'page' : undefined}
+      >
+        <div class="category-image">
+          <img src="/images/svg/categories/new.svg" alt="새 글" />
+        </div>
+        <span class="category-name">new</span>
+      </a>
+    </li>
+    
+    <!-- 카테고리 목록 -->
     {CATEGORIES.map((category) => (
       <li class="category-item">
         <a 
           href={category.link}
           class={`category-link ${isActiveCategory(category) ? 'active' : ''}`}
-          style={`--category-color: ${category.color}`}
           aria-current={isActiveCategory(category) ? 'page' : undefined}
         >
-          <span class="category-icon" aria-hidden="true">
-            {category.icon}
-          </span>
+          <div class="category-image">
+            <img 
+              src={cactusIcons[category.slug] || '/images/svg/categories/cactus-blue.svg'} 
+              alt={category.name}
+              class="cactus"
+            />
+          </div>
           <span class="category-name">
             {category.name}
           </span>
@@ -34,154 +66,128 @@ function isActiveCategory(category: Category): boolean {
 
 <style>
   .category-menu {
-    width: 100%;
+    display: block;
+    margin: 0;
+    padding: 0 0 2em;
     overflow-x: auto;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
   }
   
   .category-menu::-webkit-scrollbar {
-    display: none; /* WebKit */
+    display: none;
   }
   
   .category-list {
     display: flex;
+    flex-wrap: nowrap;
     list-style: none;
     margin: 0;
     padding: 0;
-    gap: 0.5rem;
-    min-width: max-content;
+    gap: 20px;
   }
   
   .category-item {
     flex-shrink: 0;
+    width: 70px;
+    text-align: center;
   }
   
   .category-link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1rem;
+    display: block;
+    color: white;
     text-decoration: none;
-    color: rgba(255, 255, 255, 0.8);
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
-    transition: all 0.2s ease;
-    font-weight: 500;
-    font-size: 0.9rem;
-    white-space: nowrap;
   }
   
-  .category-link:hover,
-  .category-link:focus {
-    color: white;
-    background: rgba(var(--category-color-rgb, 12, 158, 228), 0.1);
-    border-color: var(--category-color, #0c9ee4);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(var(--category-color-rgb, 12, 158, 228), 0.2);
+  .category-image {
+    padding: 2px;
+    background: rgba(49, 55, 70, 0.5);
+    border-radius: 50%;
+    position: relative;
+    margin-bottom: 5px;
   }
   
-  .category-link.active {
-    color: white;
-    background: var(--category-color, #0c9ee4);
-    border-color: var(--category-color, #0c9ee4);
-    box-shadow: 0 4px 12px rgba(var(--category-color-rgb, 12, 158, 228), 0.3);
-  }
-  
-  .category-icon {
-    font-size: 1.1rem;
-    line-height: 1;
+  .category-image img {
+    position: relative;
+    background: rgba(49, 55, 70, 0.5);
+    border-radius: 50%;
+    display: block;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
   }
   
   .category-name {
-    font-weight: 500;
-    letter-spacing: 0.3px;
+    margin-top: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: rgba(255, 255, 255, 0.6);
+    display: block;
   }
   
-  /* 스크롤 힌트 */
-  .category-menu::after {
+  /* Active state with animation */
+  .category-item.active .category-image::after,
+  .category-link.active .category-image::after {
     content: '';
     position: absolute;
-    right: 0;
+    display: block;
+    left: 0;
     top: 0;
-    bottom: 0;
-    width: 20px;
-    background: linear-gradient(to right, transparent, rgba(33, 36, 45, 0.8));
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.2s ease;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(-45deg, #ffa649, #f7645b, #805ed4);
+    animation: rotating 2s linear infinite;
   }
   
-  .category-menu:hover::after {
-    opacity: 1;
+  .category-item.active img,
+  .category-link.active img {
+    border: solid 2px rgb(33, 36, 45);
+  }
+  
+  .category-item.active .category-name,
+  .category-link.active .category-name {
+    color: white;
+  }
+  
+  @keyframes rotating {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
   }
   
   @media (max-width: 768px) {
     .category-menu {
-      margin: 0 -1rem;
-      padding: 0 1rem;
+      padding: 1em 0;
+      margin: 0 -20px;
     }
     
-    .category-link {
-      padding: 0.6rem 0.8rem;
-      font-size: 0.85rem;
-    }
-    
-    .category-icon {
-      font-size: 1rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
     .category-list {
-      gap: 0.25rem;
+      padding-left: 20px;
     }
     
-    .category-link {
-      padding: 0.5rem 0.7rem;
-      font-size: 0.8rem;
+    .category-list::after {
+      content: '';
+      width: 40px;
+      flex: 0 0 auto;
+    }
+    
+    .category-item {
+      width: 60px;
+      margin-left: 15px;
+    }
+    
+    .category-item:first-child {
+      margin-left: 0;
     }
     
     .category-name {
-      display: none; /* 모바일에서는 아이콘만 표시 */
-    }
-    
-    .category-link {
-      width: 44px;
-      height: 44px;
-      justify-content: center;
-      border-radius: 50%;
+      font-size: 12px;
     }
   }
 </style>
-
-<script>
-  // CSS 커스텀 프로퍼티로 색상 설정
-  document.addEventListener('DOMContentLoaded', () => {
-    const categoryLinks = document.querySelectorAll<HTMLElement>('.category-link');
-    
-    categoryLinks.forEach((link) => {
-      const style = link.getAttribute('style');
-      if (style && style.includes('--category-color:')) {
-        const colorMatch = style.match(/--category-color:\s*(#[0-9a-fA-F]{6})/);
-        if (colorMatch) {
-          const color = colorMatch[1];
-          const rgb = hexToRgb(color);
-          if (rgb) {
-            link.style.setProperty('--category-color-rgb', `${rgb.r}, ${rgb.g}, ${rgb.b}`);
-          }
-        }
-      }
-    });
-  });
-  
-  function hexToRgb(hex: string): {r: number, g: number, b: number} | null {
-    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-    return result ? {
-      r: parseInt(result[1], 16),
-      g: parseInt(result[2], 16),
-      b: parseInt(result[3], 16)
-    } : null;
-  }
-</script>

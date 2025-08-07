@@ -1,7 +1,7 @@
 ---
 import type { LayoutProps } from '@/types';
 import { generateSEO } from '@/utils/seo';
-import { SITE_TITLE } from '@/consts';
+import { SITE_TITLE, SITE_URL } from '@/consts';
 import '@/styles/global.css';
 
 export interface Props extends LayoutProps {}
@@ -49,6 +49,9 @@ const seo = generateSEO({
     <!-- Additional Meta -->
     <meta name="robots" content="index, follow" />
     <meta name="author" content="yoon.homme" />
+    
+    <!-- KaTeX CSS for math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV" crossorigin="anonymous" />
     
     <!-- Schema.org JSON-LD -->
     <script type="application/ld+json">

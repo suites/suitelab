@@ -1,0 +1,123 @@
+---
+title: Dynamic Programming
+date: '2018-11-05'
+category: 'algorithm'
+emoji: '💾'
+slug: 'ps-interesting-party'
+---
+
+## 문제
+화이트씨는 다재다능한 사람입니다.(모든 것이 그의 관심 대상입니다). 그래서 그에게는 친구가 많습니다.
+하지만 불행하게도 그의 친구들은 다재다능하지 않습니다. 각각의 친구는 2가지 주제에만 관심이 있고
+다른 주제로 이야기 하는 것을 싫어합니다. 그래서 파티를 개최할 때마다 모두가 즐겁게 파티를 보내려면
+어떤 친구를 초대할지가 큰 문제입니다. 화이트씨는 그동안의 경험으로 초대된 친구 모두가 공통의 흥미 있는
+화제가 있을 때 파티를 즐긴다는 것을 알았습니다.
+
+문자열 배열 first, second가 주어집니다. 화이트씨의 i번째 친구가 흥미있는 화제는 first[i]와
+second[i]입니다. 즐거운 파티가 되려면 화이트씨가 초대할 수 있는 친구는 *최대 몇 명* 인지 리턴하세요.
+
+## 정의
+```py
+class InterestingParty:
+	def best_invitaion(self, first, second):
+```
+
+## 입력
+first : 1~50개의 요소가 있는 배열.
+second : 1~50개의 요소가 있는 배열.
+first, second 공통 : 각 요소는 1~15개 문자이며, 각 문자는 영어 소문자입니다.
+i번째 요소 first[i]와 second[i]의 내용은 다릅니다.
+
+## 출력
+정수를 담고있는 변수
+
+## IO Example
+```py
+# Case# 0
+first = ['fishing', 'gradening', 'swimming', 'fishing']
+second = ['hunting', 'fishing', 'fishing', 'biting']
+result = 4
+
+# Case# 1
+first = ['Variety', 'diversity', 'loquacity', 'courtesy']
+second = ['talking', 'speaking', 'discussion', 'meeting']
+result = 1
+
+# Case# 2
+first = ['snakes', 'programming', 'cobra', 'monty']
+second = ['python', 'python', 'anaconda', 'python']
+result = 3
+
+# Case# 3
+first = ['t', 'o', 'p', 'c', 'o', 'd', 'e', 'r', 's', 'i', 'n', 'g', 'l', 'e',
+ 'r', 'o', 'u', 'n', 'd', 'm', 'a', 't', 'c', 'h', 'f', 'o', 'u', 'r', 'n', 'i']
+second = ['n', 'e', 'f', 'o', 'u', 'r', 'j', 'a', 'n', 'u', 'a', 'r', 'y', 't',
+ 'w', 'e', 'n', 't', 'y', 't', 'w', 'o', 's', 'a', 't', 'u', 'r', 'd', 'a', 'y']
+result = 6
+
+```
+
+## 구현
+
+### 1차 코드
+이중 반복문을 이용하여 모든 요소에 대해 중복되는 항목들의 갯수를 구한 뒤 ans와 비교하여 더 큰 값을
+담도록 한다.
+
+```py
+class InterestingParty:
+    def best_invitation(self, first, second):
+        ans = 0
+
+        for i in range(len(first)):
+            f = 0
+            s = 0
+
+            for j in range(len(first)):
+                if first[i] == first[j]:
+                    f += 1
+                if first[i] == second[j]:
+                    f += 1
+                if second[i] == first[j]:
+                    s += 1
+                if second[i] == second[j]:
+                    s += 1
+
+            ans = max(f, ans)
+            ans = max(s, ans)
+
+        return ans
+```
+
+### 2차 코드
+가독성이 좋지 않은 이중 반복문을 대체하여 dictionary를 사용해서 구현하였다.
+dic에 모든 단어들을 등록한 후 배열들을 검사하여 중복되는 항목의 값을 1 증가시킨다.  
+그 후 가장 값이 큰 항목을 리턴한다.
+
+```py
+class InterestingParty:
+    def best_invitation(self, first, second):
+        dic = {}
+
+        for i in range(len(first)):
+            dic[first[i]] = 0
+            dic[second[i]] = 0
+
+        for i in range(len(first)):
+            dic[first[i]] += 1
+            dic[second[i]] += 1
+
+        ans = 0
+        for key in dic:
+            ans = max(ans, dic[key])
+
+        return ans
+```
+
+## 마무리
+- **문제를 이해하고 전체탐색 떠올리기**
+> 즐거운 파티가 되려면 화이트씨가 초대할 수 있는 친구는 **최대 몇 명** 인지 리턴하세요.
+
+가장 많은 것을 답하라는 문제는 **전체 탐색** 을 머리속에 떠올려야 한다.
+
+- **모든 문제가 수학적 지식이 필요한 것은 아니다.**
+아무리 수학이 나오는 문제라도 전체 탐색을 이용하면 간단하게 해결할 수도 있다.  
