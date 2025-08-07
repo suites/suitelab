@@ -1,0 +1,137 @@
+---
+import type { LayoutProps } from '@/types';
+import { generateSEO } from '@/utils/seo';
+import { SITE_TITLE } from '@/consts';
+import '@/styles/global.css';
+
+export interface Props extends LayoutProps {}
+
+const { title, description } = Astro.props;
+
+// SEO 메타데이터 생성
+const seo = generateSEO({
+  title,
+  description,
+  canonical: Astro.url.href,
+});
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={seo.description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="apple-touch-icon" href="/images/favicon.png" />
+    
+    <!-- SEO Meta Tags -->
+    <title>{seo.title}</title>
+    <link rel="canonical" href={seo.canonical} />
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content={seo.type} />
+    <meta property="og:title" content={seo.title} />
+    <meta property="og:description" content={seo.description} />
+    <meta property="og:url" content={seo.canonical} />
+    <meta property="og:image" content={seo.image} />
+    <meta property="og:site_name" content={SITE_TITLE} />
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.title} />
+    <meta name="twitter:description" content={seo.description} />
+    <meta name="twitter:image" content={seo.image} />
+    
+    <!-- Additional Meta -->
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="yoon.homme" />
+    
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+      {
+        JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          "name": SITE_TITLE,
+          "url": SITE_URL,
+          "description": seo.description,
+          "author": {
+            "@type": "Person",
+            "name": "yoon.homme"
+          }
+        })
+      }
+    </script>
+  </head>
+  
+  <body>
+    <div class="site-root">
+      <slot />
+    </div>
+  </body>
+</html>
+
+<style>
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    min-height: 100vh;
+    background: rgb(33, 36, 45);
+    color: white;
+  }
+  
+  .site-root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+  
+  /* Custom scrollbar for webkit browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgba(12, 158, 228, 0.7);
+    border-radius: 4px;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(12, 158, 228, 0.9);
+  }
+  
+  /* Focus styles for accessibility */
+  :focus-visible {
+    outline: 2px solid #0c9ee4;
+    outline-offset: 2px;
+  }
+  
+  /* Skip to content link for accessibility */
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #0c9ee4;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+    transition: top 0.2s;
+  }
+  
+  .skip-link:focus {
+    top: 6px;
+  }
+</style>

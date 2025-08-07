@@ -1,86 +1,412 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import BaseHead from '../components/BaseHead.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
-import Header from '../components/Header.astro';
+import Layout from './Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Bio from '@/components/Bio.astro';
+import CategoryLabel from '@/components/CategoryLabel.astro';
+import PostNavigation from '@/components/PostNavigation.astro';
+import TableOfContents from '@/components/TableOfContents.astro';
+import { formatDate } from '@/utils/date';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+  headings?: Array<{ depth: number; slug: string; text: string }>;
+  readTime?: number;
+};
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, pubDate, headings, readTime, ...otherProps } = Astro.props;
+
+// 선택적 필드들 (우리 스타일 또는 다른 스타일 지원)
+const date = (otherProps as any).date;
+const category = (otherProps as any).category;
+const emoji = (otherProps as any).emoji;
+
+// 날짜 필드 통합 (기존 스타일과 템플릿 모두 지원)
+const postDateValue = date || pubDate || new Date();
+const postDate = formatDate(postDateValue);
+const estimatedReadTime = readTime || 5;
 ---
 
-<html lang="en">
-	<head>
-		<BaseHead title={title} description={description} />
-		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-		</style>
-	</head>
+<Layout title={title} description={description}>
+  <Header />
+  
+  <main id="main-content" class="blog-post-layout">
+    <div class="container">
+      <div class="content-grid">
+        <!-- 메인 콘텐츠 -->
+        <article class="post-content">
+          <!-- 포스트 헤더 -->
+          <header class="post-header">
+            <div class="post-meta">
+              {category && <CategoryLabel category={category} />}
+              <time datetime={postDateValue.toISOString()} class="post-date">
+                {postDate}
+              </time>
+              <span class="read-time" aria-label={`예상 읽기 시간 ${estimatedReadTime}분`}>
+                📖 {estimatedReadTime}분 읽기
+              </span>
+            </div>
+            
+            <div class="post-title-section">
+              {emoji && (
+                <div class="post-emoji" role="img" aria-label="포스트 이모지">
+                  {emoji}
+                </div>
+              )}
+              <h1 class="post-title">{title}</h1>
+            </div>
+            
+            {description && (
+              <p class="post-description">{description}</p>
+            )}
+          </header>
+          
+          <!-- 목차 (모바일용) -->
+          {headings && headings.length > 0 && (
+            <div class="toc-mobile">
+              <TableOfContents headings={headings} />
+            </div>
+          )}
+          
+          <!-- 포스트 본문 -->
+          <div class="prose">
+            <slot />
+          </div>
+          
+          <!-- 포스트 네비게이션 -->
+          <PostNavigation />
+        </article>
+        
+        <!-- 사이드바 -->
+        <aside class="sidebar">
+          <!-- 목차 (데스크톱용) -->
+          {headings && headings.length > 0 && (
+            <div class="toc-desktop sticky-element">
+              <TableOfContents headings={headings} />
+            </div>
+          )}
+          
+          <!-- Bio -->
+          <div class="bio-section sticky-element">
+            <Bio />
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
 
-	<body>
-		<Header />
-		<main>
-			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1>{title}</h1>
-						<hr />
-					</div>
-					<slot />
-				</div>
-			</article>
-		</main>
-		<Footer />
-	</body>
-</html>
+<style>
+  .blog-post-layout {
+    padding: 2rem 0;
+    min-height: 70vh;
+  }
+  
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+    align-items: start;
+  }
+  
+  .post-content {
+    min-width: 0; /* Grid overflow 방지 */
+  }
+  
+  .post-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  
+  .post-date {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  
+  .read-time {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .post-title-section {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .post-emoji {
+    font-size: 4rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  
+  .post-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 800;
+    line-height: 1.2;
+    margin: 0;
+    color: white;
+    word-break: keep-all;
+  }
+  
+  .post-description {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin: 0;
+    font-style: italic;
+  }
+  
+  .toc-mobile {
+    display: none;
+    margin-bottom: 2rem;
+  }
+  
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .sticky-element {
+    position: sticky;
+    top: 2rem;
+  }
+  
+  .toc-desktop {
+    display: block;
+  }
+  
+  .bio-section {
+    margin-top: 2rem;
+  }
+  
+  /* Prose 스타일링 - Astro 최적화 */
+  .prose {
+    max-width: none;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+  
+  .prose :global(h1),
+  .prose :global(h2),
+  .prose :global(h3),
+  .prose :global(h4),
+  .prose :global(h5),
+  .prose :global(h6) {
+    color: white;
+    font-weight: 700;
+    line-height: 1.3;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    scroll-margin-top: 5rem;
+  }
+  
+  .prose :global(h1) { font-size: 2.5rem; }
+  .prose :global(h2) { 
+    font-size: 2rem;
+    border-bottom: 2px solid rgba(12, 158, 228, 0.3);
+    padding-bottom: 0.5rem;
+  }
+  .prose :global(h3) { font-size: 1.75rem; }
+  .prose :global(h4) { font-size: 1.5rem; }
+  
+  .prose :global(p) {
+    margin-bottom: 1.75rem;
+  }
+  
+  .prose :global(a) {
+    color: #0c9ee4;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: all 0.2s ease;
+  }
+  
+  .prose :global(a:hover) {
+    border-bottom-color: #0c9ee4;
+    background: rgba(12, 158, 228, 0.1);
+    padding: 0 0.25rem;
+    margin: 0 -0.25rem;
+    border-radius: 4px;
+  }
+  
+  .prose :global(blockquote) {
+    border-left: 4px solid #0c9ee4;
+    padding: 1.5rem 2rem;
+    margin: 2rem 0;
+    background: rgba(12, 158, 228, 0.05);
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .prose :global(code) {
+    background: rgba(0, 0, 0, 0.4);
+    color: #e74c3c;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+    font-weight: 500;
+  }
+  
+  .prose :global(pre) {
+    background: rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    overflow-x: auto;
+    line-height: 1.6;
+  }
+  
+  .prose :global(pre code) {
+    background: none !important;
+    color: inherit !important;
+    padding: 0;
+    border-radius: 0;
+    font-size: 0.95rem;
+  }
+  
+  .prose :global(img) {
+    border-radius: 8px;
+    margin: 2rem 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: 1.75rem;
+    padding-left: 2rem;
+  }
+  
+  .prose :global(li) {
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+  
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .prose :global(th),
+  .prose :global(td) {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.75rem 1rem;
+    text-align: left;
+  }
+  
+  .prose :global(th) {
+    background: rgba(12, 158, 228, 0.1);
+    font-weight: 600;
+    color: white;
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 1024px) {
+    .content-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+    
+    .toc-desktop {
+      display: none;
+    }
+    
+    .toc-mobile {
+      display: block;
+    }
+    
+    .sidebar {
+      order: -1;
+    }
+    
+    .bio-section {
+      margin-top: 0;
+    }
+    
+    .sticky-element {
+      position: static;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .blog-post-layout {
+      padding: 1rem 0;
+    }
+    
+    .post-header {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+    }
+    
+    .post-title-section {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 1rem;
+    }
+    
+    .post-emoji {
+      font-size: 3rem;
+    }
+    
+    .post-title {
+      font-size: clamp(1.75rem, 6vw, 2.5rem);
+    }
+    
+    .post-meta {
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .prose {
+      font-size: 1rem;
+    }
+    
+    .prose :global(h2) {
+      font-size: 1.75rem;
+    }
+    
+    .prose :global(h3) {
+      font-size: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .post-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .prose :global(pre) {
+      margin-left: -1rem;
+      margin-right: -1rem;
+      border-radius: 0;
+    }
+  }
+</style>

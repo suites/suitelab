@@ -38,9 +38,9 @@ export interface DateFormatOptions {
 
 // SEO 관련 타입
 export interface SEOProps {
-  title?: string;
-  description?: string;
-  canonical?: string;
-  image?: string;
-  type?: 'website' | 'article';
+  title?: string | undefined;
+  description?: string | undefined;
+  canonical?: string | undefined;
+  image?: string | undefined;
+  type?: 'website' | 'article' | undefined;
 }

@@ -1,0 +1,398 @@
+---
+import { getCollection } from 'astro:content';
+
+// 현재 포스트의 슬러그 가져오기
+const currentSlug = Astro.url.pathname.split('/').pop() || '';
+
+// 모든 포스트 가져오기 (날짜순 정렬)
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => {
+  const dateA = (a.data as any).date || a.data.pubDate || new Date(0);
+  const dateB = (b.data as any).date || b.data.pubDate || new Date(0);
+  return new Date(dateB).getTime() - new Date(dateA).getTime();
+});
+
+// 현재 포스트의 인덱스 찾기
+const currentIndex = sortedPosts.findIndex(post => post.id === currentSlug);
+
+// 이전/다음 포스트 찾기
+const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+
+// 텍스트 자르기 함수
+function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  return text.substring(0, maxLength).trim() + '...';
+}
+---
+
+{(prevPost || nextPost) && (
+  <nav class="post-navigation" aria-label="포스트 네비게이션">
+    <div class="nav-container">
+      <!-- 이전 포스트 -->
+      {prevPost && (
+        <a href={`/blog/${prevPost.id}`} class="nav-link prev-post">
+          <div class="nav-direction">
+            <span class="nav-arrow" aria-hidden="true">←</span>
+            <span class="nav-label">이전 포스트</span>
+          </div>
+          <div class="nav-content">
+            <div class="nav-emoji" role="img" aria-hidden="true">
+              {(prevPost.data as any).emoji || '📝'}
+            </div>
+            <div class="nav-text">
+              <h3 class="nav-title">
+                {truncateText(prevPost.data.title, 50)}
+              </h3>
+              <p class="nav-description">
+                {prevPost.data.description 
+                  ? truncateText(prevPost.data.description, 80)
+                  : (prevPost.data as any).category 
+                    ? `${(prevPost.data as any).category} 카테고리`
+                    : '블로그 포스트'
+                }
+              </p>
+            </div>
+          </div>
+        </a>
+      )}
+      
+      <!-- 센터 홈 버튼 -->
+      <div class="nav-center">
+        <a href="/" class="home-button" aria-label="홈으로 가기">
+          <span class="home-icon" aria-hidden="true">🏠</span>
+          <span class="home-text">홈</span>
+        </a>
+      </div>
+      
+      <!-- 다음 포스트 -->
+      {nextPost && (
+        <a href={`/blog/${nextPost.id}`} class="nav-link next-post">
+          <div class="nav-direction">
+            <span class="nav-label">다음 포스트</span>
+            <span class="nav-arrow" aria-hidden="true">→</span>
+          </div>
+          <div class="nav-content">
+            <div class="nav-text">
+              <h3 class="nav-title">
+                {truncateText(nextPost.data.title, 50)}
+              </h3>
+              <p class="nav-description">
+                {nextPost.data.description 
+                  ? truncateText(nextPost.data.description, 80)
+                  : (nextPost.data as any).category 
+                    ? `${(nextPost.data as any).category} 카테고리`
+                    : '블로그 포스트'
+                }
+              </p>
+            </div>
+            <div class="nav-emoji" role="img" aria-hidden="true">
+              {(nextPost.data as any).emoji || '📝'}
+            </div>
+          </div>
+        </a>
+      )}
+    </div>
+  </nav>
+)}
+
+<style>
+  .post-navigation {
+    margin-top: 4rem;
+    padding: 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-container {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(5px);
+  }
+  
+  .nav-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(12, 158, 228, 0.1), rgba(255, 255, 255, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .nav-link:hover::before,
+  .nav-link:focus::before {
+    opacity: 1;
+  }
+  
+  .nav-link:hover,
+  .nav-link:focus {
+    transform: translateY(-2px);
+    border-color: rgba(12, 158, 228, 0.3);
+    box-shadow: 0 8px 32px rgba(12, 158, 228, 0.15);
+  }
+  
+  .nav-direction {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #0c9ee4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 1;
+    position: relative;
+  }
+  
+  .prev-post .nav-direction {
+    justify-content: flex-start;
+  }
+  
+  .next-post .nav-direction {
+    justify-content: flex-end;
+  }
+  
+  .nav-arrow {
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .prev-post:hover .nav-arrow {
+    transform: translateX(-3px);
+  }
+  
+  .next-post:hover .nav-arrow {
+    transform: translateX(3px);
+  }
+  
+  .nav-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1;
+    position: relative;
+  }
+  
+  .next-post .nav-content {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
+  
+  .nav-emoji {
+    font-size: 2.5rem;
+    line-height: 1;
+    flex-shrink: 0;
+    filter: grayscale(0.3);
+    transition: filter 0.2s ease;
+  }
+  
+  .nav-link:hover .nav-emoji,
+  .nav-link:focus .nav-emoji {
+    filter: grayscale(0);
+  }
+  
+  .nav-text {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .nav-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+    margin: 0 0 0.5rem 0;
+    line-height: 1.3;
+    word-break: keep-all;
+  }
+  
+  .nav-description {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  /* 센터 홈 버튼 */
+  .nav-center {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .home-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: rgba(12, 158, 228, 0.1);
+    border: 1px solid rgba(12, 158, 228, 0.3);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    text-decoration: none;
+    color: #0c9ee4;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+  }
+  
+  .home-button:hover,
+  .home-button:focus {
+    background: rgba(12, 158, 228, 0.2);
+    border-color: #0c9ee4;
+    transform: scale(1.05);
+    box-shadow: 0 8px 32px rgba(12, 158, 228, 0.25);
+  }
+  
+  .home-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+  
+  .home-text {
+    font-size: 0.8rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+  
+  /* 접근성 */
+  .nav-link:focus-visible,
+  .home-button:focus-visible {
+    outline: 2px solid #0c9ee4;
+    outline-offset: 2px;
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 1024px) {
+    .nav-container {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .nav-center {
+      order: -1;
+    }
+    
+    .next-post {
+      order: 1;
+    }
+    
+    .prev-post {
+      order: 2;
+    }
+    
+    .next-post .nav-content {
+      flex-direction: row;
+      text-align: left;
+    }
+    
+    .next-post .nav-direction {
+      justify-content: flex-start;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .post-navigation {
+      margin-top: 3rem;
+      padding: 1.5rem 0;
+    }
+    
+    .nav-link {
+      padding: 1rem;
+    }
+    
+    .nav-content {
+      flex-direction: column;
+      text-align: center;
+      gap: 0.75rem;
+    }
+    
+    .next-post .nav-content {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .nav-emoji {
+      font-size: 2rem;
+    }
+    
+    .nav-title {
+      font-size: 1rem;
+    }
+    
+    .nav-description {
+      font-size: 0.85rem;
+    }
+    
+    .home-button {
+      width: 70px;
+      height: 70px;
+    }
+    
+    .home-icon {
+      font-size: 1.25rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .nav-container {
+      gap: 1rem;
+    }
+    
+    .nav-link {
+      padding: 0.75rem;
+    }
+    
+    .nav-direction {
+      font-size: 0.8rem;
+    }
+    
+    .home-button {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .home-icon {
+      font-size: 1.1rem;
+    }
+    
+    .home-text {
+      font-size: 0.75rem;
+    }
+  }
+  
+  /* 모션 선호도 감소 */
+  @media (prefers-reduced-motion: reduce) {
+    .nav-link,
+    .nav-arrow,
+    .nav-emoji,
+    .home-button {
+      transition: none;
+    }
+    
+    .nav-link:hover,
+    .home-button:hover {
+      transform: none;
+    }
+  }
+</style>

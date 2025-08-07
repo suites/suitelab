@@ -1,0 +1,187 @@
+---
+import { CATEGORIES } from '@/consts';
+import type { Category } from '@/consts';
+
+const currentPath = Astro.url.pathname;
+
+// 현재 활성 카테고리 확인
+function isActiveCategory(category: Category): boolean {
+  return currentPath.startsWith(`/category/${category.slug}`);
+}
+---
+
+<nav class="category-menu" aria-label="카테고리 네비게이션">
+  <ul class="category-list">
+    {CATEGORIES.map((category) => (
+      <li class="category-item">
+        <a 
+          href={category.link}
+          class={`category-link ${isActiveCategory(category) ? 'active' : ''}`}
+          style={`--category-color: ${category.color}`}
+          aria-current={isActiveCategory(category) ? 'page' : undefined}
+        >
+          <span class="category-icon" aria-hidden="true">
+            {category.icon}
+          </span>
+          <span class="category-name">
+            {category.name}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>
+
+<style>
+  .category-menu {
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+  }
+  
+  .category-menu::-webkit-scrollbar {
+    display: none; /* WebKit */
+  }
+  
+  .category-list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0.5rem;
+    min-width: max-content;
+  }
+  
+  .category-item {
+    flex-shrink: 0;
+  }
+  
+  .category-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  
+  .category-link:hover,
+  .category-link:focus {
+    color: white;
+    background: rgba(var(--category-color-rgb, 12, 158, 228), 0.1);
+    border-color: var(--category-color, #0c9ee4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--category-color-rgb, 12, 158, 228), 0.2);
+  }
+  
+  .category-link.active {
+    color: white;
+    background: var(--category-color, #0c9ee4);
+    border-color: var(--category-color, #0c9ee4);
+    box-shadow: 0 4px 12px rgba(var(--category-color-rgb, 12, 158, 228), 0.3);
+  }
+  
+  .category-icon {
+    font-size: 1.1rem;
+    line-height: 1;
+  }
+  
+  .category-name {
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+  
+  /* 스크롤 힌트 */
+  .category-menu::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    background: linear-gradient(to right, transparent, rgba(33, 36, 45, 0.8));
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+  
+  .category-menu:hover::after {
+    opacity: 1;
+  }
+  
+  @media (max-width: 768px) {
+    .category-menu {
+      margin: 0 -1rem;
+      padding: 0 1rem;
+    }
+    
+    .category-link {
+      padding: 0.6rem 0.8rem;
+      font-size: 0.85rem;
+    }
+    
+    .category-icon {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .category-list {
+      gap: 0.25rem;
+    }
+    
+    .category-link {
+      padding: 0.5rem 0.7rem;
+      font-size: 0.8rem;
+    }
+    
+    .category-name {
+      display: none; /* 모바일에서는 아이콘만 표시 */
+    }
+    
+    .category-link {
+      width: 44px;
+      height: 44px;
+      justify-content: center;
+      border-radius: 50%;
+    }
+  }
+</style>
+
+<script>
+  // CSS 커스텀 프로퍼티로 색상 설정
+  document.addEventListener('DOMContentLoaded', () => {
+    const categoryLinks = document.querySelectorAll<HTMLElement>('.category-link');
+    
+    categoryLinks.forEach((link) => {
+      const style = link.getAttribute('style');
+      if (style && style.includes('--category-color:')) {
+        const colorMatch = style.match(/--category-color:\s*(#[0-9a-fA-F]{6})/);
+        if (colorMatch) {
+          const color = colorMatch[1];
+          const rgb = hexToRgb(color);
+          if (rgb) {
+            link.style.setProperty('--category-color-rgb', `${rgb.r}, ${rgb.g}, ${rgb.b}`);
+          }
+        }
+      }
+    });
+  });
+  
+  function hexToRgb(hex: string): {r: number, g: number, b: number} | null {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    return result ? {
+      r: parseInt(result[1], 16),
+      g: parseInt(result[2], 16),
+      b: parseInt(result[3], 16)
+    } : null;
+  }
+</script>

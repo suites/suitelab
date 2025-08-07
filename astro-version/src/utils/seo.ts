@@ -4,7 +4,7 @@ import type { SEOProps } from '@/types';
 /**
  * SEO 메타데이터 생성
  */
-export function generateSEO(props: SEOProps = {}): Required<SEOProps> {
+export function generateSEO(props: Partial<SEOProps> = {}): Required<SEOProps> {
   const {
     title,
     description = SITE_DESCRIPTION,
