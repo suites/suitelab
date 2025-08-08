@@ -65,19 +65,19 @@ const cactusIcons: Record<string, string> = {
 </nav>
 
 <style>
-  .category-menu {
-    display: block;
-    margin: 0;
-    padding: 0 0 2em;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  
-  .category-menu::-webkit-scrollbar {
-    display: none;
-  }
+                .category-menu {
+                display: block;
+                margin: 0;
+                padding: 0 0 2em;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+              }
+              
+              .category-menu::-webkit-scrollbar {
+                display: none;
+              }
   
   .category-list {
     display: flex;
@@ -106,6 +106,11 @@ const cactusIcons: Record<string, string> = {
     border-radius: 50%;
     position: relative;
     margin-bottom: 5px;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .category-image img {
@@ -113,9 +118,10 @@ const cactusIcons: Record<string, string> = {
     background: rgba(49, 55, 70, 0.5);
     border-radius: 50%;
     display: block;
-    width: 100%;
-    height: 100%;
+    width: 66px;
+    height: 66px;
     z-index: 2;
+    object-fit: cover;
   }
   
   .category-name {
@@ -161,14 +167,15 @@ const cactusIcons: Record<string, string> = {
     }
   }
   
-  @media (max-width: 768px) {
+  @media screen and (max-width: 500px) { /* theme.responsive.small */
     .category-menu {
       padding: 1em 0;
       margin: 0 -20px;
+      -webkit-overflow-scrolling: touch;
     }
     
-    .category-list {
-      padding-left: 20px;
+    .category-menu::-webkit-scrollbar {
+      display: none;
     }
     
     .category-list::after {
@@ -179,11 +186,18 @@ const cactusIcons: Record<string, string> = {
     
     .category-item {
       width: 60px;
-      margin-left: 15px;
+      margin: 0 0 0 15px;
+      flex: 0 0 auto;
     }
     
-    .category-item:first-child {
-      margin-left: 0;
+    .category-item .category-image {
+      width: 60px;
+      height: 60px;
+    }
+    
+    .category-item .category-image img {
+      width: 56px;
+      height: 56px;
     }
     
     .category-name {

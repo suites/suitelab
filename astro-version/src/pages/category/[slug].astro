@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
-import CategoryMenu from '@/components/CategoryMenu.astro';
+import Bio from '@/components/Bio.astro';
 import PostCard from '@/components/PostCard.astro';
 import { getCategoryBySlug, getAllCategorySlugs } from '@/utils/category';
 import { sortByDate } from '@/utils/date';
@@ -49,42 +49,63 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
 <Layout title={pageTitle} description={pageDescription}>
   <Header />
   
-  <main class="container main-content">
-    <!-- 카테고리 메뉴 -->
-    <CategoryMenu />
-    
-    <!-- 카테고리 헤더 -->
-    <div class="category-header">
-      <h1 class="category-title">
-        {categoryInfo && (
-          <span class="category-icon" set:text={categoryInfo.icon} />
-        )}
-        {categoryName}
-      </h1>
-      <p class="category-description">
-        총 {sortedPosts.length}개의 포스트
-      </p>
+  <div class="container">
+    <div class="content-wrapper">
+      <main class="main-content">
+        <!-- 카테고리 헤더 -->
+        <div class="category-header">
+          <h1 class="category-title">
+            {categoryInfo && (
+              <span class="category-icon" set:text={categoryInfo.icon} />
+            )}
+            {categoryName}
+          </h1>
+          <p class="category-description">
+            총 {sortedPosts.length}개의 포스트
+          </p>
+        </div>
+        
+        <!-- 포스트 목록 -->
+        <div class="posts-list">
+          {sortedPosts.length > 0 ? (
+            sortedPosts.map((post) => (
+              <PostCard post={post} />
+            ))
+          ) : (
+            <p class="no-posts">아직 포스트가 없습니다.</p>
+          )}
+        </div>
+      </main>
+      
+      <!-- Bio 컴포넌트 -->
+      <aside class="sidebar">
+        <Bio />
+      </aside>
     </div>
-    
-    <!-- 포스트 목록 -->
-    <div class="posts-list">
-      {sortedPosts.length > 0 ? (
-        sortedPosts.map((post) => (
-          <PostCard post={post} />
-        ))
-      ) : (
-        <p class="no-posts">아직 포스트가 없습니다.</p>
-      )}
-    </div>
-  </main>
+  </div>
   
   <Footer />
 </Layout>
 
 <style>
+  .content-wrapper {
+    margin-top: 2em;
+    display: flex;
+    min-height: 85vh;
+    align-items: flex-start;
+    gap: 40px;
+  }
+  
   .main-content {
-    min-height: 70vh;
-    padding: 2rem 0;
+    width: calc(100% - 320px - 40px);
+    flex: 1;
+  }
+  
+  .sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 2em;
   }
   
   .category-header {
@@ -126,9 +147,26 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
     font-size: 1.1rem;
   }
   
-  @media (max-width: 768px) {
+  @media screen and (max-width: 1024px) {
+    .content-wrapper {
+      display: block;
+    }
+    
     .main-content {
-      padding: 1rem 0;
+      width: 100%;
+    }
+    
+    .sidebar {
+      position: relative;
+      margin: 2em 0;
+      width: 100%;
+      top: 0;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .content-wrapper {
+      margin-top: 0;
     }
     
     .category-header {

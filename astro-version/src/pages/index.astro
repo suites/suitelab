@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
+import Bio from '@/components/Bio.astro';
 import CategoryMenu from '@/components/CategoryMenu.astro';
 import PostCard from '@/components/PostCard.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '@/consts';
@@ -16,38 +17,62 @@ const sortedPosts = sortByDate(posts);
 <Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
   <Header />
   
-  <main class="container main-content">
-    <!-- 카테고리 메뉴 -->
-    <CategoryMenu />
-    
-    <!-- 포스트 목록 -->
-    <div class="posts-list">
-      {sortedPosts.map((post) => (
-        <PostCard post={post} />
-      ))}
+  <div class="content-wrapper">
+    <div class="layout-content">
+      <main class="main-wrapper">
+        <CategoryMenu />
+        {sortedPosts.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </main>
+      
+      <Bio />
     </div>
-  </main>
+  </div>
   
   <Footer />
 </Layout>
 
 <style>
-  .main-content {
-    min-height: 70vh;
-    padding: 2rem 0;
+  /* ContentWrapper 스타일 (원본 Gatsby 기준) */
+  .content-wrapper {
+    max-width: 1100px; /* theme.sizes.maxWidth */
+    margin: 0 auto;
+    padding: 0 1.5em; /* theme.sideSpace.large */
   }
   
-  .posts-list {
-    margin-top: 2rem;
+  /* Layout Content 스타일 (원본 Gatsby 기준) */
+  .layout-content {
+    margin-top: 2em;
+    display: flex;
+    min-height: 85vh;
+    align-items: flex-start;
   }
   
-  @media (max-width: 768px) {
-    .main-content {
-      padding: 1rem 0;
+  /* Main Wrapper 스타일 (원본 Gatsby 기준) */
+  .main-wrapper {
+    width: calc(100% - 290px - 40px); /* bioWidth(290px) + 여백(40px) */
+    margin-right: 40px;
+  }
+  
+  @media screen and (max-width: 950px) { /* theme.responsive.large */
+    .content-wrapper {
+      max-width: 760px;
     }
     
-    .posts-list {
-      margin-top: 1rem;
+    .layout-content {
+      display: block;
+    }
+    
+    .main-wrapper {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+  
+  @media screen and (max-width: 500px) { /* theme.responsive.small */
+    .content-wrapper {
+      padding: 0 20px; /* theme.sideSpace.small */
     }
   }
 </style>
