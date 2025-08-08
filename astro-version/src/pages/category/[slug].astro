@@ -54,18 +54,8 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
       <main class="main-wrapper">
         <CategoryMenu />
         
-        <!-- 카테고리 헤더 -->
-        <div class="category-header">
-          <h1 class="category-title">
-            {categoryInfo && (
-              <span class="category-icon" set:text={categoryInfo.icon} />
-            )}
-            {categoryName}
-          </h1>
-          <p class="category-description">
-            총 {sortedPosts.length}개의 포스트
-          </p>
-        </div>
+        <!-- 카테고리 제목 (Gatsby 원본 스타일) -->
+        <h1 class="category-heading">{categoryName}</h1>
         
         <!-- 포스트 목록 -->
         {sortedPosts.length > 0 ? (
@@ -106,32 +96,14 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
     margin-right: 40px;
   }
   
-  .category-header {
-    margin: 2rem 0;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid #313746; /* theme.colors.blackLight - PostCard와 동일한 색상 사용 */
-  }
-  
-  .category-title {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin: 0 0 1rem 0;
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: white;
-    letter-spacing: -0.5px;
-  }
-  
-  .category-icon {
-    font-size: 3rem;
-    line-height: 1;
-  }
-  
-  .category-description {
-    margin: 0;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.7);
+  /* Gatsby 원본 헤딩 스타일 */
+  .category-heading {
+    margin: 0.5em 0 0.8em;
+    font-size: 32px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 44px;
+    letter-spacing: 1px;
   }
   
   .posts-list {
@@ -171,21 +143,9 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
       margin-top: 0;
     }
     
-    .category-header {
-      margin: 1.5rem 0;
-      padding-bottom: 1.5rem;
-    }
-    
-    .category-title {
-      font-size: 2rem;
-    }
-    
-    .category-icon {
-      font-size: 2.5rem;
-    }
-    
-    .category-description {
-      font-size: 1rem;
+    .category-heading {
+      font-size: 28px;
+      line-height: 38px;
     }
     
     .posts-list {
