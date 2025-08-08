@@ -55,11 +55,6 @@ const estimatedReadTime = readTime || 5;
             </div>
             
             <div class="post-title-section">
-              {emoji && (
-                <div class="post-emoji" role="img" aria-label="포스트 이모지">
-                  {emoji}
-                </div>
-              )}
               <h1 class="post-title">{title}</h1>
             </div>
             
@@ -179,8 +174,7 @@ const estimatedReadTime = readTime || 5;
   
   .post-header {
     margin-bottom: 3rem;
-    padding: 1.8rem 2.5rem 2rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 1.8rem 2.5rem 0rem;
   }
   
   .post-meta {
@@ -212,11 +206,6 @@ const estimatedReadTime = readTime || 5;
     margin-bottom: 1rem;
   }
   
-  .post-emoji {
-    font-size: 4rem;
-    line-height: 1;
-    flex-shrink: 0;
-  }
   
   .post-title {
     font-size: clamp(1.8rem, 5vw, 2.5rem);
@@ -452,11 +441,7 @@ const estimatedReadTime = readTime || 5;
       text-align: center;
       gap: 1rem;
     }
-    
-    .post-emoji {
-      font-size: 3rem;
-    }
-    
+
     .post-title {
       font-size: clamp(1.75rem, 6vw, 2.5rem);
     }
