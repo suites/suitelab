@@ -38,7 +38,7 @@ export function generatePageTitle(title?: string): string {
  */
 export function generateOGImageUrl(title?: string): string {
   if (!title) return `${SITE_URL}/images/ogp.png`;
-  
+
   // 제목이 있으면 동적 OG 이미지 생성 (향후 구현)
   const encodedTitle = encodeURIComponent(title);
   return `${SITE_URL}/api/og?title=${encodedTitle}`;

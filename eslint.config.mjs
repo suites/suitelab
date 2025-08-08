@@ -4,7 +4,7 @@ import prettier from 'eslint-plugin-prettier/recommended';
 import parser from '@typescript-eslint/parser';
 import eslintPluginTs from '@typescript-eslint/eslint-plugin';
 import eslintPluginPrettier from 'eslint-plugin-prettier';
-import eslintPluginMdx from 'eslint-plugin-mdx';
+
 
 const jsRules = {
   'no-console': 0,
@@ -44,7 +44,6 @@ export default [
     plugins: {
       '@typescript-eslint': eslintPluginTs,
       prettier: eslintPluginPrettier,
-      mdx: eslintPluginMdx,
     },
     rules: {
       '@typescript-eslint/interface-name-prefix': 'off',
@@ -52,10 +51,6 @@ export default [
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
       'prettier/prettier': 'error',
-    },
-    settings: {
-      'mdx/code-blocks': true,
-      'mdx/language-mapper': {},
     },
   },
 ];

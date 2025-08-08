@@ -27,6 +27,6 @@ export function getAllCategorySlugs(): CategorySlug[] {
  */
 export function getCategoryByName(name: string): Category | undefined {
   return CATEGORIES.find(
-    (category) => category.name.toLowerCase() === name.toLowerCase()
+    (category) => category.name.toLowerCase() === name.toLowerCase(),
   );
 }
