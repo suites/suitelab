@@ -66,13 +66,6 @@ export const CATEGORIES: readonly Category[] = [
     link: '/category/deep-learning',
   },
   {
-    name: 'Infrastructure',
-    slug: 'infrastructure',
-    color: '#f7615f',
-    icon: '🏗️',
-    link: '/category/infrastructure',
-  },
-  {
     name: 'Infra',
     slug: 'infra',
     color: '#f7615f',
@@ -82,4 +75,4 @@ export const CATEGORIES: readonly Category[] = [
 ] as const;
 
 // 카테고리 타입 추론
-export type CategorySlug = typeof CATEGORIES[number]['slug'];
+export type CategorySlug = (typeof CATEGORIES)[number]['slug'];

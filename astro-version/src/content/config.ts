@@ -12,15 +12,7 @@ const blog = defineCollection({
       .transform((str) => new Date(str))
       .optional(),
     category: z
-      .enum([
-        'web',
-        'network',
-        'cs',
-        'algorithm',
-        'deep-learning',
-        'infrastructure',
-        'infra', // infrastructure의 줄임말
-      ])
+      .enum(['web', 'network', 'cs', 'algorithm', 'deep-learning', 'infra'])
       .optional(),
     emoji: z.string().optional(),
     slug: z.string().optional(),
