@@ -4,6 +4,7 @@ import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
 import Bio from '@/components/Bio.astro';
+import CategoryMenu from '@/components/CategoryMenu.astro';
 import PostCard from '@/components/PostCard.astro';
 import { getCategoryBySlug, getAllCategorySlugs } from '@/utils/category';
 import { sortByDate } from '@/utils/date';
@@ -49,9 +50,11 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
 <Layout title={pageTitle} description={pageDescription}>
   <Header />
   
-  <div class="container">
-    <div class="content-wrapper">
-      <main class="main-content">
+  <div class="content-wrapper">
+    <div class="layout-content">
+      <main class="main-wrapper">
+        <CategoryMenu />
+        
         <!-- 카테고리 헤더 -->
         <div class="category-header">
           <h1 class="category-title">
@@ -66,21 +69,16 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
         </div>
         
         <!-- 포스트 목록 -->
-        <div class="posts-list">
-          {sortedPosts.length > 0 ? (
-            sortedPosts.map((post) => (
-              <PostCard post={post} />
-            ))
-          ) : (
-            <p class="no-posts">아직 포스트가 없습니다.</p>
-          )}
-        </div>
+        {sortedPosts.length > 0 ? (
+          sortedPosts.map((post) => (
+            <PostCard post={post} />
+          ))
+        ) : (
+          <p class="no-posts">아직 포스트가 없습니다.</p>
+        )}
       </main>
       
-      <!-- Bio 컴포넌트 -->
-      <aside class="sidebar">
-        <Bio />
-      </aside>
+      <Bio />
     </div>
   </div>
   
@@ -88,30 +86,31 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
 </Layout>
 
 <style>
+  /* ContentWrapper 스타일 (원본 Gatsby 기준) */
   .content-wrapper {
+    max-width: 1100px; /* theme.sizes.maxWidth */
+    margin: 0 auto;
+    padding: 0 1.5em; /* theme.sideSpace.large */
+  }
+  
+  /* Layout Content 스타일 (원본 Gatsby 기준) */
+  .layout-content {
     margin-top: 2em;
     display: flex;
     min-height: 85vh;
     align-items: flex-start;
-    gap: 40px;
   }
   
-  .main-content {
-    width: calc(100% - 320px - 40px);
-    flex: 1;
-  }
-  
-  .sidebar {
-    width: 320px;
-    flex-shrink: 0;
-    position: sticky;
-    top: 2em;
+  /* Main Wrapper 스타일 (원본 Gatsby 기준) */
+  .main-wrapper {
+    width: calc(100% - 290px - 40px); /* bioWidth(290px) + 여백(40px) */
+    margin-right: 40px;
   }
   
   .category-header {
     margin: 2rem 0;
     padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid #313746; /* theme.colors.blackLight - PostCard와 동일한 색상 사용 */
   }
   
   .category-title {
@@ -147,20 +146,24 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
     font-size: 1.1rem;
   }
   
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 950px) { /* theme.responsive.large */
     .content-wrapper {
+      max-width: 760px;
+    }
+    
+    .layout-content {
       display: block;
     }
     
-    .main-content {
+    .main-wrapper {
       width: 100%;
+      margin-right: 0;
     }
-    
-    .sidebar {
-      position: relative;
-      margin: 2em 0;
-      width: 100%;
-      top: 0;
+  }
+  
+  @media screen and (max-width: 500px) { /* theme.responsive.small */
+    .content-wrapper {
+      padding: 0 20px; /* theme.sideSpace.small */
     }
   }
   

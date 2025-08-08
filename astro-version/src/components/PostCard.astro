@@ -38,6 +38,10 @@ const parsedEmoji = twemojiParse(emoji);
     border-top: solid 1px #313746; /* theme.colors.blackLight */
   }
   
+  .post-card-wrapper:first-child {
+    border-top: none; /* 첫 번째 포스트는 상단 border 제거 */
+  }
+  
   .post-card-link {
     display: flex;
     align-items: flex-start;

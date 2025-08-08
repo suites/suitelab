@@ -13,164 +13,45 @@ const categoryInfo = getCategoryBySlug(category);
 const categoryData = categoryInfo || {
   name: category,
   slug: category,
-  color: '#6b7280',
+  color: '#6d4bf5',
   icon: '📝',
   link: `/category/${category}`
 };
-
-// RGB 색상 추출 (CSS 변수용)
-function hexToRgb(hex: string): string {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  if (result) {
-    const r = parseInt(result[1], 16);
-    const g = parseInt(result[2], 16);
-    const b = parseInt(result[3], 16);
-    return `${r}, ${g}, ${b}`;
-  }
-  return '107, 114, 128'; // 기본 gray-500
-}
-
-const rgbColor = hexToRgb(categoryData.color);
 ---
 
 {isLink ? (
   <a 
     href={categoryData.link} 
-    class="category-label link"
-    style={`--category-color: ${categoryData.color}; --category-rgb: ${rgbColor};`}
-    aria-label={`${categoryData.name} 카테고리로 이동`}
+    class="category-text"
+    style={`background: ${categoryData.color};`}
   >
-    <span class="category-icon" role="img" aria-hidden="true">
-      {categoryData.icon}
-    </span>
-    <span class="category-name">{categoryData.name}</span>
+    {categoryData.name}
   </a>
 ) : (
   <span 
-    class="category-label"
-    style={`--category-color: ${categoryData.color}; --category-rgb: ${rgbColor};`}
-    aria-label={`카테고리: ${categoryData.name}`}
+    class="category-text"
+    style={`background: ${categoryData.color};`}
   >
-    <span class="category-icon" role="img" aria-hidden="true">
-      {categoryData.icon}
-    </span>
-    <span class="category-name">{categoryData.name}</span>
+    {categoryData.name}
   </span>
 )}
 
 <style>
-  .category-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: rgba(var(--category-rgb), 0.1);
-    border: 1px solid rgba(var(--category-rgb), 0.3);
-    border-radius: 9999px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--category-color);
+  .category-text {
+    display: inline-block;
+    padding: 3px 6px;
+    line-height: 1.2;
+    font-size: 12px;
+    border-radius: 2px;
+    font-weight: 700;
+    color: #fff;
     text-decoration: none;
-    transition: all 0.2s ease;
-    white-space: nowrap;
-    position: relative;
-    overflow: hidden;
   }
   
-  .category-label::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(var(--category-rgb), 0.1),
-      transparent
-    );
-    transition: left 0.6s ease;
-  }
-  
-  .category-label:hover::before {
-    left: 100%;
-  }
-  
-  .category-label.link:hover,
-  .category-label.link:focus {
-    background: rgba(var(--category-rgb), 0.2);
-    border-color: var(--category-color);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(var(--category-rgb), 0.25);
-  }
-  
-  .category-label.link:active {
-    transform: translateY(0);
-  }
-  
-  .category-icon {
-    font-size: 1rem;
-    line-height: 1;
-    filter: brightness(1.1);
-  }
-  
-  .category-name {
-    font-weight: 600;
-    letter-spacing: 0.3px;
-    text-transform: capitalize;
-  }
-  
-  /* 접근성을 위한 포커스 스타일 */
-  .category-label.link:focus-visible {
-    outline: 2px solid var(--category-color);
-    outline-offset: 2px;
-  }
-  
-  /* 다크모드 최적화 */
-  @media (prefers-color-scheme: dark) {
-    .category-label {
-      background: rgba(var(--category-rgb), 0.15);
-      border-color: rgba(var(--category-rgb), 0.4);
-    }
-    
-    .category-label.link:hover,
-    .category-label.link:focus {
-      background: rgba(var(--category-rgb), 0.25);
-      box-shadow: 0 4px 16px rgba(var(--category-rgb), 0.3);
-    }
-  }
-  
-  /* 반응형 디자인 */
-  @media (max-width: 480px) {
-    .category-label {
-      font-size: 0.8rem;
-      padding: 0.4rem 0.8rem;
-      gap: 0.4rem;
-    }
-    
-    .category-icon {
-      font-size: 0.9rem;
-    }
-  }
-  
-  /* 고대비 모드 지원 */
-  @media (prefers-contrast: high) {
-    .category-label {
-      border-width: 2px;
-      font-weight: 700;
-    }
-  }
-  
-  /* 모션 선호도 감소 */
-  @media (prefers-reduced-motion: reduce) {
-    .category-label,
-    .category-label::before {
-      transition: none;
-    }
-    
-    .category-label.link:hover {
-      transform: none;
+  @media screen and (max-width: 950px) { /* theme.responsive.large */
+    .category-text {
+      font-size: 11px;
+      padding: 2.5px 6px;
     }
   }
 </style>
