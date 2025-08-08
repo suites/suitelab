@@ -2,6 +2,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ko';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import type { CollectionEntry } from 'astro:content';
 
 // dayjs 플러그인 및 로케일 설정
 dayjs.extend(relativeTime);
@@ -48,15 +49,15 @@ export function isAfter(date1: Date | string, date2: Date | string): boolean {
 }
 
 /**
- * 날짜 정렬 헬퍼
+ * 날짜 정렬 헬퍼 - Astro collection entry용
  */
-export function sortByDate<T extends { date?: string | Date; pubDate?: Date }>(
-  items: T[],
+export function sortByDate(
+  items: CollectionEntry<'blog'>[],
   ascending: boolean = false,
-): T[] {
+): CollectionEntry<'blog'>[] {
   return [...items].sort((a, b) => {
-    const dateA = dayjs(a.date || a.pubDate);
-    const dateB = dayjs(b.date || b.pubDate);
+    const dateA = dayjs(a.data.date || a.data.pubDate);
+    const dateB = dayjs(b.data.date || b.data.pubDate);
     return ascending
       ? dateA.unix() - dateB.unix()
       : dateB.unix() - dateA.unix();

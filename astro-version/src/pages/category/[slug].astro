@@ -1,5 +1,5 @@
 ---
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 import Layout from '@/layouts/Layout.astro';
 import Header from '@/components/Header.astro';
 import Footer from '@/components/Footer.astro';
@@ -8,7 +8,6 @@ import CategoryMenu from '@/components/CategoryMenu.astro';
 import PostCard from '@/components/PostCard.astro';
 import { getCategoryBySlug, getAllCategorySlugs } from '@/utils/category';
 import { sortByDate } from '@/utils/date';
-import { SITE_DESCRIPTION } from '@/consts';
 
 export async function getStaticPaths() {
   const categorySlugs = getAllCategorySlugs();
@@ -17,7 +16,7 @@ export async function getStaticPaths() {
   return categorySlugs.map((slug) => {
     // 해당 카테고리의 포스트만 필터링
     const categoryPosts = posts.filter((post) => {
-      return (post.data as any).category === slug;
+      return 'category' in post.data && post.data.category === slug;
     });
     
     return {
@@ -31,7 +30,7 @@ export async function getStaticPaths() {
 }
 
 interface Props {
-  posts: any[];
+  posts: CollectionEntry<'blog'>[];
   categorySlug: string;
 }
 

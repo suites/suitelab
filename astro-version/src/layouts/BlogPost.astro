@@ -17,9 +17,9 @@ type Props = CollectionEntry<'blog'>['data'] & {
 const { title, description, pubDate, headings, readTime, ...otherProps } = Astro.props;
 
 // 선택적 필드들 (우리 스타일 또는 다른 스타일 지원)
-const date = (otherProps as any).date;
-const category = (otherProps as any).category;
-const emoji = (otherProps as any).emoji;
+const date = 'date' in otherProps ? otherProps.date : null;
+const category = 'category' in otherProps ? otherProps.category : null;
+const emoji = 'emoji' in otherProps ? otherProps.emoji : null;
 
 // 날짜 필드 통합 (기존 스타일과 템플릿 모두 지원)
 const postDateValue = date || pubDate || new Date();
@@ -27,7 +27,7 @@ const postDate = formatDate(postDateValue);
 const estimatedReadTime = readTime || 5;
 ---
 
-<Layout title={title} description={description}>
+<Layout title={title} description={description || ''}>
   <Header />
   
   <main id="main-content" class="blog-post-layout">

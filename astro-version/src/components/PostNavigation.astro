@@ -7,14 +7,14 @@ const currentSlug = Astro.url.pathname.split('/').pop() || '';
 // 모든 포스트 가져오기 (날짜순 정렬)
 const allPosts = await getCollection('blog');
 const sortedPosts = allPosts.sort((a, b) => {
-  const dateA = (a.data as any).date || a.data.pubDate || new Date(0);
-  const dateB = (b.data as any).date || b.data.pubDate || new Date(0);
+  const dateA = ('date' in a.data ? a.data.date : null) || a.data.pubDate || new Date(0);
+  const dateB = ('date' in b.data ? b.data.date : null) || b.data.pubDate || new Date(0);
   return new Date(dateB).getTime() - new Date(dateA).getTime();
 });
 
 // 현재 포스트의 인덱스 찾기 (slug 매칭 로직 개선)
 const currentIndex = sortedPosts.findIndex(post => {
-  const postSlug = (post.data as any).slug || post.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
+  const postSlug = ('slug' in post.data ? post.data.slug : null) || post.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
   return postSlug === currentSlug;
 });
 
@@ -34,14 +34,14 @@ function truncateText(text: string, maxLength: number): string {
     <div class="nav-container">
       <!-- 이전 포스트 -->
       {prevPost && (
-        <a href={`/${(prevPost.data as any).slug || prevPost.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-')}`} class="nav-link prev-post">
+        <a href={`/${('slug' in prevPost.data ? prevPost.data.slug : null) || prevPost.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-')}`} class="nav-link prev-post">
           <div class="nav-direction">
             <span class="nav-arrow" aria-hidden="true">←</span>
             <span class="nav-label">이전 포스트</span>
           </div>
           <div class="nav-content">
             <div class="nav-emoji" role="img" aria-hidden="true">
-              {(prevPost.data as any).emoji || '📝'}
+              {('emoji' in prevPost.data ? prevPost.data.emoji : null) || '📝'}
             </div>
             <div class="nav-text">
               <h3 class="nav-title">
@@ -50,8 +50,8 @@ function truncateText(text: string, maxLength: number): string {
               <p class="nav-description">
                 {prevPost.data.description 
                   ? truncateText(prevPost.data.description, 80)
-                  : (prevPost.data as any).category 
-                    ? `${(prevPost.data as any).category} 카테고리`
+                  : ('category' in prevPost.data && prevPost.data.category)
+                    ? `${prevPost.data.category} 카테고리`
                     : '블로그 포스트'
                 }
               </p>
@@ -70,7 +70,7 @@ function truncateText(text: string, maxLength: number): string {
       
       <!-- 다음 포스트 -->
       {nextPost && (
-        <a href={`/${(nextPost.data as any).slug || nextPost.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-')}`} class="nav-link next-post">
+        <a href={`/${('slug' in nextPost.data ? nextPost.data.slug : null) || nextPost.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-')}`} class="nav-link next-post">
           <div class="nav-direction">
             <span class="nav-label">다음 포스트</span>
             <span class="nav-arrow" aria-hidden="true">→</span>
@@ -83,14 +83,14 @@ function truncateText(text: string, maxLength: number): string {
               <p class="nav-description">
                 {nextPost.data.description 
                   ? truncateText(nextPost.data.description, 80)
-                  : (nextPost.data as any).category 
-                    ? `${(nextPost.data as any).category} 카테고리`
+                  : ('category' in nextPost.data && nextPost.data.category)
+                    ? `${nextPost.data.category} 카테고리`
                     : '블로그 포스트'
                 }
               </p>
             </div>
             <div class="nav-emoji" role="img" aria-hidden="true">
-              {(nextPost.data as any).emoji || '📝'}
+              {('emoji' in nextPost.data ? nextPost.data.emoji : null) || '📝'}
             </div>
           </div>
         </a>

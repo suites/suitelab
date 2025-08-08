@@ -12,11 +12,11 @@ const { post } = Astro.props;
 const { data, id } = post;
 
 // 데이터 추출 (우리 스타일 + 템플릿 스타일 지원)
-const title = data.title || (data as any).slug || id;
-const date = (data as any).date || data.pubDate;
-const category = (data as any).category;
-const emoji = (data as any).emoji || '📝';
-const slug = (data as any).slug || id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
+const title = data.title || ('slug' in data ? data.slug : null) || id;
+const date = ('date' in data ? data.date : null) || data.pubDate || new Date();
+const category = 'category' in data ? data.category : null;
+const emoji = ('emoji' in data ? data.emoji : null) || '📝';
+const slug = ('slug' in data ? data.slug : null) || id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
 
 // 이모지 파싱
 const parsedEmoji = twemojiParse(emoji);

@@ -8,7 +8,7 @@ export async function getStaticPaths() {
   
   return posts.map((post) => {
     // 우리 스타일의 slug 필드를 우선 사용, 없으면 id에서 추출
-    const slug = (post.data as any).slug || post.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
+    const slug = ('slug' in post.data ? post.data.slug : null) || post.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
     
     // slug가 유효한지 확인
     if (!slug) {
