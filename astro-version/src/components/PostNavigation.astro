@@ -62,10 +62,6 @@ function truncateText(text: string, maxLength: number): string {
       
       <!-- 센터 홈 버튼 -->
       <div class="nav-center">
-        <a href="/" class="home-button" aria-label="홈으로 가기">
-          <span class="home-icon" aria-hidden="true">🏠</span>
-          <span class="home-text">홈</span>
-        </a>
       </div>
       
       <!-- 다음 포스트 -->
@@ -242,31 +238,6 @@ function truncateText(text: string, maxLength: number): string {
     justify-content: center;
   }
   
-  .home-button {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 1rem;
-    background: rgba(12, 158, 228, 0.1);
-    border: 1px solid rgba(12, 158, 228, 0.3);
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    text-decoration: none;
-    color: #0c9ee4;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-  }
-  
-  .home-button:hover,
-  .home-button:focus {
-    background: rgba(12, 158, 228, 0.2);
-    border-color: #0c9ee4;
-    transform: scale(1.05);
-    box-shadow: 0 8px 32px rgba(12, 158, 228, 0.25);
-  }
-  
   .home-icon {
     font-size: 1.5rem;
     line-height: 1;
@@ -279,8 +250,7 @@ function truncateText(text: string, maxLength: number): string {
   }
   
   /* 접근성 */
-  .nav-link:focus-visible,
-  .home-button:focus-visible {
+  .nav-link:focus-visible {
     outline: 2px solid #0c9ee4;
     outline-offset: 2px;
   }
@@ -347,11 +317,6 @@ function truncateText(text: string, maxLength: number): string {
       font-size: 0.85rem;
     }
     
-    .home-button {
-      width: 70px;
-      height: 70px;
-    }
-    
     .home-icon {
       font-size: 1.25rem;
     }
@@ -370,11 +335,6 @@ function truncateText(text: string, maxLength: number): string {
       font-size: 0.8rem;
     }
     
-    .home-button {
-      width: 60px;
-      height: 60px;
-    }
-    
     .home-icon {
       font-size: 1.1rem;
     }
@@ -389,13 +349,7 @@ function truncateText(text: string, maxLength: number): string {
     .nav-link,
     .nav-arrow,
     .nav-emoji,
-    .home-button {
-      transition: none;
-    }
-    
+
     .nav-link:hover,
-    .home-button:hover {
-      transform: none;
-    }
   }
 </style>
