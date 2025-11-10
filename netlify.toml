@@ -30,7 +30,13 @@
   status = 301
   force = true
 
-# Specific redirects for common paths (higher priority)
+# Specific redirects for root domain (highest priority)
+[[redirects]]
+  from = "https://suitee.me/"
+  to = "https://fredly.dev/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "https://suitee.me"
   to = "https://fredly.dev"
@@ -38,7 +44,25 @@
   force = true
 
 [[redirects]]
+  from = "https://www.suitee.me/"
+  to = "https://fredly.dev/"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "https://www.suitee.me"
+  to = "https://fredly.dev"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://suitee.me/"
+  to = "https://fredly.dev/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "http://suitee.me"
   to = "https://fredly.dev"
   status = 301
   force = true

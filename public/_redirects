@@ -4,7 +4,7 @@
 
 # Redirect all suitee.me traffic to fredly.dev with 301 status
 
-https://suitee.me/_ https://fredly.dev/:splat 301!
-https://www.suitee.me/_ https://fredly.dev/:splat 301!
-http://suitee.me/_ https://fredly.dev/:splat 301!
-http://www.suitee.me/_ https://fredly.dev/:splat 301!
+https://suitee.me/* https://fredly.dev/:splat 301!
+https://www.suitee.me/* https://fredly.dev/:splat 301!
+http://suitee.me/* https://fredly.dev/:splat 301!
+http://www.suitee.me/* https://fredly.dev/:splat 301!
