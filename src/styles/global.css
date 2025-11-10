@@ -154,8 +154,11 @@ th {
 /* Content Wrapper - Gatsby와 동일한 스타일 (통일) */
 .content-wrapper {
   max-width: 1100px; /* theme.sizes.maxWidth */
+  width: 100%;
   margin: 0 auto;
   padding: 0 1.5em; /* theme.sideSpace.large */
+  box-sizing: border-box;
+  overflow: hidden; /* 콘텐츠 wrapper overflow 방지 */
 }
 
 @media screen and (max-width: 950px) { /* theme.responsive.large */
@@ -177,6 +180,9 @@ th {
   display: flex;
   min-height: 85vh;
   align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden; /* 전체 레이아웃 overflow 방지 */
 }
 
 @media screen and (max-width: 950px) {
@@ -194,13 +200,23 @@ th {
 /* Main Wrapper - 공통 메인 콘텐츠 스타일 */
 .main-wrapper {
   width: calc(100% - 290px - 40px); /* bioWidth(290px) + 여백(40px) */
+  max-width: calc(100% - 290px - 40px); /* 최대 width 고정 */
   margin-right: 40px;
+  min-height: 70vh; /* 메인페이지와 동일한 최소 높이 보장 */
+  overflow: hidden; /* 내용이 넘칠 때 숨김 */
+  box-sizing: border-box;
+  flex-shrink: 0; /* flex에서 축소 방지 */
 }
 
 @media screen and (max-width: 950px) {
   .main-wrapper {
     width: 100%;
+    max-width: 100%; /* 최대 width 고정 */
     margin-right: 0;
+    min-height: auto; /* 모바일에서는 자연스러운 높이 사용 */
+    overflow: hidden; /* 내용이 넘칠 때 숨김 */
+    box-sizing: border-box;
+    flex-shrink: 0; /* flex에서 축소 방지 */
   }
 }
 

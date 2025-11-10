@@ -36,6 +36,9 @@ const parsedEmoji = twemojiParse(emoji);
 <style>
   .post-card-wrapper {
     border-top: solid 1px #313746; /* theme.colors.blackLight */
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden; /* 내용 overflow 방지 */
   }
   
   .post-card-wrapper:first-child {
@@ -49,6 +52,9 @@ const parsedEmoji = twemojiParse(emoji);
     color: white;
     text-decoration: none;
     transition: background 0.2s ease;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .post-card-link:hover {
@@ -74,7 +80,12 @@ const parsedEmoji = twemojiParse(emoji);
   
   .post-card-content {
     width: calc(100% - 90px);
+    max-width: calc(100% - 90px);
     padding-left: 20px;
+    flex: 1;
+    min-width: 0; /* flex overflow 방지 */
+    overflow: hidden; /* 내용 overflow 방지 */
+    box-sizing: border-box;
   }
   
   .post-card-content h3 {
@@ -83,6 +94,12 @@ const parsedEmoji = twemojiParse(emoji);
     line-height: 1.4;
     margin: 0 0 0.3rem 0;
     color: white;
+    word-wrap: break-word; /* 긴 단어 wrapping */
+    overflow-wrap: break-word; /* 현대 브라우저 지원 */
+    hyphens: auto; /* 하이픈 자동 삽입 */
+    text-overflow: ellipsis; /* 긴 텍스트 생략 표시 */
+    white-space: normal; /* 정상적인 줄바꿈 허용 */
+    max-width: 100%;
   }
   
   .post-card-content :global(time) {
@@ -110,11 +127,22 @@ const parsedEmoji = twemojiParse(emoji);
     
     .post-card-content {
       width: calc(100% - 70px);
+      max-width: calc(100% - 70px);
       padding-left: 15px;
+      flex: 1;
+      min-width: 0; /* flex overflow 방지 */
+      overflow: hidden; /* 내용 overflow 방지 */
+      box-sizing: border-box;
     }
     
     .post-card-content h3 {
       font-size: 1.1rem;
+      word-wrap: break-word; /* 긴 단어 wrapping */
+      overflow-wrap: break-word; /* 현대 브라우저 지원 */
+      hyphens: auto; /* 하이픈 자동 삽입 */
+      text-overflow: ellipsis; /* 긴 텍스트 생략 표시 */
+      white-space: normal; /* 정상적인 줄바꿈 허용 */
+      max-width: 100%;
     }
     
     .post-card-content :global(time) {
