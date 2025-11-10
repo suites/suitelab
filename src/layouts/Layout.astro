@@ -1,7 +1,7 @@
 ---
 import type { LayoutProps } from '@/types';
 import { generateSEO } from '@/utils/seo';
-import { SITE_TITLE, SITE_URL } from '@/consts';
+import { SITE_TITLE } from '@/consts';
 import '@/styles/global.css';
 
 export interface Props extends LayoutProps {}
@@ -24,9 +24,12 @@ const seo = generateSEO({
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/images/favicon.png" />
-    <link rel="apple-touch-icon" href="/images/favicon.png" />
+    <!-- Favicon - 현대적이고 포괄적인 지원 -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
     
     <!-- SEO Meta Tags -->
     <title>{seo.title}</title>
