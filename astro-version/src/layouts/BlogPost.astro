@@ -50,6 +50,9 @@ const postId = Astro.url.pathname; // identifier로 사용
           
           <!-- 포스트 헤더 -->
           <header class="post-header">
+            <div class="post-title-section">
+              <h1 class="post-title">{title}</h1>
+            </div>
             <div class="post-meta">
               {category && <CategoryLabel category={category} />}
               <time datetime={postDateValue.toISOString()} class="post-date">
@@ -58,10 +61,6 @@ const postId = Astro.url.pathname; // identifier로 사용
               <span class="read-time" aria-label={`예상 읽기 시간 ${estimatedReadTime}분`}>
                 📖 {estimatedReadTime}분 읽기
               </span>
-            </div>
-            
-            <div class="post-title-section">
-              <h1 class="post-title">{title}</h1>
             </div>
             
             {description && (
