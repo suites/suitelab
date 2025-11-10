@@ -544,6 +544,8 @@ const postId = Astro.url.pathname; // identifier로 사용
     .post-meta {
       flex-direction: column;
       gap: 0.5rem;
+      align-items: flex-start; /* 왼쪽 정렬 */
+      text-align: left; /* 텍스트 왼쪽 정렬 */
     }
     
     .prose {
@@ -573,8 +575,8 @@ const postId = Astro.url.pathname; // identifier로 사용
     }
     
     .post-meta {
-      justify-content: center;
-      text-align: center;
+      justify-content: flex-start;
+      text-align: left;
     }
   }
 </style>
