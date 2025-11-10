@@ -31,9 +31,9 @@ export interface Props extends HeaderProps {}
     position: relative;
   }
   
-  .container {
+  /* Header 전용 container 오버라이드 */
+  .header .container {
     max-width: 1100px;
-    margin: 0 auto;
     padding: 0 1.5em;
   }
   
@@ -50,18 +50,7 @@ export interface Props extends HeaderProps {}
     height: 36px;
   }
   
-  @media screen and (max-width: 950px) {
-    .container {
-      max-width: 100%;
-    }
-  }
-  
   @media screen and (max-width: 500px) {
-    .container {
-      max-width: 100%;
-      padding: 0 20px;
-    }
-    
     .logo {
       margin: 0 auto;
     }

@@ -34,46 +34,5 @@ const sortedPosts = sortByDate(posts);
 </Layout>
 
 <style>
-  /* ContentWrapper 스타일 (원본 Gatsby 기준) */
-  .content-wrapper {
-    max-width: 1100px; /* theme.sizes.maxWidth */
-    margin: 0 auto;
-    padding: 0 1.5em; /* theme.sideSpace.large */
-  }
-  
-  /* Layout Content 스타일 (원본 Gatsby 기준) */
-  .layout-content {
-    margin-top: 2em;
-    display: flex;
-    min-height: 85vh;
-    align-items: flex-start;
-  }
-  
-  /* Main Wrapper 스타일 (원본 Gatsby 기준) */
-  .main-wrapper {
-    width: calc(100% - 290px - 40px); /* bioWidth(290px) + 여백(40px) */
-    margin-right: 40px;
-  }
-  
-  @media screen and (max-width: 950px) { /* theme.responsive.large */
-    .content-wrapper {
-      max-width: 100%;
-    }
-    
-    .layout-content {
-      display: block;
-    }
-    
-    .main-wrapper {
-      width: 100%;
-      margin-right: 0;
-    }
-  }
-  
-  @media screen and (max-width: 500px) { /* theme.responsive.small */
-    .content-wrapper {
-      padding: 0 20px; /* theme.sideSpace.small */
-      max-width: 100%;
-    }
-  }
+  /* content-wrapper, layout-content, main-wrapper는 global.css에서 통일 관리 */
 </style>

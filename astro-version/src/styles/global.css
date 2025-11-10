@@ -122,11 +122,17 @@ th {
   font-weight: 700;
 }
 
-/* Responsive Utilities */
+/* Container - 통일된 컨테이너 스타일 */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+}
+
+@media screen and (max-width: 950px) {
+  .container {
+    max-width: 100%;
+  }
 }
 
 @media (max-width: 768px) {
@@ -137,6 +143,117 @@ th {
   h1 { font-size: 2rem; }
   h2 { font-size: 1.75rem; }
   h3 { font-size: 1.5rem; }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+/* Content Wrapper - Gatsby와 동일한 스타일 (통일) */
+.content-wrapper {
+  max-width: 1100px; /* theme.sizes.maxWidth */
+  margin: 0 auto;
+  padding: 0 1.5em; /* theme.sideSpace.large */
+}
+
+@media screen and (max-width: 950px) { /* theme.responsive.large */
+  .content-wrapper {
+    max-width: 760px;
+  }
+}
+
+@media screen and (max-width: 500px) { /* theme.responsive.small */
+  .content-wrapper {
+    padding: 0 20px; /* theme.sideSpace.small */
+    max-width: 100%;
+  }
+}
+
+/* Layout Content - 공통 레이아웃 스타일 */
+.layout-content {
+  margin-top: 2em;
+  display: flex;
+  min-height: 85vh;
+  align-items: flex-start;
+}
+
+@media screen and (max-width: 950px) {
+  .layout-content {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .layout-content {
+    margin-top: 0;
+  }
+}
+
+/* Main Wrapper - 공통 메인 콘텐츠 스타일 */
+.main-wrapper {
+  width: calc(100% - 290px - 40px); /* bioWidth(290px) + 여백(40px) */
+  margin-right: 40px;
+}
+
+@media screen and (max-width: 950px) {
+  .main-wrapper {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
+/* Page Header - 공통 페이지 헤더 스타일 */
+.page-header {
+  margin: 2rem 0;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Page Title - 공통 페이지 제목 스타일 */
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2rem;
+  }
+}
+
+/* Page Description - 공통 페이지 설명 스타일 */
+.page-description {
+  margin: 0;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+  .page-description {
+    font-size: 1rem;
+  }
+}
+
+/* Posts List - 공통 포스트 목록 스타일 */
+.posts-list {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .posts-list {
+    margin-top: 1rem;
+  }
 }
 
 /* Layout Utilities */

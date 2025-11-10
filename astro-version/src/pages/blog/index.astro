@@ -45,6 +45,8 @@ const pageDescription = `${SITE_TITLE}의 모든 포스트를 확인해보세요
 </Layout>
 
 <style>
+  /* content-wrapper, page-header, page-title, page-description, posts-list는 global.css에서 통일 관리 */
+  
   .content-wrapper {
     margin-top: 2em;
     display: flex;
@@ -56,30 +58,6 @@ const pageDescription = `${SITE_TITLE}의 모든 포스트를 확인해보세요
   .main-content {
     width: calc(100% - 320px - 40px);
     flex: 1;
-  }
-
-  .page-header {
-    margin: 2rem 0;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-  
-  .page-title {
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin: 0 0 1rem 0;
-    color: white;
-    letter-spacing: -0.5px;
-  }
-  
-  .page-description {
-    margin: 0;
-    font-size: 1.1rem;
-    color: rgba(255, 255, 255, 0.7);
-  }
-  
-  .posts-list {
-    margin-top: 2rem;
   }
   
   @media screen and (max-width: 1024px) {
@@ -95,23 +73,6 @@ const pageDescription = `${SITE_TITLE}의 모든 포스트를 확인해보세요
   @media (max-width: 768px) {
     .content-wrapper {
       margin-top: 0;
-    }
-    
-    .page-header {
-      /* margin: 1.5rem 0; */
-      padding-bottom: 1.5rem;
-    }
-    
-    .page-title {
-      font-size: 2rem;
-    }
-    
-    .page-description {
-      font-size: 1rem;
-    }
-    
-    .posts-list {
-      margin-top: 1rem;
     }
   }
 </style>

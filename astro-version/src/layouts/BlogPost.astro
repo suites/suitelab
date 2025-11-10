@@ -100,12 +100,7 @@ const postId = Astro.url.pathname; // identifier로 사용
     min-height: 70vh;
   }
   
-  /* ContentWrapper 스타일 (Gatsby와 동일) */
-  .content-wrapper {
-    max-width: 1100px; /* theme.sizes.maxWidth - Gatsby와 동일 */
-    margin: 0 auto;
-    padding: 0 1.5em; /* theme.sideSpace.large - Gatsby와 동일 */
-  }
+  /* content-wrapper는 global.css에서 통일 관리 */
   
   .content-grid {
     display: flex;
@@ -499,10 +494,6 @@ const postId = Astro.url.pathname; // identifier로 사용
   
   /* 반응형 디자인 - Gatsby 브레이크포인트: small 500px, medium 768px, large 950px */
   @media screen and (max-width: 950px) {
-    .content-wrapper {
-      max-width: 760px;
-    }
-    
     .content-grid {
       flex-direction: column;
       gap: 2rem;
@@ -517,8 +508,8 @@ const postId = Astro.url.pathname; // identifier로 사용
   @media screen and (max-width: 500px) {
     /* 모바일에서 content-wrapper의 padding 제거하여 화면 전체 사용 */
     .content-wrapper {
-      padding: 0; /* 모바일에서는 패딩 제거 */
-      max-width: 100%; /* 모바일에서는 최대 너비 제한 제거 */
+      padding: 0; /* BlogPost 전용: 모바일에서 패딩 제거 */
+      max-width: 100%; /* BlogPost 전용: 모바일에서 최대 너비 제한 제거 */
     }
     
     .content-grid {

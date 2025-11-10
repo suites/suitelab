@@ -75,26 +75,7 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
 </Layout>
 
 <style>
-  /* ContentWrapper 스타일 (원본 Gatsby 기준) */
-  .content-wrapper {
-    max-width: 1100px; /* theme.sizes.maxWidth */
-    margin: 0 auto;
-    padding: 0 1.5em; /* theme.sideSpace.large */
-  }
-  
-  /* Layout Content 스타일 (원본 Gatsby 기준) */
-  .layout-content {
-    margin-top: 2em;
-    display: flex;
-    min-height: 85vh;
-    align-items: flex-start;
-  }
-  
-  /* Main Wrapper 스타일 (원본 Gatsby 기준) */
-  .main-wrapper {
-    width: calc(100% - 290px - 40px); /* bioWidth(290px) + 여백(40px) */
-    margin-right: 40px;
-  }
+  /* content-wrapper, layout-content, main-wrapper는 global.css에서 통일 관리 */
   
   /* Gatsby 원본 헤딩 스타일 */
   .category-heading {
@@ -106,9 +87,7 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
     letter-spacing: 1px;
   }
   
-  .posts-list {
-    margin-top: 2rem;
-  }
+  /* posts-list는 global.css에서 통일 관리 */
   
   .no-posts {
     padding: 4rem 0;
@@ -117,40 +96,10 @@ const pageDescription = `${categoryName} 관련 포스트들을 확인해보세�
     font-size: 1.1rem;
   }
   
-  @media screen and (max-width: 950px) { /* theme.responsive.large */
-    .content-wrapper {
-      max-width: 760px;
-    }
-    
-    .layout-content {
-      display: block;
-    }
-    
-    .main-wrapper {
-      width: 100%;
-      margin-right: 0;
-    }
-  }
-  
-  @media screen and (max-width: 500px) { /* theme.responsive.small */
-    .content-wrapper {
-      max-width: 100%;
-      padding: 0 20px; /* theme.sideSpace.small */
-    }
-  }
-  
   @media (max-width: 768px) {
-    .content-wrapper {
-      margin-top: 0;
-    }
-    
     .category-heading {
       font-size: 28px;
       line-height: 38px;
-    }
-    
-    .posts-list {
-      margin-top: 1rem;
     }
   }
 </style>
