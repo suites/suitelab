@@ -38,7 +38,7 @@ const postId = Astro.url.pathname; // identifier로 사용
   <Header />
   
   <main id="main-content" class="blog-post-layout">
-    <div class="container">
+    <div class="content-wrapper">
       <div class="content-grid">
         <!-- 메인 콘텐츠 -->
         <article class="post-content-wrapper">
@@ -96,19 +96,28 @@ const postId = Astro.url.pathname; // identifier로 사용
 
 <style>
   .blog-post-layout {
-    padding: 2rem 0;
+    padding: 0;
     min-height: 70vh;
+  }
+  
+  /* ContentWrapper 스타일 (Gatsby와 동일) */
+  .content-wrapper {
+    max-width: 1100px; /* theme.sizes.maxWidth - Gatsby와 동일 */
+    margin: 0 auto;
+    padding: 0 1.5em; /* theme.sideSpace.large - Gatsby와 동일 */
   }
   
   .content-grid {
     display: flex;
     align-items: flex-start;
     gap: 3rem;
+    margin-top: 2em; /* Gatsby의 Content margin-top과 유사 */
   }
   
   .post-content-wrapper {
     flex: 1;
     min-width: 0; /* Flex overflow 방지 */
+    max-width: 100%; /* 오버플로우 방지 */
   }
 
   .post-content-main {
@@ -118,6 +127,9 @@ const postId = Astro.url.pathname; // identifier로 사용
     font-size: 16px;
     color: #333;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0);
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .post-content-main::before,
@@ -133,7 +145,6 @@ const postId = Astro.url.pathname; // identifier로 사용
     top: 0;
     left: 0;
     border-top: 20px solid rgb(33, 36, 45); /* theme.colors.background */
-    border-right: 20px solid transparent;
   }
   
   .post-content-main::after {
@@ -165,8 +176,8 @@ const postId = Astro.url.pathname; // identifier로 사용
   }
   
   .post-header {
-    margin-bottom: 3rem;
-    padding: 1.8rem 2.5rem 0rem;
+    padding: 1.8em 2.5em 0; /* Gatsby와 동일: 1.8em 2.5em */
+    margin-bottom: 0; /* Gatsby 버전에서는 ContentMain에 margin이 없고 PostContent에만 있음 */
   }
   
   .post-meta {
@@ -241,8 +252,12 @@ const postId = Astro.url.pathname; // identifier로 사용
     color: #333;
     line-height: 1.9;
     font-size: 16px;
-    padding: 0 2.5rem 2rem;
-    margin: 1.5rem 0 1rem;
+    margin: 1.5em 0 1em; /* Gatsby와 동일 */
+    padding: 0 2.5em; /* Gatsby와 동일: ContentMain의 패딩과 동일한 좌우 패딩 */
+    width: 100%;
+    box-sizing: border-box;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
   }
   
   .prose :global(h1),
@@ -289,7 +304,7 @@ const postId = Astro.url.pathname; // identifier로 사용
   }
   
   .prose :global(p) {
-    margin-bottom: 1.75rem;
+    margin-bottom: 1em; /* Gatsby와 동일: 1em */
   }
   
   .prose :global(a) {
@@ -303,16 +318,33 @@ const postId = Astro.url.pathname; // identifier로 사용
   }
   
   .prose :global(blockquote) {
-    margin: 2.3rem 0;
+    margin: 2.3em 0; /* Gatsby와 동일: em 단위 */
     font-style: italic;
-    background: #f8f9fa;
-    padding: 1rem;
-    border-radius: 4px;
-    border-left: 4px solid #0c9ee4;
+    background: #f1f4f7; /* theme.colors.whitesmoke - Gatsby와 동일 */
+    padding: 1em; /* Gatsby와 동일: em 단위 */
   }
   
   .prose :global(blockquote p) {
-    margin: 0.3rem 0;
+    margin: 0.3em 0; /* Gatsby와 동일: em 단위 */
+  }
+  
+  .prose :global(hr) {
+    display: block;
+    margin: 2em 0; /* Gatsby와 동일 */
+    border: none;
+    border-top: dotted 3px #e1eaf3; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(strong) {
+    font-weight: 700; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(em) {
+    font-style: italic; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(del) {
+    text-decoration: line-through; /* Gatsby와 동일 */
   }
   
   .prose :global(code) {
@@ -327,7 +359,6 @@ const postId = Astro.url.pathname; // identifier로 사용
   
   .prose :global(pre) {
     background: #2d3748 !important;
-    border: 1px solid #e2e8f0;
     border-radius: 8px;
     padding: 1.5rem;
     margin: 2rem 0;
@@ -345,47 +376,133 @@ const postId = Astro.url.pathname; // identifier로 사용
   
   .prose :global(img) {
     border-radius: 8px;
-    margin: 2rem 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    margin: 1em 0; /* Gatsby와 동일: 1em */
     max-width: 100%;
     height: auto;
   }
   
-  .prose :global(ul),
-  .prose :global(ol) {
-    margin-bottom: 1.75rem;
-    padding-left: 2rem;
-  }
-  
-  .prose :global(li) {
-    margin-bottom: 0.5rem;
-    line-height: 1.7;
-  }
-  
-  .prose :global(table) {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2rem 0;
-    background: rgba(255, 255, 255, 0.02);
-    border-radius: 8px;
+  .prose :global(.gatsby-resp-image-wrapper) {
+    margin: 1em 0; /* Gatsby와 동일 */
+    box-shadow: 0 2px 5px -1px rgba(0, 0, 0, 0.25); /* Gatsby와 동일 */
+    border-radius: 4px; /* Gatsby와 동일 */
     overflow: hidden;
   }
   
-  .prose :global(th),
-  .prose :global(td) {
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.75rem 1rem;
-    text-align: left;
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin: 1em 0; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(ul) {
+    padding-left: 1.2em; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(ul li) {
+    margin: 0.4em 0; /* Gatsby와 동일 */
+    list-style: disc;
+  }
+  
+  .prose :global(ul ul) {
+    margin: 0; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(ol) {
+    counter-reset: number;
+    padding-left: 0; /* Gatsby는 커스텀 카운터 사용 */
+  }
+  
+  .prose :global(ol > li) {
+    list-style: none;
+    list-style-position: inside;
+    position: relative;
+    line-height: 25px;
+    padding-left: 34px; /* Gatsby와 동일: 커스텀 카운터 공간 */
+    margin: 1em 0;
+  }
+  
+  .prose :global(ol > li::before) {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    background: #20a8ea; /* theme.colors.highlight */
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    text-align: center;
+    line-height: 25px;
+    content: counter(number);
+    counter-increment: number;
+  }
+  
+  .prose :global(li) {
+    line-height: 1.7;
+  }
+  
+  .prose :global(ul p),
+  .prose :global(ol p) {
+    margin: 0; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(table) {
+    display: block; /* Gatsby와 동일 */
+    border-spacing: 2px;
+    border-collapse: separate;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; /* Gatsby와 동일: 모바일 스크롤 개선 */
+    width: auto; /* Gatsby와 동일 */
+    font-size: 0.9em; /* Gatsby와 동일 */
+    line-height: 1.4; /* Gatsby와 동일 */
+    margin: 1.5em 0; /* Gatsby와 동일 */
   }
   
   .prose :global(th) {
-    background: rgba(12, 158, 228, 0.1);
-    font-weight: 600;
-    color: white;
+    background-color: #20a8ea; /* theme.colors.highlight - Gatsby와 동일 */
+    color: #fff;
+    padding: 10px 12px; /* Gatsby와 동일 */
+    text-align: center;
+    font-weight: 700;
   }
   
-  /* 반응형 디자인 */
-  @media (max-width: 1024px) {
+  .prose :global(th[align='center']) {
+    text-align: center;
+  }
+  
+  .prose :global(th[align='right']) {
+    text-align: right;
+  }
+  
+  .prose :global(td) {
+    background-color: #f1f4f7; /* theme.colors.whitesmoke - Gatsby와 동일 */
+    color: #313746; /* theme.colors.blackLight - Gatsby와 동일 */
+    padding: 10px 12px; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(thead tr th:first-child) {
+    border-radius: 5px 0 0 0; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(thead tr th:last-child) {
+    border-radius: 0 5px 0 0; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(tbody tr:last-child td:first-child) {
+    border-radius: 0 0 0 5px; /* Gatsby와 동일 */
+  }
+  
+  .prose :global(tbody tr:last-child td:last-child) {
+    border-radius: 0 0 5px 0; /* Gatsby와 동일 */
+  }
+  
+  /* 반응형 디자인 - Gatsby 브레이크포인트: small 500px, medium 768px, large 950px */
+  @media screen and (max-width: 950px) {
+    .content-wrapper {
+      max-width: 760px;
+    }
+    
     .content-grid {
       flex-direction: column;
       gap: 2rem;
@@ -396,14 +513,65 @@ const postId = Astro.url.pathname; // identifier로 사용
     }
   }
   
-  @media (max-width: 768px) {
-    .blog-post-layout {
-      padding: 1rem 0;
+  /* Gatsby의 small 브레이크포인트: 500px */
+  @media screen and (max-width: 500px) {
+    /* 모바일에서 content-wrapper의 padding 제거하여 화면 전체 사용 */
+    .content-wrapper {
+      padding: 0; /* 모바일에서는 패딩 제거 */
+      max-width: 100%; /* 모바일에서는 최대 너비 제한 제거 */
     }
     
+    .content-grid {
+      margin-top: 0; /* Gatsby의 Content margin-top: 0과 동일 */
+    }
+    
+    /* Gatsby와 동일: 작은 화면에서 화면 전체 사용 */
+    .post-content-main {
+      margin: 0; /* content-wrapper의 padding이 없으므로 음수 마진 불필요 */
+    }
+    
+    /* Gatsby와 동일: 작은 화면에서 ::before, ::after 제거 */
+    .post-content-main::before,
+    .post-content-main::after {
+      content: none;
+    }
+    
+    /* Gatsby와 동일: 히어로 이미지 높이 축소 */
+    .hero-image {
+      min-height: 190px;
+    }
+    
+    /* Gatsby와 동일: ContentMain 패딩 변경 */
     .post-header {
-      margin-bottom: 2rem;
-      padding-bottom: 1.5rem;
+      padding: 30px 20px 0; /* theme.sideSpace.contentSmall */
+    }
+    
+    .post-title {
+      font-size: 25px; /* Gatsby와 동일 */
+    }
+    
+    .post-meta {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .prose {
+      margin: 1.5em 0 1em;
+      padding: 0 20px; /* ContentMain의 패딩과 동일 */
+    }
+    
+    .prose :global(pre) {
+      margin-left: -20px; /* ContentMain의 음수 마진과 맞춤 */
+      margin-right: -20px;
+      border-radius: 0;
+      padding: 1rem;
+    }
+  }
+  
+  /* 중간 크기 화면 (500px ~ 768px) */
+  @media screen and (min-width: 501px) and (max-width: 768px) {
+    .blog-post-layout {
+      padding: 1rem 0;
     }
     
     .post-title-section {
@@ -412,39 +580,10 @@ const postId = Astro.url.pathname; // identifier로 사용
       text-align: center;
       gap: 1rem;
     }
-
-    .post-title {
-      font-size: clamp(1.75rem, 6vw, 2.5rem);
-    }
     
     .post-meta {
       justify-content: center;
       text-align: center;
-    }
-    
-    .prose {
-      font-size: 1rem;
-    }
-    
-    .prose :global(h2) {
-      font-size: 1.75rem;
-    }
-    
-    .prose :global(h3) {
-      font-size: 1.5rem;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .post-meta {
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-    
-    .prose :global(pre) {
-      margin-left: -1rem;
-      margin-right: -1rem;
-      border-radius: 0;
     }
   }
 </style>
