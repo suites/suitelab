@@ -8,7 +8,7 @@ import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://suitee.me',
+  site: 'https://fredly.dev',
   integrations: [
     mdx({ remarkPlugins: [remarkMath], rehypePlugins: [rehypeKatex] }),
     sitemap(),
