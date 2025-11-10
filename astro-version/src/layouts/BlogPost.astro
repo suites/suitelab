@@ -7,8 +7,10 @@ import Bio from '@/components/Bio.astro';
 import CategoryLabel from '@/components/CategoryLabel.astro';
 import PostNavigation from '@/components/PostNavigation.astro';
 import TableOfContents from '@/components/TableOfContents.astro';
+import Disqus from '@/components/Disqus.astro';
 import { formatDate } from '@/utils/date';
 import { twemojiParse } from '@/utils/twemoji.util';
+import { SITE_URL } from '@/consts';
 
 type Props = CollectionEntry<'blog'>['data'] & {
   headings?: Array<{ depth: number; slug: string; text: string }>;
@@ -26,6 +28,11 @@ const emoji = 'emoji' in otherProps ? otherProps.emoji : null;
 const postDateValue = date || pubDate || new Date();
 const postDate = formatDate(postDateValue);
 const estimatedReadTime = readTime || 5;
+
+// Disqus 설정 (Gatsby 버전과 동일)
+const slug = ('slug' in otherProps ? otherProps.slug : null) || Astro.url.pathname;
+const postUrl = `${SITE_URL}${slug}`;
+const postId = Astro.url.pathname; // identifier로 사용
 ---
 
 <Layout title={title} description={description || ''}>
@@ -75,7 +82,12 @@ const estimatedReadTime = readTime || 5;
             <slot />
           </div>
           
-          <!-- 포스트 네비게이션 -->
+          <!-- Disqus (RelatedPosts 위에 위치) -->
+          <aside class="post-aside">
+            <Disqus url={postUrl} identifier={postId} title={title} />
+          </aside>
+          
+          <!-- 포스트 네비게이션 (RelatedPosts 역할) -->
           <PostNavigation />
           </section>
         </article>
@@ -246,6 +258,11 @@ const estimatedReadTime = readTime || 5;
   
   .bio-section {
     margin-top: 2rem;
+  }
+  
+  /* Post Aside - Gatsby 버전의 aside와 동일 */
+  .post-aside {
+    margin-top: 0;
   }
   
   /* Prose 스타일링 - Gatsby 원본 스타일 */
