@@ -110,20 +110,14 @@ const postId = Astro.url.pathname; // identifier로 사용
     flex: 1;
     min-width: 0; /* Flex overflow 방지 */
   }
-  
-  .sidebar {
-    width: 300px;
-    flex-shrink: 0;
-  }
-  
+
   .post-content-main {
     position: relative;
     background: #fff;
     overflow: hidden;
     font-size: 16px;
     color: #333;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0);
   }
   
   .post-content-main::before,
@@ -225,13 +219,6 @@ const postId = Astro.url.pathname; // identifier로 사용
   .toc-mobile {
     display: none;
     margin-bottom: 2rem;
-  }
-  
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2rem;
   }
   
   .sticky-element {
@@ -402,11 +389,6 @@ const postId = Astro.url.pathname; // identifier로 사용
     .content-grid {
       flex-direction: column;
       gap: 2rem;
-    }
-    
-    .sidebar {
-      width: 100%;
-      order: -1;
     }
     
     .sticky-element {
