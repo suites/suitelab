@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Bio from '@/components/Bio.astro';
+import CategoryMenu from '@/components/CategoryMenu.astro';
+import PostCard from '@/components/PostCard.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '@/consts';
+import { sortByDate } from '@/utils/date';
+
+// 모든 블로그 포스트 가져오기
+const posts = await getCollection('blog');
+const sortedPosts = sortByDate(posts);
+---
+
+<Layout title={SITE_TITLE} description={SITE_DESCRIPTION}>
+  <Header />
+  
+  <div class="content-wrapper">
+    <div class="layout-content">
+      <main class="main-wrapper">
+        <CategoryMenu />
+        {sortedPosts.map((post) => (
+          <PostCard post={post} />
+        ))}
+      </main>
+      
+      <Bio />
+    </div>
+  </div>
+  
+  <Footer />
+</Layout>
+
+<style>
+  /* content-wrapper, layout-content, main-wrapper는 global.css에서 통일 관리 */
+</style>

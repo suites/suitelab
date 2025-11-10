@@ -1,0 +1,78 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Bio from '@/components/Bio.astro';
+import PostCard from '@/components/PostCard.astro';
+import { SITE_TITLE } from '@/consts';
+import { sortByDate } from '@/utils/date';
+
+// 모든 블로그 포스트 가져오기
+const posts = await getCollection('blog');
+const sortedPosts = sortByDate(posts);
+
+const pageTitle = '블로그';
+const pageDescription = `${SITE_TITLE}의 모든 포스트를 확인해보세요.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Header />
+  
+  <div class="container">
+    <div class="content-wrapper">
+      <main class="main-content">
+        <!-- 페이지 헤더 -->
+        <div class="page-header">
+          <h1 class="page-title">블로그</h1>
+          <p class="page-description">모든 포스트 ({sortedPosts.length}개)</p>
+        </div>
+        
+        <!-- 포스트 목록 -->
+        <div class="posts-list">
+          {sortedPosts.map((post) => (
+            <PostCard post={post} />
+          ))}
+        </div>
+      </main>
+      
+      <!-- Bio 컴포넌트 -->
+        <Bio />
+    </div>
+  </div>
+  
+  <Footer />
+</Layout>
+
+<style>
+  /* content-wrapper, page-header, page-title, page-description, posts-list는 global.css에서 통일 관리 */
+  
+  .content-wrapper {
+    margin-top: 2em;
+    display: flex;
+    min-height: 85vh;
+    align-items: flex-start;
+    gap: 40px;
+  }
+  
+  .main-content {
+    width: calc(100% - 320px - 40px);
+    flex: 1;
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .content-wrapper {
+      display: block;
+    }
+    
+    .main-content {
+      width: 100%;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .content-wrapper {
+      margin-top: 0;
+    }
+  }
+</style>

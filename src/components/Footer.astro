@@ -1,0 +1,37 @@
+---
+import { AUTHOR_NAME } from '@/consts';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        © {currentYear}, {AUTHOR_NAME} All rights reserved.
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    padding: 0.1em 0;
+  }
+  
+  .footer-inner {
+    margin-top: 3em;
+    text-align: center;
+    padding: 1.5em;
+    border-top: solid 1px #313746; /* theme.colors.blackLight */
+    color: #727d86; /* theme.colors.gray */
+    font-size: 14px;
+  }
+  
+  .footer-inner a {
+    color: #727d86; /* theme.colors.gray */
+    text-decoration: underline;
+  }
+  
+  /* Footer는 global.css의 .container 사용 */
+</style>

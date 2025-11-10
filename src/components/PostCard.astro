@@ -1,0 +1,152 @@
+---
+import type { BlogPost } from '@/types';
+import CategoryLabel from './CategoryLabel.astro';
+import FormattedDate from './FormattedDate.astro';
+import { twemojiParse } from '@/utils/twemoji.util';
+
+export interface Props {
+  post: BlogPost;
+}
+
+const { post } = Astro.props;
+const { data, id } = post;
+
+// 데이터 추출 (우리 스타일 + 템플릿 스타일 지원)
+const title = data.title || ('slug' in data ? data.slug : null) || id;
+const date = ('date' in data ? data.date : null) || data.pubDate || new Date();
+const category = 'category' in data ? data.category : null;
+const emoji = ('emoji' in data ? data.emoji : null) || '📝';
+const slug = ('slug' in data ? data.slug : null) || id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
+
+// 이모지 파싱
+const parsedEmoji = twemojiParse(emoji);
+---
+
+<div class="post-card-wrapper">
+  <a href={`/${slug}`} class="post-card-link">
+    <div class="post-card-emoji" set:html={parsedEmoji}></div>
+    <div class="post-card-content">
+      <h3>{title}</h3>
+      <FormattedDate date={date} />
+      {category && <CategoryLabel category={category} />}
+    </div>
+  </a>
+</div>
+
+<style>
+  .post-card-wrapper {
+    border-top: solid 1px #313746; /* theme.colors.blackLight */
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden; /* 내용 overflow 방지 */
+  }
+  
+  .post-card-wrapper:first-child {
+    border-top: none; /* 첫 번째 포스트는 상단 border 제거 */
+  }
+  
+  .post-card-link {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.4em 0;
+    color: white;
+    text-decoration: none;
+    transition: background 0.2s ease;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .post-card-link:hover {
+    background: #313746; /* theme.colors.blackLight */
+  }
+  
+  .post-card-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90px;
+    height: 90px;
+    background: #313746; /* theme.colors.blackLight */
+    border-radius: 8px;
+    font-size: 50px;
+    flex-shrink: 0;
+  }
+  
+  .post-card-emoji :global(img) {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .post-card-content {
+    width: calc(100% - 90px);
+    max-width: calc(100% - 90px);
+    padding-left: 20px;
+    flex: 1;
+    min-width: 0; /* flex overflow 방지 */
+    overflow: hidden; /* 내용 overflow 방지 */
+    box-sizing: border-box;
+  }
+  
+  .post-card-content h3 {
+    font-size: 1.5em;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 0.3rem 0;
+    color: white;
+    word-wrap: break-word; /* 긴 단어 wrapping */
+    overflow-wrap: break-word; /* 현대 브라우저 지원 */
+    hyphens: auto; /* 하이픈 자동 삽입 */
+    text-overflow: ellipsis; /* 긴 텍스트 생략 표시 */
+    white-space: normal; /* 정상적인 줄바꿈 허용 */
+    max-width: 100%;
+  }
+  
+  .post-card-content :global(time) {
+    display: block;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+    font-size: 0.9em;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  
+  @media screen and (max-width: 950px) { /* theme.responsive.large */
+    .post-card-link {
+      padding: 1em 0;
+    }
+    
+    .post-card-emoji {
+      width: 70px;
+      height: 70px;
+    }
+    
+    .post-card-emoji :global(img) {
+      width: 40px;
+      height: 40px;
+    }
+    
+    .post-card-content {
+      width: calc(100% - 70px);
+      max-width: calc(100% - 70px);
+      padding-left: 15px;
+      flex: 1;
+      min-width: 0; /* flex overflow 방지 */
+      overflow: hidden; /* 내용 overflow 방지 */
+      box-sizing: border-box;
+    }
+    
+    .post-card-content h3 {
+      font-size: 1.1rem;
+      word-wrap: break-word; /* 긴 단어 wrapping */
+      overflow-wrap: break-word; /* 현대 브라우저 지원 */
+      hyphens: auto; /* 하이픈 자동 삽입 */
+      text-overflow: ellipsis; /* 긴 텍스트 생략 표시 */
+      white-space: normal; /* 정상적인 줄바꿈 허용 */
+      max-width: 100%;
+    }
+    
+    .post-card-content :global(time) {
+      font-size: 0.8rem;
+    }
+  }
+</style>

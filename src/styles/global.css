@@ -1,0 +1,296 @@
+/* 기존 Gatsby 스타일을 Astro용으로 변환 */
+
+/* Reset & Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: rgb(33, 36, 45);
+  color: white;
+  line-height: 1.6;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.75rem; }
+h4 { font-size: 1.5rem; }
+h5 { font-size: 1.25rem; }
+h6 { font-size: 1rem; }
+
+p {
+  margin-bottom: 1.5rem;
+}
+
+/* Links */
+a {
+  color: #0c9ee4;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Lists */
+ul, ol {
+  margin-bottom: 1.5rem;
+  padding-left: 2rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+/* Code */
+code {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 0.9em;
+}
+
+pre {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+  border-radius: 0;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid #0c9ee4;
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: #ccc;
+  background: rgba(12, 158, 228, 0.05);
+  padding: 1rem 1rem 1rem 2rem;
+  border-radius: 0 8px 8px 0;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1.5rem 0;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+th, td {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 700;
+}
+
+/* Container - 통일된 컨테이너 스타일 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media screen and (max-width: 950px) {
+  .container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+  
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.5rem; }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+/* Content Wrapper - Gatsby와 동일한 스타일 (통일) */
+.content-wrapper {
+  max-width: 1100px; /* theme.sizes.maxWidth */
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5em; /* theme.sideSpace.large */
+  box-sizing: border-box;
+  overflow: hidden; /* 콘텐츠 wrapper overflow 방지 */
+}
+
+@media screen and (max-width: 950px) { /* theme.responsive.large */
+  .content-wrapper {
+    max-width: 760px;
+  }
+}
+
+@media screen and (max-width: 500px) { /* theme.responsive.small */
+  .content-wrapper {
+    padding: 0 20px; /* theme.sideSpace.small */
+    max-width: 100%;
+  }
+}
+
+/* Layout Content - 공통 레이아웃 스타일 */
+.layout-content {
+  margin-top: 2em;
+  display: flex;
+  min-height: 85vh;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden; /* 전체 레이아웃 overflow 방지 */
+}
+
+@media screen and (max-width: 950px) {
+  .layout-content {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .layout-content {
+    margin-top: 0;
+  }
+}
+
+/* Main Wrapper - 공통 메인 콘텐츠 스타일 */
+.main-wrapper {
+  width: calc(100% - 290px - 40px); /* bioWidth(290px) + 여백(40px) */
+  max-width: calc(100% - 290px - 40px); /* 최대 width 고정 */
+  margin-right: 40px;
+  min-height: 70vh; /* 메인페이지와 동일한 최소 높이 보장 */
+  overflow: hidden; /* 내용이 넘칠 때 숨김 */
+  box-sizing: border-box;
+  flex-shrink: 0; /* flex에서 축소 방지 */
+}
+
+@media screen and (max-width: 950px) {
+  .main-wrapper {
+    width: 100%;
+    max-width: 100%; /* 최대 width 고정 */
+    margin-right: 0;
+    min-height: auto; /* 모바일에서는 자연스러운 높이 사용 */
+    overflow: hidden; /* 내용이 넘칠 때 숨김 */
+    box-sizing: border-box;
+    flex-shrink: 0; /* flex에서 축소 방지 */
+  }
+}
+
+/* Page Header - 공통 페이지 헤더 스타일 */
+.page-header {
+  margin: 2rem 0;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 768px) {
+  .page-header {
+    padding-bottom: 1.5rem;
+  }
+}
+
+/* Page Title - 공통 페이지 제목 스타일 */
+.page-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  color: white;
+  letter-spacing: -0.5px;
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 2rem;
+  }
+}
+
+/* Page Description - 공통 페이지 설명 스타일 */
+.page-description {
+  margin: 0;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+  .page-description {
+    font-size: 1rem;
+  }
+}
+
+/* Posts List - 공통 포스트 목록 스타일 */
+.posts-list {
+  margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .posts-list {
+    margin-top: 1rem;
+  }
+}
+
+/* Layout Utilities */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mb-0 { margin-bottom: 0; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mb-4 { margin-bottom: 2rem; }

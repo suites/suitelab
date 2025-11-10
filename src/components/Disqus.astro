@@ -1,0 +1,45 @@
+---
+interface Props {
+  url: string;
+  identifier: string;
+  title: string;
+}
+
+const { url, identifier, title } = Astro.props;
+const DISQUS_SHORTNAME = 'suitelab';
+---
+
+<div id="disqus_thread" class="disqus-container"></div>
+
+<script is:inline define:vars={{ disqusShortname: DISQUS_SHORTNAME, pageUrl: url, pageIdentifier: identifier, pageTitle: title }}>
+  (function() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://' + disqusShortname + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    
+    window.disqus_config = function () {
+      this.page.url = pageUrl;
+      this.page.identifier = pageIdentifier;
+      this.page.title = pageTitle;
+    };
+  })();
+</script>
+
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+
+<style>
+  .disqus-container {
+    margin: 0 0 2.5em;
+    padding: 0 2.5em;
+  }
+  
+  @media (max-width: 500px) {
+    .disqus-container {
+      padding: 0 20px;
+    }
+  }
+</style>
+

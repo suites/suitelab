@@ -1,0 +1,105 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Bio from '@/components/Bio.astro';
+import CategoryMenu from '@/components/CategoryMenu.astro';
+import PostCard from '@/components/PostCard.astro';
+import { getCategoryBySlug, getAllCategorySlugs } from '@/utils/category';
+import { sortByDate } from '@/utils/date';
+
+export async function getStaticPaths() {
+  const categorySlugs = getAllCategorySlugs();
+  const posts = await getCollection('blog');
+  
+  return categorySlugs.map((slug) => {
+    // 해당 카테고리의 포스트만 필터링
+    const categoryPosts = posts.filter((post) => {
+      return 'category' in post.data && post.data.category === slug;
+    });
+    
+    return {
+      params: { slug },
+      props: { 
+        posts: categoryPosts,
+        categorySlug: slug 
+      },
+    };
+  });
+}
+
+interface Props {
+  posts: CollectionEntry<'blog'>[];
+  categorySlug: string;
+}
+
+const { posts, categorySlug } = Astro.props;
+const categoryInfo = getCategoryBySlug(categorySlug);
+const categoryName = categoryInfo?.name || categorySlug;
+
+// 날짜순 정렬
+const sortedPosts = sortByDate(posts);
+
+// 페이지 타이틀과 설명
+const pageTitle = `${categoryName} 카테고리`;
+const pageDescription = `${categoryName} 관련 포스트들을 확인해보세요.`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+  <Header />
+  
+  <div class="content-wrapper">
+    <div class="layout-content">
+      <main class="main-wrapper">
+        <CategoryMenu />
+        
+        <!-- 카테고리 제목 (Gatsby 원본 스타일) -->
+        <h1 class="category-heading">{categoryName}</h1>
+        
+        <!-- 포스트 목록 -->
+        {sortedPosts.length > 0 ? (
+          sortedPosts.map((post) => (
+            <PostCard post={post} />
+          ))
+        ) : (
+          <p class="no-posts">아직 포스트가 없습니다.</p>
+        )}
+      </main>
+      
+      <Bio />
+    </div>
+  </div>
+  
+  <Footer />
+</Layout>
+
+<style>
+  /* content-wrapper, layout-content, main-wrapper는 global.css에서 통일 관리 */
+  
+  /* Gatsby 원본 헤딩 스타일 */
+  .category-heading {
+    margin: 0.5em 0 0.8em;
+    font-size: 32px;
+    color: #fff;
+    font-weight: 700;
+    line-height: 44px;
+    letter-spacing: 1px;
+  }
+  
+  /* posts-list는 global.css에서 통일 관리 */
+  
+  .no-posts {
+    padding: 4rem 0;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1.1rem;
+  }
+  
+  @media (max-width: 768px) {
+    .category-heading {
+      font-size: 28px;
+      line-height: 38px;
+    }
+  }
+</style>

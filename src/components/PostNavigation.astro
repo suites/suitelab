@@ -1,0 +1,178 @@
+---
+import { getCollection } from 'astro:content';
+import { twemojiParse } from '@/utils/twemoji.util';
+import { formatDate } from '@/utils/date';
+
+// 현재 포스트의 슬러그 가져오기
+const currentSlug = Astro.url.pathname.split('/').pop() || '';
+
+// 모든 포스트 가져오기 (날짜순 정렬)
+const allPosts = await getCollection('blog');
+const sortedPosts = allPosts.sort((a, b) => {
+  const dateA = ('date' in a.data ? a.data.date : null) || a.data.pubDate || new Date(0);
+  const dateB = ('date' in b.data ? b.data.date : null) || b.data.pubDate || new Date(0);
+  return new Date(dateB).getTime() - new Date(dateA).getTime();
+});
+
+// 현재 포스트의 인덱스 찾기 (slug 매칭 로직 개선)
+const currentIndex = sortedPosts.findIndex(post => {
+  const postSlug = ('slug' in post.data ? post.data.slug : null) || post.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-');
+  return postSlug === currentSlug;
+});
+
+// 이전/다음 포스트 찾기
+const prevPost = currentIndex > 0 ? sortedPosts[currentIndex - 1] : null;
+const nextPost = currentIndex < sortedPosts.length - 1 ? sortedPosts[currentIndex + 1] : null;
+
+
+// 날짜 가져오기 헬퍼
+function getPostDate(post: typeof prevPost): Date {
+  if (!post) return new Date();
+  const date = ('date' in post.data ? post.data.date : null) || post.data.pubDate || new Date();
+  return date instanceof Date ? date : new Date(date);
+}
+
+// 날짜 포맷팅 헬퍼
+function getFormattedDate(post: typeof prevPost): string {
+  if (!post) return '';
+  return formatDate(getPostDate(post), 'YYYY.MM.DD');
+}
+
+// 이모지 파싱 헬퍼
+function getParsedEmoji(post: typeof prevPost): string {
+  if (!post) return '';
+  const emoji = ('emoji' in post.data ? post.data.emoji : null) || '😺';
+  return twemojiParse(emoji);
+}
+---
+
+{(prevPost || nextPost) && (
+  <nav class="post-navigation" aria-label="포스트 네비게이션">
+    {prevPost && (
+      <div class="post-card-wrapper">
+        <a href={`/${('slug' in prevPost.data ? prevPost.data.slug : null) || prevPost.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-')}`} class="post-card-link">
+          <div class="post-card-emoji" role="img" aria-hidden="true" set:html={getParsedEmoji(prevPost)}></div>
+          <div class="post-card-content">
+            <h5 class="post-card-title">{prevPost.data.title}</h5>
+            <time class="post-card-date" datetime={getPostDate(prevPost).toISOString()}>
+              {getFormattedDate(prevPost)}
+            </time>
+          </div>
+        </a>
+      </div>
+    )}
+    
+    {nextPost && (
+      <div class="post-card-wrapper">
+        <a href={`/${('slug' in nextPost.data ? nextPost.data.slug : null) || nextPost.id.replace(/\/index\.mdx?$/, '').replace(/\//g, '-')}`} class="post-card-link">
+          <div class="post-card-emoji" role="img" aria-hidden="true" set:html={getParsedEmoji(nextPost)}></div>
+          <div class="post-card-content">
+            <h5 class="post-card-title">{nextPost.data.title}</h5>
+            <time class="post-card-date" datetime={getPostDate(nextPost).toISOString()}>
+              {getFormattedDate(nextPost)}
+            </time>
+          </div>
+        </a>
+      </div>
+    )}
+  </nav>
+)}
+
+<style>
+  /* Wrapper - RelatedPosts와 동일 */
+  .post-navigation {
+    margin-top: 0;
+    background: #f1f4f7; /* whitesmoke - RelatedPosts와 동일한 배경색 */
+    padding: 2em 2.5em; /* RelatedPosts와 동일한 패딩 */
+    border-top: none;
+  }
+  
+  @media (max-width: 500px) {
+    .post-navigation {
+      padding: 30px 20px; /* RelatedPosts와 동일한 모바일 패딩 */
+    }
+  }
+  
+  /* PostCardWrapper - RelatedPosts와 동일 */
+  .post-card-wrapper {
+    margin-bottom: 1em;
+  }
+  
+  .post-card-wrapper:last-child {
+    margin-bottom: 0;
+  }
+  
+  /* post-card-link - RelatedPosts와 동일 */
+  .post-card-link {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+    border-radius: 5px;
+    color: #313746; /* theme.colors.blackLight */
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: background 0.2s ease;
+  }
+  
+  .post-card-link:hover {
+    background: #e0ebf1;
+  }
+  
+  @media (max-width: 500px) {
+    .post-card-link {
+      padding: 10px;
+    }
+  }
+  
+  /* PostCardEmoji - RelatedPosts와 동일 */
+  .post-card-emoji {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    width: 80px;
+    height: 80px;
+    background: #f1f4f7; /* theme.colors.whitesmoke */
+    border-radius: 4px;
+    font-size: 50px;
+    flex-shrink: 0;
+  }
+  
+  .post-card-emoji :global(img) {
+    width: 55px;
+    height: 55px;
+  }
+  
+  /* PostCardContent - RelatedPosts와 동일 */
+  .post-card-content {
+    width: calc(100% - 80px);
+    padding-left: 15px;
+  }
+  
+  .post-card-title {
+    font-size: 1.1em;
+    font-weight: 700;
+    line-height: 1.45;
+    margin: 0 0 0.1em 0;
+    color: #313746; /* theme.colors.blackLight */
+  }
+  
+  .post-card-date {
+    display: block;
+    margin-bottom: 0.1em;
+    letter-spacing: 0.05em;
+    font-size: 0.8em;
+    color: #969fa7; /* theme.colors.silver */
+  }
+  
+  @media (max-width: 500px) {
+    .post-card-content {
+      padding-left: 15px;
+    }
+    
+    .post-card-title {
+      font-size: 1em;
+    }
+  }
+</style>

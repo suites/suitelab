@@ -1,32 +1,20 @@
 {
+  "extends": "astro/tsconfigs/strict",
+  "include": [".astro/types.d.ts", "**/*"],
+  "exclude": ["dist"],
   "compilerOptions": {
-    "module": "commonjs",
-    "jsx": "react",
-    "declaration": true,
-    "removeComments": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
-    "sourceMap": true,
-    "outDir": "./dist",
-    "baseUrl": "./",
-    "incremental": true,
-    "skipLibCheck": true,
-    "strictNullChecks": false,
-    "noImplicitAny": false,
-    "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false,
-    "esModuleInterop": true,
-    "typeRoots": ["./node_modules/@types", "./@types"]
-  },
-  "include": [
-    "./src/**/*",
-    "./gatsby-node.ts",
-    "./gatsby-config.ts",
-    "./gatsby-browser.ts",
-    "eslint.config.mjs",
-    "./plugins/**/*"
-  ]
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/layouts/*": ["./src/layouts/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/utils/*": ["./src/utils/*"]
+    },
+    "strictNullChecks": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "exactOptionalPropertyTypes": true
+  }
 }

@@ -1,0 +1,58 @@
+---
+import type { HeaderProps } from '@/types';
+import { SITE_TITLE } from '@/consts';
+
+export interface Props extends HeaderProps {}
+
+---
+
+<header class="header">
+  <div class="header-inner">
+    <div class="container">
+      <a href="/" class="logo-link" aria-label={`${SITE_TITLE} 홈페이지로 이동`}>
+        <img 
+          src="/images/logo.png" 
+          alt={`${SITE_TITLE} 로고`} 
+          class="logo" 
+        />
+      </a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .header {
+    background: #3b71da;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  }
+  
+  .header-inner {
+    position: relative;
+  }
+  
+  /* Header 전용 container 오버라이드 */
+  .header .container {
+    max-width: 1100px;
+    padding: 0 1.5em;
+  }
+  
+  .logo-link {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    text-decoration: none;
+  }
+  
+  .logo {
+    display: block;
+    width: 170px;
+    height: 36px;
+  }
+  
+  @media screen and (max-width: 500px) {
+    .logo {
+      margin: 0 auto;
+    }
+  }
+</style>

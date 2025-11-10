@@ -1,0 +1,57 @@
+---
+import type { CategoryLabelProps } from '@/types';
+import { getCategoryBySlug } from '@/utils/category';
+
+export interface Props extends CategoryLabelProps {}
+
+const { category, isLink = false } = Astro.props;
+
+// 카테고리 정보 가져오기
+const categoryInfo = getCategoryBySlug(category);
+
+// 카테고리 정보가 없는 경우 기본값
+const categoryData = categoryInfo || {
+  name: category,
+  slug: category,
+  color: '#6d4bf5',
+  icon: '📝',
+  link: `/category/${category}`
+};
+---
+
+{isLink ? (
+  <a 
+    href={categoryData.link} 
+    class="category-text"
+    style={`background: ${categoryData.color};`}
+  >
+    {categoryData.name}
+  </a>
+) : (
+  <span 
+    class="category-text"
+    style={`background: ${categoryData.color};`}
+  >
+    {categoryData.name}
+  </span>
+)}
+
+<style>
+  .category-text {
+    display: inline-block;
+    padding: 3px 6px;
+    line-height: 1.2;
+    font-size: 12px;
+    border-radius: 2px;
+    font-weight: 700;
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  @media screen and (max-width: 950px) { /* theme.responsive.large */
+    .category-text {
+      font-size: 11px;
+      padding: 2.5px 6px;
+    }
+  }
+</style>
