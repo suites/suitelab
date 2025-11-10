@@ -37,9 +37,7 @@ const pageDescription = `${SITE_TITLE}의 모든 포스트를 확인해보세요
       </main>
       
       <!-- Bio 컴포넌트 -->
-      <aside class="sidebar">
         <Bio />
-      </aside>
     </div>
   </div>
   
@@ -59,14 +57,7 @@ const pageDescription = `${SITE_TITLE}의 모든 포스트를 확인해보세요
     width: calc(100% - 320px - 40px);
     flex: 1;
   }
-  
-  .sidebar {
-    width: 320px;
-    flex-shrink: 0;
-    position: sticky;
-    top: 2em;
-  }
-  
+
   .page-header {
     margin: 2rem 0;
     padding-bottom: 2rem;
@@ -98,13 +89,6 @@ const pageDescription = `${SITE_TITLE}의 모든 포스트를 확인해보세요
     
     .main-content {
       width: 100%;
-    }
-    
-    .sidebar {
-      position: relative;
-      margin: 2em 0;
-      width: 100%;
-      top: 0;
     }
   }
   

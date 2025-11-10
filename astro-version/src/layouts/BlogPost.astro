@@ -6,7 +6,6 @@ import Footer from '@/components/Footer.astro';
 import Bio from '@/components/Bio.astro';
 import CategoryLabel from '@/components/CategoryLabel.astro';
 import PostNavigation from '@/components/PostNavigation.astro';
-import TableOfContents from '@/components/TableOfContents.astro';
 import Disqus from '@/components/Disqus.astro';
 import { formatDate } from '@/utils/date';
 import { twemojiParse } from '@/utils/twemoji.util';
@@ -69,13 +68,7 @@ const postId = Astro.url.pathname; // identifier로 사용
               <p class="post-description">{description}</p>
             )}
           </header>
-          
-          <!-- 목차 (모바일용) -->
-          {headings && headings.length > 0 && (
-            <div class="toc-mobile">
-              <TableOfContents headings={headings} />
-            </div>
-          )}
+        
           
           <!-- 포스트 본문 -->
           <div class="prose">
@@ -92,20 +85,8 @@ const postId = Astro.url.pathname; // identifier로 사용
           </section>
         </article>
         
-        <!-- 사이드바 -->
-        <aside class="sidebar">
-          <!-- 목차 (데스크톱용) -->
-          {headings && headings.length > 0 && (
-            <div class="toc-desktop sticky-element">
-              <TableOfContents headings={headings} />
-            </div>
-          )}
-          
-          <!-- Bio -->
-          <div class="bio-section sticky-element">
-            <Bio />
-          </div>
-        </aside>
+        <!-- Bio -->
+        <Bio />
       </div>
     </div>
   </main>
@@ -120,14 +101,19 @@ const postId = Astro.url.pathname; // identifier로 사용
   }
   
   .content-grid {
-    display: grid;
-    grid-template-columns: 1fr 300px;
+    display: flex;
+    align-items: flex-start;
     gap: 3rem;
-    align-items: start;
   }
   
   .post-content-wrapper {
-    min-width: 0; /* Grid overflow 방지 */
+    flex: 1;
+    min-width: 0; /* Flex overflow 방지 */
+  }
+  
+  .sidebar {
+    width: 300px;
+    flex-shrink: 0;
   }
   
   .post-content-main {
@@ -244,6 +230,7 @@ const postId = Astro.url.pathname; // identifier로 사용
   .sidebar {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     gap: 2rem;
   }
   
@@ -254,10 +241,6 @@ const postId = Astro.url.pathname; // identifier로 사용
   
   .toc-desktop {
     display: block;
-  }
-  
-  .bio-section {
-    margin-top: 2rem;
   }
   
   /* Post Aside - Gatsby 버전의 aside와 동일 */
@@ -417,24 +400,13 @@ const postId = Astro.url.pathname; // identifier로 사용
   /* 반응형 디자인 */
   @media (max-width: 1024px) {
     .content-grid {
-      grid-template-columns: 1fr;
+      flex-direction: column;
       gap: 2rem;
     }
     
-    .toc-desktop {
-      display: none;
-    }
-    
-    .toc-mobile {
-      display: block;
-    }
-    
     .sidebar {
+      width: 100%;
       order: -1;
-    }
-    
-    .bio-section {
-      margin-top: 0;
     }
     
     .sticky-element {
