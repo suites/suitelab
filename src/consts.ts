@@ -17,7 +17,7 @@ export interface SocialLinks {
 export const SOCIAL_LINKS: SocialLinks = {
   instagram: 'yoon.homme',
   github: 'suites',
-  linkedin: 'suitee',
+  linkedin: 'fredyoons',
 };
 
 // 카테고리 타입 정의

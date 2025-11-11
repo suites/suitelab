@@ -4,9 +4,9 @@
 
 **기술과 커뮤니케이션의 힘으로 세상을 바꾸는 개발자의 기술 블로그**
 
-[![Deploy Status](https://api.netlify.com/api/v1/badges/720440e3-bd73-49f8-8625-145e62975597/deploy-status)](https://app.netlify.com/sites/suitee/deploys)
+[![Deploy Status](https://api.netlify.com/api/v1/badges/720440e3-bd73-49f8-8625-145e62975597/deploy-status)](https://app.netlify.com/sites/fredly-dev/deploys)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.0.1-brightgreen.svg)](https://github.com/suites/suitelab)
+[![Version](https://img.shields.io/badge/version-1.0.1-brightgreen.svg)](https://github.com/suites/fredly-dev)
 [![Made with Astro](https://img.shields.io/badge/Made%20with-Astro-ff5d01.svg)](https://astro.build)
 
 [🌐 Live Demo](https://fredly.dev) • [📝 Blog Posts](https://fredly.dev) • [👤 About](https://fredly.dev/about)
@@ -38,8 +38,8 @@
 
 ```bash
 # Repository 클론
-git clone https://github.com/suites/suitelab.git
-cd suitelab
+git clone https://github.com/suites/fredly-dev.git
+cd fredly-dev
 
 # 의존성 설치
 pnpm install
