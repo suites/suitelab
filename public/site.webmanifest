@@ -1,27 +1,27 @@
 {
-    "name": "Fredly.dev",
-    "short_name": "Fredly.dev",
-    "description": "개발과 기술에 대한 인사이트를 공유하는 블로그",
-    "icons": [
-        {
-            "src": "/favicon-16x16.png",
-            "sizes": "16x16",
-            "type": "image/png"
-        },
-        {
-            "src": "/favicon-32x32.png",
-            "sizes": "32x32",
-            "type": "image/png"
-        },
-        {
-            "src": "/apple-touch-icon.png",
-            "sizes": "180x180",
-            "type": "image/png"
-        }
-    ],
-    "theme_color": "#0c9ee4",
-    "background_color": "#21242d",
-    "display": "standalone",
-    "start_url": "/",
-    "lang": "ko"
+  "name": "Fredly.dev",
+  "short_name": "Fredly.dev",
+  "description": "개발과 기술에 대한 인사이트를 공유하는 블로그",
+  "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#0c9ee4",
+  "background_color": "#21242d",
+  "display": "standalone",
+  "start_url": "/",
+  "lang": "ko"
 }
