@@ -1,2 +1,4 @@
 User-agent: *
 Disallow:
+
+Sitemap: https://fredly.dev/sitemap-index.xml
