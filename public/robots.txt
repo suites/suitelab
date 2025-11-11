@@ -2,3 +2,5 @@ User-agent: *
 Disallow:
 
 Sitemap: https://fredly.dev/sitemap-index.xml
+
+#DaumWebMasterTool:193dc5bc1dcc2ff8eafb13bf50f0bcdd2ae4b91cf2d5efd1aa1d89b27d8bc926:RxjL/wmdHXEoWs8y9hPm8A==
