@@ -1,71 +1,7 @@
 [build]
   publish = "dist"
-  command = "npm run build"
+  command = "pnpm run build"
 
-# 301 Redirects for domain migration from suitee.me to fredly.dev
-# Netlify processes these at the CDN edge level for maximum performance
-
-# Handle all variations of the old domain
-[[redirects]]
-  from = "https://suitee.me/*"
-  to = "https://fredly.dev/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://www.suitee.me/*"
-  to = "https://fredly.dev/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://suitee.me/*"
-  to = "https://fredly.dev/:splat"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://www.suitee.me/*"
-  to = "https://fredly.dev/:splat"
-  status = 301
-  force = true
-
-# Specific redirects for root domain (highest priority)
-[[redirects]]
-  from = "https://suitee.me/"
-  to = "https://fredly.dev/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://suitee.me"
-  to = "https://fredly.dev"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://www.suitee.me/"
-  to = "https://fredly.dev/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "https://www.suitee.me"
-  to = "https://fredly.dev"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://suitee.me/"
-  to = "https://fredly.dev/"
-  status = 301
-  force = true
-
-[[redirects]]
-  from = "http://suitee.me"
-  to = "https://fredly.dev"
-  status = 301
-  force = true
 
 # Security and performance headers
 [[headers]]
