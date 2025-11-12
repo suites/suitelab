@@ -5,17 +5,15 @@ export const SITE_DESCRIPTION = `기술과 커뮤니케이션의 힘이 세상�
 export const SITE_URL = 'https://fredly.dev';
 export const AUTHOR_NAME = 'yoon.homme';
 export const AUTHOR_EMAIL = 'woosiks.io@gmail.com';
-export const RESUME_URL = 'http://resume.fredly.dev';
+export const RESUME_URL = '/about';
 
 // 소셜 링크 타입 정의
 export interface SocialLinks {
-  instagram: string;
   github: string;
   linkedin: string;
 }
 
 export const SOCIAL_LINKS: SocialLinks = {
-  instagram: 'yoon.homme',
   github: 'suites',
   linkedin: 'fredyoons',
 };
