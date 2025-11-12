@@ -45,13 +45,25 @@ const blogSchema = z.object({
     .optional(),
 });
 
+const pageSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  layout: z.string().optional(),
+});
+
 const blog = defineCollection({
   type: 'content',
   schema: blogSchema,
 });
 
+const pages = defineCollection({
+  type: 'content',
+  schema: pageSchema,
+});
+
 export const collections = {
   blog,
+  pages,
 };
 
 // 타입 추론을 위한 export

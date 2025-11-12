@@ -1,0 +1,319 @@
+---
+import Layout from './Layout.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '@/consts';
+
+// About 페이지의 기본 메타데이터
+const title = `소개 - ${SITE_TITLE}`;
+const description = SITE_DESCRIPTION;
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  
+  <main id="main-content" class="about-layout">
+    <div class="content-wrapper">
+      <div class="about-container">
+        <slot />
+      </div>
+    </div>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .about-layout {
+    padding: 0;
+    min-height: 70vh;
+  }
+  
+  .about-container {
+    position: relative;
+    background: #fff;
+    color: #333;
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 3rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  /* 코너 장식 요소 */
+  .about-container::before,
+  .about-container::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: 5;
+  }
+  
+  .about-container::before {
+    top: 0;
+    left: 0;
+    border-right: 20px solid transparent;
+    border-top: 20px solid rgb(33, 36, 45);
+  }
+  
+  .about-container::after {
+    bottom: 0;
+    right: 0;
+    border-bottom: 20px solid rgb(33, 36, 45);
+    border-left: 20px solid transparent;
+  }
+  
+  /* About 페이지 전용 타이포그래피 */
+  .about-container :global(h1) {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin: 0 0 1rem;
+    color: #333;
+    border-bottom: 3px solid #0c9ee4;
+    padding-bottom: 0.5rem;
+  }
+  
+  .about-container :global(h2) {
+    position: relative;
+    margin: 2rem 0 0.8rem;
+    padding: 0.5rem 0 0.5rem 1.2rem;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .about-container :global(h2)::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
+    display: inline-block;
+    width: 5px;
+    height: 100%;
+    border-radius: 5px;
+    background: linear-gradient(135deg, #0c9ee4 0%, #20a8ea 100%);
+  }
+  
+  .about-container :global(h3) {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.8rem;
+    color: #444;
+  }
+  
+  .about-container :global(p) {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 0.8em;
+    color: #555;
+  }
+  
+  .about-container :global(a) {
+    color: #0c9ee4;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .about-container :global(a:hover) {
+    text-decoration: underline;
+    color: #20a8ea;
+  }
+  
+  .about-container :global(ul) {
+    margin: 0.5em 0;
+    padding-left: 0;
+  }
+  
+  .about-container :global(li) {
+    position: relative;
+    list-style: none;
+    padding: 0.2rem 0 0.2rem 2rem;
+    margin: 0.2em 0;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #555;
+  }
+  
+  .about-container :global(li::before) {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 0.8rem;
+    width: 6px;
+    height: 6px;
+    background: #0c9ee4;
+    border-radius: 50%;
+  }
+  
+  .about-container :global(strong) {
+    font-weight: 700;
+    color: #333;
+  }
+  
+  .about-container :global(em) {
+    font-style: italic;
+    color: #666;
+  }
+  
+  .about-container :global(code) {
+    background: #f1f3f4;
+    color: #e74c3c;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+    font-size: 0.9em;
+    font-weight: 500;
+  }
+  
+  .about-container :global(blockquote) {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-left: 4px solid #0c9ee4;
+    border-radius: 0 8px 8px 0;
+    font-style: italic;
+  }
+  
+  .about-container :global(blockquote p) {
+    margin: 0;
+    color: #666;
+  }
+  
+  /* 프로필 섹션 스타일 */
+  .about-container :global(.intro-section) {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e9ecef;
+  }
+  
+  .about-container :global(.profile-image) {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1.5rem;
+    display: block;
+    border: 4px solid #0c9ee4;
+    box-shadow: 0 4px 12px rgba(12, 158, 228, 0.2);
+  }
+  
+  .about-container :global(.greeting) {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+    border: none;
+    padding: 0;
+  }
+  
+  .about-container :global(.contact-email) {
+    font-size: 1.1rem;
+    margin: 1rem 0 0 0;
+    color: #666;
+  }
+  
+  .about-container :global(.contact-email a) {
+    color: #0c9ee4;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+  }
+  
+  .about-container :global(.contact-email a:hover) {
+    text-decoration: underline;
+    color: #20a8ea;
+  }
+  
+  /* 반응형 디자인 */
+  @media screen and (max-width: 768px) {
+    .about-container {
+      margin: 1rem;
+      padding: 2rem;
+      border-radius: 0;
+    }
+    
+    .about-container::before,
+    .about-container::after {
+      content: none;
+    }
+    
+    .about-container :global(h1) {
+      font-size: 2rem;
+    }
+    
+    .about-container :global(h2) {
+      font-size: 1.5rem;
+      margin: 1.5rem 0 0.6rem;
+    }
+    
+    .about-container :global(h3) {
+      font-size: 1.25rem;
+    }
+    
+    .about-container :global(p) {
+      font-size: 1rem;
+    }
+    
+    .about-container :global(.profile-image) {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .about-container :global(.greeting) {
+      font-size: 1.8rem;
+    }
+    
+    .about-container :global(.contact-email) {
+      font-size: 1rem;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .content-wrapper {
+      padding: 0;
+    }
+    
+    .about-container {
+      margin: 0;
+      padding: 1.5rem 1rem;
+      box-shadow: none;
+    }
+    
+    .about-container :global(h1) {
+      font-size: 1.8rem;
+    }
+    
+    .about-container :global(h2) {
+      font-size: 1.3rem;
+      margin: 1.2rem 0 0.5rem;
+      padding-left: 1rem;
+    }
+    
+    .about-container :global(li) {
+      padding-left: 1.5rem;
+    }
+    
+    .about-container :global(li::before) {
+      left: 0.3rem;
+      top: 0.6rem;
+    }
+    
+    .about-container :global(.profile-image) {
+      width: 80px;
+      height: 80px;
+    }
+    
+    .about-container :global(.greeting) {
+      font-size: 1.5rem;
+    }
+    
+    .about-container :global(.contact-email) {
+      font-size: 0.9rem;
+    }
+  }
+</style>
